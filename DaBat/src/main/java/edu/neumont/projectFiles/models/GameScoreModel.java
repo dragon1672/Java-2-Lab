@@ -1,4 +1,4 @@
-package main.java.edu.neumont.projectFiles.models;
+package edu.neumont.projectFiles.models;
 import java.util.Date;
 
 /**
