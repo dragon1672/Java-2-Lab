@@ -5,28 +5,28 @@ package edu.neumont.projectFiles.models.interfaces;
  */
 public interface DAL {
     //region User DAL
-    public User createUser(User user);
-    public User retrieveUser(int userId);
-    public User updateUser(User user);
-    public void deleteUser(int userId);
+    User createUser(User user);
+    User retrieveUser(int userId);
+    User updateUser(User user);
+    void deleteUser(int userId);
     //endregion
-    //region Achievment DAL
-    public Achievment createAchievment(Achievment achievment);
-    public Achievment retrieveAchievment(int gameID, int userId);
-    public Achievment updateAchievment(Achievment achievment);
-    public void deleteAchievment(int achievmentId);
-    public void unlockAchievment(int userID, int achievmentId);
+    //region Achievement DAL
+    Achievment createAchievement(Achievement achievement);
+    Achievment retrieveAchievement(int gameID, int userId);
+    Achievment updateAchievement(Achievement achievement);
+    void deleteAchievement(int achievementId);
+    void unlockAchievement(int userID, int achievementId);
     //endregion
     //region Game DAL
-    public Game createGame(Game game);
-    public Game retrieveGame(int gameId);
-    public Game updateGame(Game game);
-    public void deleteGame(int gameId);
+    Game createGame(Game game);
+    Game retrieveGame(int gameId);
+    Game updateGame(Game game);
+    void deleteGame(int gameId);
     //endregion
     //region Gamescore DAL
-    public Gamescore createGame(Gamescore gamescore);
-    public Gamescore retrieveGame(int gamescoreId);
-    public Gamescore updateGame(Gamescore gamescore);
-    public void deleteGame(int gamescoreId);
+    Gamescore createGame(Gamescore gamescore);
+    Gamescore retrieveGame(int gamescoreId);
+    Gamescore updateGame(Gamescore gamescore);
+    void deleteGame(int gamescoreId);
     //endregion
 }
