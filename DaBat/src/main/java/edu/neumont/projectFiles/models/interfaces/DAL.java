@@ -18,15 +18,15 @@ public interface DAL {
     void unlockAchievement(int userID, int achievementId);
     //endregion
     //region Game DAL
-    Game createGame(Game game);
-    Game retrieveGame(int gameId);
-    Game updateGame(Game game);
-    void deleteGame(int gameId);
+    GameModel createGameModel(GameModel gameModel);
+    GameModel retrieveGameModel(int gameModelId);
+    GameModel updateGameModel(GameModel gameModel);
+    void deleteGameModel(int gameModelId);
     //endregion
-    //region Gamescore DAL
-    Gamescore createGame(Gamescore gamescore);
-    Gamescore retrieveGame(int gamescoreId);
-    Gamescore updateGame(Gamescore gamescore);
-    void deleteGame(int gamescoreId);
+    //region GameScore DAL
+    GameScore createGameScore(GameScore gameScore);
+    GameScore retrieveGameScore(int gameScoreId);
+    GameScore updateGameScore(GameScore gameScore);
+    void deleteGameScore(int gameScoreId);
     //endregion
 }
