@@ -1,5 +1,7 @@
 package edu.neumont.projectFiles.controllers.routing;
 
+import edu.neumont.projectFiles.controllers.LandingPage;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +18,7 @@ public class GodServlet extends HttpServlet {
 
 
     private static Router GetRoutes = new Router()
-            //.addURIRegex(LandingPage.Regex, LandingPage.Instance::DoIt)
+            .addURIRegex(LandingPage.Regex, LandingPage::DoIt)
             ;
 
     private static Router PostRoutes = new Router()

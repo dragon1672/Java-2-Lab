@@ -1,7 +1,7 @@
 package edu.neumont.projectFiles.controllers.routing;
 
-import utils.ColletionUtils;
-import utils.FunctionInterfaces.Functions.Function1;
+import utils.CollectionUtils;
+import utils.FunctionInterfaces.Functions.*;
 import utils.Tuple;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.regex.Pattern;
 
 import static utils.NullSafeGets.NullSafeGet;
+
 
 /**
  * Created by Anthony on 5/12/2015.
@@ -73,6 +74,6 @@ public class Router {
     }
 
     public Route getServlet(HttpServletRequest request) {
-        return NullSafeGet(ColletionUtils.firstOrDefault(mapper, n -> n.isValid(request)), n -> n.extractResponse(request));
+        return NullSafeGet(CollectionUtils.firstOrDefault(mapper, n -> n.isValid(request)), n -> n.extractResponse(request));
     }
 }

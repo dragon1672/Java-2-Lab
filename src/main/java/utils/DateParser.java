@@ -188,7 +188,7 @@ public class DateParser {
 
     public static String formatTimeSinceShort(Date pastDate) {
         long diff = Math.abs(System.currentTimeMillis() - pastDate.getTime());
-        Tuple<String,Long> shortestTime = ColletionUtils.firstOrDefault(ColletionUtils.reverse(DateParser.timeBetweenBrokenUp(diff)), item -> item.Second != 0);
+        Tuple<String,Long> shortestTime = CollectionUtils.firstOrDefault(CollectionUtils.reverse(DateParser.timeBetweenBrokenUp(diff)), item -> item.Second != 0);
         if(shortestTime == null) {
             return "Just Now";
         }
