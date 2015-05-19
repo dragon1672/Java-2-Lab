@@ -1,4 +1,4 @@
-package main.java.edu.neumont.projectFiles.models;
+package edu.neumont.projectFiles.models;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class PostMortemModel
 
     public PostMortemModel()
     {
-        playerModels = new ArrayList<PostPlayerModel>();
+        playerModels = new ArrayList<>();
 
     }
 
@@ -22,7 +22,7 @@ public class PostMortemModel
 
     public PostMortemModel(PostPlayerModel first, PostPlayerModel second)
     {
-        playerModels = new ArrayList<PostPlayerModel>();
+        playerModels = new ArrayList<>();
         playerModels.add(first);
         playerModels.add(second);
     }

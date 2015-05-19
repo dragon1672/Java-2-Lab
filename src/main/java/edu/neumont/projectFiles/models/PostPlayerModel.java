@@ -1,4 +1,6 @@
-package main.java.edu.neumont.projectFiles.models;
+package edu.neumont.projectFiles.models;
+
+import edu.neumont.projectFiles.models.UserModel;
 
 /**
  * Created by awayman on 5/19/2015.
