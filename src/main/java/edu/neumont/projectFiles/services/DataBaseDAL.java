@@ -1,10 +1,10 @@
-package edu.neumont.projectFiles.models.services;
+package edu.neumont.projectFiles.services;
 
 import edu.neumont.projectFiles.models.AchievementModel;
 import edu.neumont.projectFiles.models.GameModel;
 import edu.neumont.projectFiles.models.GameScoreModel;
 import edu.neumont.projectFiles.models.UserModel;
-import edu.neumont.projectFiles.models.interfaces.DAL;
+import edu.neumont.projectFiles.interfaces.DAL;
 
 /**
  * Created by bwaite on 5/19/2015.

@@ -1,4 +1,4 @@
-package edu.neumont.projectFiles.models.interfaces;
+package edu.neumont.projectFiles.interfaces;
 
 import edu.neumont.projectFiles.models.UserModel;
 

@@ -1,11 +1,14 @@
-package edu.neumont.projectFiles.models.interfaces;
+package edu.neumont.projectFiles.interfaces;
 
+import edu.neumont.projectFiles.models.AchievementModel;
 import edu.neumont.projectFiles.models.GameModel;
+import edu.neumont.projectFiles.models.GameScoreModel;
+import edu.neumont.projectFiles.models.UserModel;
 
 /**
- * Created by bwaite on 5/19/2015.
+ * Created by bwaite on 5/15/2015.
  */
-public interface GameService {
+public interface DAL {
 
     //region Custom Exceptions ==================================================================================================
 
@@ -13,7 +16,7 @@ public interface GameService {
      * The user passed invalid data
      * RECOMMENDED: use throwable cause to have a more detailed exception
      */
-    class UserExceptions extends GameServiceServiceExceptions {
+    class UserExceptions extends DALExceptions {
         public UserExceptions() {
             super();
         }
@@ -31,7 +34,7 @@ public interface GameService {
     /**
      * Something went wrong with the server
      */
-    class ServiceExceptions extends GameServiceServiceExceptions {
+    class ServiceExceptions extends DALExceptions {
         public ServiceExceptions() {
             super();
         }
@@ -49,7 +52,7 @@ public interface GameService {
     /**
      * The identifier the user passed in was not contained in this service
      */
-    class NotFoundExceptions extends GameServiceServiceExceptions {
+    class NotFoundExceptions extends DALExceptions {
         public NotFoundExceptions() {
             super();
         }
@@ -67,25 +70,46 @@ public interface GameService {
     /**
      * All Exceptions throw by this class should somehow be from this type
      */
-    class GameServiceServiceExceptions extends RuntimeException {
-        public GameServiceServiceExceptions() {
+    class DALExceptions extends RuntimeException {
+        public DALExceptions() {
             super();
         }
-        public GameServiceServiceExceptions(String message) {
+        public DALExceptions(String message) {
             super(message);
         }
-        public GameServiceServiceExceptions(String message, Throwable cause) {
+        public DALExceptions(String message, Throwable cause) {
             super(message, cause);
         }
-        public GameServiceServiceExceptions(Throwable cause) {
+        public DALExceptions(Throwable cause) {
             super(cause);
         }
     }
 
     //endregion
 
-    GameModel createGame(String name, String description);
-    GameModel retrieveGame(long id);
-    GameModel updateGame(GameModel user);
-    void deleteGame(long id);
+    //region User DAL
+    UserModel createUser(UserModel userModel);
+    UserModel retrieveUser(int userModelId);
+    UserModel updateUser(UserModel userModel);
+    void deleteUser(int userModelId);
+    //endregion
+    //region Achievement DAL
+    AchievementModel createAchievementModel(AchievementModel achievementModel);
+    AchievementModel retrieveAchievementModel(int gameID, int userId);
+    AchievementModel updateAchievementModel(AchievementModel achievementModel);
+    void deleteAchievement(int achievementModelId);
+    void unlockAchievement(int userID, int achievementModelId);
+    //endregion
+    //region Game DAL
+    GameModel createGameModel(GameModel gameModel);
+    GameModel retrieveGameModel(int gameModelId);
+    GameModel updateGameModel(GameModel gameModel);
+    void deleteGameModel(int gameModelId);
+    //endregion
+    //region GameScore DAL
+    GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel);
+    GameScoreModel retrieveGameScoreModel(int gameScoreModelId);
+    GameScoreModel updateGameScoreModel(GameScoreModel gameScoreModel);
+    void deleteGameScore(int gameScoreModelId);
+    //endregion
 }
