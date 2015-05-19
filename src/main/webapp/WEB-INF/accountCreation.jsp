@@ -12,7 +12,6 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
-
 <form class="accountCreationForm" action="${pageContext.request.contextPath}/user/createAccount/" method="POST">
   <div class="textInputField">
     Account name: <input class="accountInputField" type="text" name="accountName">
@@ -24,7 +23,7 @@
     Last name: <input class="accountInputField" type="text" name="lastName">
   </div>
   <div class="textInputField">
-    Password name: <input class="accountInputField" type="text" name="password">
+    Password: <input class="accountInputField" type="text" name="password">
   </div>
   <div class="textInputField">
     Email: <input class="accountInputField" type="text" name="email">
