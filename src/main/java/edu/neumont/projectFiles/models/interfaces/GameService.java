@@ -7,7 +7,6 @@ import edu.neumont.projectFiles.models.GameModel;
  */
 public interface GameService {
     GameModel createGame(String name, String description);
-    GameModel retrieveGame(String name);
     GameModel retrieveGame(long id);
     GameModel updateGame(GameModel user);
     void deleteGame(long id);
