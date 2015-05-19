@@ -6,7 +6,7 @@
 <body>
 <jsp:include page="header.jsp" />
 <h1>Log In </h1>
-<form action="${pageContext.request.contextPath}/user/login/" method="POST">
+<form action="${pageContext.request.contextPath}/login" method="POST">
     <h5>Username:</h5>
   <input type="text" name="username" placeholder="username"/>
   <br/><br/>

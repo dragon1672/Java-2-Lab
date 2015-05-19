@@ -11,7 +11,11 @@ import java.util.regex.Pattern;
 public class LoginPage {
     public static Pattern Regex = Pattern.compile("/login");
 
-    public static Route getPage(HttpServletRequest request) {
-        return Route.ForwardToUrl("/WEB-INF/login.jsp");
-    }
+    public static Route getLoginPage(HttpServletRequest request) {return Route.ForwardToUrl("/WEB-INF/login.jsp");}
+    public static Route LoginUserRedirect(HttpServletRequest request) {
+        //login the user here
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        //currently redirect to home page
+        return Route.RedirectToUrl("");}
 }
