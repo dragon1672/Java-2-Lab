@@ -11,7 +11,9 @@
     <title>Account Creation</title>
 </head>
 <body>
-<form class="accountCreationForm">
+<jsp:include page="header.jsp" />
+
+<form class="accountCreationForm" method="post">
   <div class="textInputField">
     Account name: <input class="accountInputField" type="text" name="accountName">
   </div>
