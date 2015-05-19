@@ -21,4 +21,8 @@ public class HtmlStringHelper {
     public static String RemoveScripts(String HTML) {
         return HTML;
     }
+
+    public static String SanitizeAndRemoveScripts(String HTML) {
+        return HTML;
+    }
 }
