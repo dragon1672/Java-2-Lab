@@ -3,6 +3,7 @@ package edu.neumont.projectFiles.services;
 
 import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.interfaces.AccountService;
+import utils.HtmlStringHelper;
 
 import java.util.List;
 
@@ -12,10 +13,12 @@ import java.util.List;
 public class LocalAccountService implements AccountService {
 
     //region validation helpers
-    void validateInput(String input, String name) {
+    String validateInput(String input, String name) {
         if(input == null || input.isEmpty()) {
             throw new AccountService.UserExceptions(name + " cannot be null or empty",new IllegalArgumentException(name));
         }
+        input = HtmlStringHelper.Sanatize(input);
+        return input;
     }
     void validateInput(Object input, String name) {
         if(input == null) {
@@ -26,11 +29,11 @@ public class LocalAccountService implements AccountService {
 
     @Override
     public UserModel createUser(String firstName, String lastName, String displayName, String email, String avatarURL) {
-        validateInput(firstName,"firstName");
-        validateInput(firstName,"lastName");
-        validateInput(firstName,"displayName");
-        validateInput(firstName,"email");
-        validateInput(firstName,"avatarURL");
+        firstName = validateInput(firstName,"firstName");
+        lastName = validateInput(lastName,"lastName");
+        displayName = validateInput(displayName,"displayName");
+        email = validateInput(email,"email");
+        avatarURL = validateInput(avatarURL,"avatarURL");
         //use -1 for id, Database will assign ID later.
         UserModel userM = new UserModel(-1,firstName,lastName,displayName,email,avatarURL);
         Singletons.theDAL.createUser(userM);
