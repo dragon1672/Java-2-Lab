@@ -195,6 +195,39 @@ public class CollectionUtils {
         };
     }
 
+    /**
+     * Joins collections together
+     * Will iterate in the same order they are passed in
+     * @param collections
+     * @param <T> type of collection
+     * @return hook to iterate over all the collections
+     */
+    @SafeVarargs
+    public static <T> Iterable<T> join(Iterable<T> ... collections) {
+        return selectMany(toIterable(collections));
+    }
+
+    public static <T> Iterable<T> selectMany(Iterable<Iterable<T>> collection) {
+        return () -> new Iterator<T>() {
+            Iterator<Iterator<T>> backingData = select(collection, Iterable::iterator).iterator();
+            Iterator<T> current = null;
+
+            @Override
+            public boolean hasNext() {
+                if(current != null && current.hasNext()) return true;
+                while((current == null || !current.hasNext()) && backingData.hasNext()) {
+                    current = backingData.next();
+                }
+                return (current != null && current.hasNext());
+            }
+
+            @Override
+            public T next() {
+                return current.next();
+            }
+        };
+    }
+
     @SuppressWarnings("SpellCheckingInspection")
     public static <T> Iterable<T> emptyIterable() {
         return toIterable();

@@ -11,6 +11,12 @@ public class GameModel
     //Some kind of routing information to game files / logic will go here in these properties.  I'm not going to assume anything but I'll leave this comment as a reminder.
 
 
+    public GameModel(long ID, String name, String description) {
+        this.ID = ID;
+        this.name = name;
+        this.description = description;
+    }
+
     public String getName() {
         return name;
     }
@@ -34,12 +40,5 @@ public class GameModel
     public GameModel(long ID)
     {
         this.ID = ID;
-    }
-
-    public GameModel(long ID, String name, String description)
-    {
-        this.ID = ID;
-        this.name = name;
-        this.description = description;
     }
 }
