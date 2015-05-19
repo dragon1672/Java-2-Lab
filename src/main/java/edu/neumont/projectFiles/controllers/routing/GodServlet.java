@@ -1,5 +1,6 @@
 package edu.neumont.projectFiles.controllers.routing;
 
+import edu.neumont.projectFiles.controllers.AccountCreationPage;
 import edu.neumont.projectFiles.controllers.LandingPage;
 import edu.neumont.projectFiles.controllers.LoginPage;
 
@@ -21,6 +22,7 @@ public class GodServlet extends HttpServlet {
     private static Router GetRoutes = new Router()
             .addURIRegex(LandingPage.Regex, LandingPage::DoIt)
             .addURIRegex(LoginPage.Regex, LoginPage::getLoginPage)
+            .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::getPage)
             ;
 
     private static Router PostRoutes = new Router()
