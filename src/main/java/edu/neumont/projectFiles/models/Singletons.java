@@ -1,0 +1,10 @@
+package edu.neumont.projectFiles.models;
+
+import edu.neumont.projectFiles.models.interfaces.DAL;
+
+/**
+ * Created by bwaite on 5/19/2015.
+ */
+public class Singletons {
+    public static DAL dbDAL = new DataBaseDAL();
+}
