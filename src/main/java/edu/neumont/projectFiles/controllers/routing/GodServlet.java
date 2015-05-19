@@ -27,6 +27,7 @@ public class GodServlet extends HttpServlet {
 
     private static Router PostRoutes = new Router()
             .addURIRegex(LoginPage.Regex, LoginPage::LoginUserRedirect)
+            .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::createAccountRedirect)
             //.addURIRegex(QuestionActionRouter.questionVoteUpPattern, QuestionActionRouter.Instance::upVoteQuestion)
             ;
 

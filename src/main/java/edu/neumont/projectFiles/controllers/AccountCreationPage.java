@@ -14,4 +14,17 @@ public class AccountCreationPage {
     public static Route getPage(HttpServletRequest request) {
         return Route.ForwardToUrl("/WEB-INF/accountCreation.jsp");
     }
+
+    public static Route createAccountRedirect(HttpServletRequest request){
+        //Information to create an account
+        String AccountName = request.getParameter("accountName");
+        String FirstName = request.getParameter("firstName");
+        String LastName = request.getParameter("lastName");
+        String Password = request.getParameter("password");
+        String Email = request.getParameter("email");
+        //Create an account here
+
+        //Forward page
+        return Route.RedirectToUrl("");
+    }
 }

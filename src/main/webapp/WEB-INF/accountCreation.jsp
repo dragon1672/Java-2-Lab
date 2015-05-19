@@ -12,7 +12,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
-<form class="accountCreationForm" action="${pageContext.request.contextPath}/user/createAccount/" method="POST">
+<form class="accountCreationForm" action="${pageContext.request.contextPath}/accountCreation" method="POST">
   <div class="textInputField">
     Account name: <input class="accountInputField" type="text" name="accountName">
   </div>
