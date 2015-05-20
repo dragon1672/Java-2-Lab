@@ -12,7 +12,6 @@ import java.util.List;
  * Created by bwaite on 5/19/2015.
  */
 public class DataBaseDAL implements DAL {
-
     @Override
     public UserModel createUserModel(UserModel userModel) {
         return null;
@@ -35,36 +34,6 @@ public class DataBaseDAL implements DAL {
 
     @Override
     public List<UserModel> GetAllUsers() {
-        return null;
-    }
-
-    @Override
-    public AchievementModel createAchievementModel(AchievementModel achievementModel) {
-        return null;
-    }
-
-    @Override
-    public AchievementModel retrieveAchievementModel(long gameID, long userId) {
-        return null;
-    }
-
-    @Override
-    public AchievementModel updateAchievementModel(AchievementModel achievementModel) {
-        return null;
-    }
-
-    @Override
-    public void deleteAchievement(long achievementModelId) {
-
-    }
-
-    @Override
-    public void unlockAchievement(long userID, long achievementModelId) {
-
-    }
-
-    @Override
-    public List<AchievementModel> GetAllAchievements() {
         return null;
     }
 
@@ -94,12 +63,42 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
+    public AchievementModel createAchievementModel(AchievementModel achievementModel) {
+        return null;
+    }
+
+    @Override
+    public AchievementModel retrieveAchievementModel(long gameModelId, long achievementModelId) {
+        return null;
+    }
+
+    @Override
+    public AchievementModel updateAchievementModel(AchievementModel achievementModel) {
+        return null;
+    }
+
+    @Override
+    public void deleteAchievement(long gameModelId, long achievementModelId) {
+
+    }
+
+    @Override
+    public void unlockAchievement(long userModelID, long achievementModelId) {
+
+    }
+
+    @Override
+    public List<AchievementModel> GetAllAchievements() {
+        return null;
+    }
+
+    @Override
     public GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel) {
         return null;
     }
 
     @Override
-    public GameScoreModel retrieveGameScoreModel(long gameScoreModelId) {
+    public GameScoreModel retrieveGameScoreModel(long gameModelId, long gameScoreModelId) {
         return null;
     }
 
@@ -109,7 +108,7 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
-    public void deleteGameScore(long gameScoreModelId) {
+    public void deleteGameScore(long gameModelId, long gameScoreModelId) {
 
     }
 
