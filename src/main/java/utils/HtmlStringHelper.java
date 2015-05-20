@@ -15,7 +15,7 @@ public class HtmlStringHelper {
      * @param HTML raw HTML
      * @return String that can be rendered in HTML not AS HTML
      */
-    public static String Sanatize(String HTML) {
+    public static String Sanitize(String HTML) {
         return HTML_TAG.matcher(HTML).replaceAll(""); // no tags for u
     }
 
@@ -29,6 +29,6 @@ public class HtmlStringHelper {
     }
 
     public static String SanitizeAndRemoveScripts(String HTML) {
-        return HTML;
+        return Sanitize(RemoveScripts(HTML));
     }
 }
