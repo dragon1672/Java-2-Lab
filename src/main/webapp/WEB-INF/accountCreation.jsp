@@ -23,10 +23,13 @@
     Last name: <input class="accountInputField" type="text" name="lastName">
   </div>
   <div class="textInputField">
+    Email: <input class="accountInputField" type="text" name="email">
+  </div>
+  <div class="textInputField">
     Password: <input class="accountInputField" type="text" name="password">
   </div>
   <div class="textInputField">
-    Email: <input class="accountInputField" type="text" name="email">
+    Avatar URL: <input class="accountInputField" type="text" name="avatar">
   </div>
   <input type="submit" value="Create Account">
 </form>

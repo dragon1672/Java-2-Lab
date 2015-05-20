@@ -22,12 +22,17 @@ public class AccountCreationPage {
         String accountName = request.getParameter("accountName");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-        String password = request.getParameter("password");
+
         String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String avatar = request.getParameter("avatar");
+        if(avatar.isEmpty()){
+            avatar = "http://i.imgur.com/PtGnyUo.jpg";
+        }
 
         //Create an account here
         LocalAccountService las = new LocalAccountService();
-        las.createUser(firstName,lastName,accountName,email,"");
+        las.createUser(firstName,lastName,accountName,email,avatar);
 
         //Forward page
         return Route.RedirectToUrl("");
