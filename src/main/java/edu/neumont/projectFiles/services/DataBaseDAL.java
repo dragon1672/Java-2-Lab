@@ -10,13 +10,14 @@ import edu.neumont.projectFiles.interfaces.DAL;
  * Created by bwaite on 5/19/2015.
  */
 public class DataBaseDAL implements DAL {
+
     @Override
     public UserModel createUser(UserModel userModel) {
         return null;
     }
 
     @Override
-    public UserModel retrieveUser(int userModelId) {
+    public UserModel retrieveUser(long userModelId) {
         return null;
     }
 
@@ -26,7 +27,7 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
-    public void deleteUser(int userModelId) {
+    public void deleteUser(long userModelId) {
 
     }
 
@@ -36,7 +37,7 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
-    public AchievementModel retrieveAchievementModel(int gameID, int userId) {
+    public AchievementModel retrieveAchievementModel(long gameID, long userId) {
         return null;
     }
 
@@ -46,12 +47,12 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
-    public void deleteAchievement(int achievementModelId) {
+    public void deleteAchievement(long achievementModelId) {
 
     }
 
     @Override
-    public void unlockAchievement(int userID, int achievementModelId) {
+    public void unlockAchievement(long userID, long achievementModelId) {
 
     }
 
@@ -61,7 +62,7 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
-    public GameModel retrieveGameModel(int gameModelId) {
+    public GameModel retrieveGameModel(long gameModelId) {
         return null;
     }
 
@@ -71,7 +72,7 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
-    public void deleteGameModel(int gameModelId) {
+    public void deleteGameModel(long gameModelId) {
 
     }
 
@@ -81,7 +82,7 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
-    public GameScoreModel retrieveGameScoreModel(int gameScoreModelId) {
+    public GameScoreModel retrieveGameScoreModel(long gameScoreModelId) {
         return null;
     }
 
@@ -91,7 +92,7 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
-    public void deleteGameScore(int gameScoreModelId) {
+    public void deleteGameScore(long gameScoreModelId) {
 
     }
 }

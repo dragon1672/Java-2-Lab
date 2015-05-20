@@ -89,27 +89,27 @@ public interface DAL {
 
     //region User DAL
     UserModel createUser(UserModel userModel);
-    UserModel retrieveUser(int userModelId);
+    UserModel retrieveUser(long userModelId);
     UserModel updateUser(UserModel userModel);
-    void deleteUser(int userModelId);
+    void deleteUser(long userModelId);
     //endregion
     //region Achievement DAL
     AchievementModel createAchievementModel(AchievementModel achievementModel);
-    AchievementModel retrieveAchievementModel(int gameID, int userId);
+    AchievementModel retrieveAchievementModel(long gameID, long userId);
     AchievementModel updateAchievementModel(AchievementModel achievementModel);
-    void deleteAchievement(int achievementModelId);
-    void unlockAchievement(int userID, int achievementModelId);
+    void deleteAchievement(long achievementModelId);
+    void unlockAchievement(long userID, long achievementModelId);
     //endregion
     //region Game DAL
     GameModel createGameModel(GameModel gameModel);
-    GameModel retrieveGameModel(int gameModelId);
+    GameModel retrieveGameModel(long gameModelId);
     GameModel updateGameModel(GameModel gameModel);
-    void deleteGameModel(int gameModelId);
+    void deleteGameModel(long gameModelId);
     //endregion
     //region GameScore DAL
     GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel);
-    GameScoreModel retrieveGameScoreModel(int gameScoreModelId);
+    GameScoreModel retrieveGameScoreModel(long gameScoreModelId);
     GameScoreModel updateGameScoreModel(GameScoreModel gameScoreModel);
-    void deleteGameScore(int gameScoreModelId);
+    void deleteGameScore(long gameScoreModelId);
     //endregion
 }
