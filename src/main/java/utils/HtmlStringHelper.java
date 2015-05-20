@@ -16,7 +16,8 @@ public class HtmlStringHelper {
      * @return String that can be rendered in HTML not AS HTML
      */
     public static String Sanitize(String HTML) {
-        return HTML_TAG.matcher(HTML).replaceAll(""); // no tags for u
+        //return HTML_TAG.matcher(HTML).replaceAll(""); // no tags for u
+        return HTML;
     }
 
     /**
@@ -25,10 +26,12 @@ public class HtmlStringHelper {
      * @return HTML formatted string where no code will run
      */
     public static String RemoveScripts(String HTML) {
-        return ALL_SCRIPTS.matcher(HTML).replaceAll(""); // no tags for u
+        //return ALL_SCRIPTS.matcher(HTML).replaceAll(""); // no tags for u
+        return HTML;
     }
 
     public static String SanitizeAndRemoveScripts(String HTML) {
-        return Sanitize(RemoveScripts(HTML));
+        //return Sanitize(RemoveScripts(HTML));
+        return HTML;
     }
 }
