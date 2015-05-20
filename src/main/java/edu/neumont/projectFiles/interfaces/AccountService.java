@@ -1,6 +1,7 @@
 package edu.neumont.projectFiles.interfaces;
 
 import edu.neumont.projectFiles.models.UserModel;
+import utils.HtmlStringHelper;
 
 import java.util.List;
 
@@ -8,6 +9,21 @@ import java.util.List;
  * Created by bwaite on 5/19/2015.
  */
 public interface AccountService {
+
+    //region Validation Helpers =================================================================================================
+    default String validateInput(String input, String name) {
+        if(input == null || input.isEmpty()) {
+            throw new AccountService.UserExceptions(name + " cannot be null or empty",new IllegalArgumentException(name));
+        }
+        input = HtmlStringHelper.Sanatize(input);
+        return input;
+    }
+    default void validateInput(Object input, String name) {
+        if(input == null) {
+            throw new AccountService.UserExceptions(name + " cannot be null",new IllegalArgumentException(name));
+        }
+    }
+    //endregion
     //region Custom Exceptions ==================================================================================================
 
     /**
@@ -84,7 +100,6 @@ public interface AccountService {
     }
 
     //endregion
-
 
     UserModel createUser(String firstName,String lastName,String displayName,String email,String avatarURL);
     UserModel retrieveUser(long id);
