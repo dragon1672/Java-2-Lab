@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * Created by bwaite on 5/20/2015.
  */
-public class DummyDAL implements DAL{
+public class LocalInMemoryDal implements DAL{
     Map<Long,UserModel> users = new HashMap<>();
     Map<Long,GameModel> games = new HashMap<>();
     Map<Tuple<Long,Long>, AchievementModel> achievements = new HashMap<>();

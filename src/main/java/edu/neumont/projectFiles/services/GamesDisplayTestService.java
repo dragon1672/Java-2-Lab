@@ -19,7 +19,5 @@ public class GamesDisplayTestService {
         dummyGames.add(temp3);
         GameModel temp4 = new GameModel(4,"Shhhh", "What Game?");
         dummyGames.add(temp4);
-
     }
-
 }
