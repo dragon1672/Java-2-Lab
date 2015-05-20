@@ -18,11 +18,15 @@ public class DummyDAL implements DAL{
     Map<Tuple<Long,Long>, AchievementModel> achievements = new HashMap<>();
     Map<UserModel, AchievementModel> unlockedAchievements = new HashMap<>();
     Map<Tuple<Long,Long>, GameScoreModel> gameScores = new HashMap<>();
+    private static long gameIDCounter = 0;
+    private static long userIDCounter = 0;
+    private static long achivementIDCounter = 0;
+    private static long gameScoreIDCounter = 0;
 
 
     @Override
     public UserModel createUserModel(UserModel userModel) {
-        users.put(userModel.getID(),userModel);
+        users.put(userIDCounter++,userModel);
         return users.get(userModel.getID());
     }
 
@@ -55,7 +59,7 @@ public class DummyDAL implements DAL{
 
     @Override
     public GameModel createGameModel(GameModel gameModel) {
-        games.put(gameModel.getID(),gameModel);
+        games.put(gameIDCounter++,gameModel);
         return games.get(gameModel.getID());
     }
 
@@ -88,7 +92,7 @@ public class DummyDAL implements DAL{
 
     @Override
     public AchievementModel createAchievementModel(AchievementModel achievementModel) {
-        achievements.put(new Tuple<>(achievementModel.getGameID(),achievementModel.getID()),achievementModel);
+        achievements.put(new Tuple<>(achievementModel.getGameID(),achivementIDCounter++),achievementModel);
         return achievements.get(new Tuple<>(achievementModel.getGameID(),achievementModel.getID()));
     }
 
@@ -126,7 +130,7 @@ public class DummyDAL implements DAL{
 
     @Override
     public GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel) {
-        gameScores.put(new Tuple<>(gameScoreModel.getGameID(),gameScoreModel.getID()),gameScoreModel);
+        gameScores.put(new Tuple<>(gameScoreModel.getGameID(),gameScoreIDCounter++),gameScoreModel);
         return gameScores.get(new Tuple<>(gameScoreModel.getGameID(),gameScoreModel.getID()));
     }
 
