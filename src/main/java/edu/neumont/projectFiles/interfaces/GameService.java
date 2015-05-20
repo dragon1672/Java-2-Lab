@@ -103,7 +103,7 @@ public interface GameService {
 
     GameModel createGame(String name, String description);
     GameModel retrieveGame(long id);
-    GameModel updateGame(GameModel user);
+    GameModel updateGame(GameModel game);
     void deleteGame(long id);
     public List<GameModel> getAllGames();
 }

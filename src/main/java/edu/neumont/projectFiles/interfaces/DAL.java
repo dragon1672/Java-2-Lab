@@ -90,10 +90,10 @@ public interface DAL {
     //endregion
 
     //region User DAL
-    UserModel createUser(UserModel userModel);
-    UserModel retrieveUser(long userModelId);
-    UserModel updateUser(UserModel userModel);
-    void deleteUser(long userModelId);
+    UserModel createUserModel(UserModel userModel);
+    UserModel retrieveUserModel(long userModelId);
+    UserModel updateUserModel(UserModel userModel);
+    void deleteUserModel(long userModelId);
     List<UserModel> GetAllUsers();
     //endregion
     //region Achievement DAL
