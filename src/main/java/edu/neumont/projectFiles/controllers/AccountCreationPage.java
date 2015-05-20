@@ -1,6 +1,8 @@
 package edu.neumont.projectFiles.controllers;
 
 import edu.neumont.projectFiles.controllers.routing.Route;
+import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.services.LocalAccountService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.regex.Pattern;
@@ -17,12 +19,15 @@ public class AccountCreationPage {
 
     public static Route createAccountRedirect(HttpServletRequest request){
         //Information to create an account
-        String AccountName = request.getParameter("accountName");
-        String FirstName = request.getParameter("firstName");
-        String LastName = request.getParameter("lastName");
-        String Password = request.getParameter("password");
-        String Email = request.getParameter("email");
+        String accountName = request.getParameter("accountName");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+
         //Create an account here
+        LocalAccountService las = new LocalAccountService();
+        las.createUser(firstName,lastName,accountName,email,"");
 
         //Forward page
         return Route.RedirectToUrl("");
