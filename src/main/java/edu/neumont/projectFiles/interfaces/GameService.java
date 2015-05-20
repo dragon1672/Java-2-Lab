@@ -1,12 +1,29 @@
 package edu.neumont.projectFiles.interfaces;
 
 import edu.neumont.projectFiles.models.GameModel;
+import utils.HtmlStringHelper;
+
+import java.util.List;
 
 /**
  * Created by bwaite on 5/19/2015.
  */
 public interface GameService {
 
+    //region Validation Helpers =================================================================================================
+    default String validateInput(String input, String name) {
+        if(input == null || input.isEmpty()) {
+            throw new GameService.UserExceptions(name + " cannot be null or empty",new IllegalArgumentException(name));
+        }
+        input = HtmlStringHelper.Sanatize(input);
+        return input;
+    }
+    default void validateInput(Object input, String name) {
+        if(input == null) {
+            throw new GameService.UserExceptions(name + " cannot be null",new IllegalArgumentException(name));
+        }
+    }
+    //endregion
     //region Custom Exceptions ==================================================================================================
 
     /**
@@ -88,4 +105,5 @@ public interface GameService {
     GameModel retrieveGame(long id);
     GameModel updateGame(GameModel user);
     void deleteGame(long id);
+    public List<GameModel> getAllGames();
 }
