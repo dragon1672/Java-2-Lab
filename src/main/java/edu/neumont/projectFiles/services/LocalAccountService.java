@@ -1,8 +1,8 @@
 package edu.neumont.projectFiles.services;
 
 
-import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.interfaces.AccountService;
+import edu.neumont.projectFiles.models.UserModel;
 import utils.HtmlStringHelper;
 
 import java.util.List;
@@ -42,21 +42,33 @@ public class LocalAccountService implements AccountService {
 
     @Override
     public UserModel retrieveUser(long id) {
-        return null;
+        return Singletons.theDAL.retrieveUser(id);
     }
 
     @Override
     public UserModel updateUser(UserModel user) {
-        return null;
+        UserModel uInDB = Singletons.theDAL.retrieveUser(user.getID());
+        UserModel uNew = null;
+        if(uInDB != null)
+        {
+            uNew = new UserModel(user.getID(),
+                    validateInput(user.getFirstName(), "firstName"),
+                    validateInput(user.getLastName(),"lasName"),
+                    validateInput(user.getDisplayName(),"displayName"),
+                    validateInput(user.getEmail(),"email"),
+                    validateInput(user.getAvatarURL(),"avatarURL"));
+            Singletons.theDAL.updateUser(uNew);
+        }
+        return uNew;
     }
 
     @Override
     public void deleteUser(long id) {
-
+        Singletons.theDAL.deleteUser(id);
     }
 
     @Override
     public List<UserModel> getAllUsers() {
-        return null;
+        return Singletons.theDAL.GetAllUsers();
     }
 }
