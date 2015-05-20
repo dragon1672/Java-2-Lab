@@ -20,7 +20,7 @@ public class LocalInMemoryDal implements DAL{
     Map<Tuple<Long,Long>, GameScoreModel> gameScores = new HashMap<>();
     private static long gameIDCounter = 0;
     private static long userIDCounter = 0;
-    private static long achivementIDCounter = 0;
+    private static long achievementIDCounter = 0;
     private static long gameScoreIDCounter = 0;
 
 
@@ -92,7 +92,7 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public AchievementModel createAchievementModel(AchievementModel achievementModel) {
-        achievements.put(new Tuple<>(achievementModel.getGameID(),achivementIDCounter++),achievementModel);
+        achievements.put(new Tuple<>(achievementModel.getGameID(), achievementIDCounter++),achievementModel);
         return achievements.get(new Tuple<>(achievementModel.getGameID(),achievementModel.getID()));
     }
 
