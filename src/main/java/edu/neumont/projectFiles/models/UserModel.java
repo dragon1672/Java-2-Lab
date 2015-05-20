@@ -70,7 +70,7 @@ public class UserModel {
         this.avatarURL = avatarURL;
     }
 
-    public String getSvatarURL(){
+    public String getAvatarURL(){
         return avatarURL;
     }
 }
