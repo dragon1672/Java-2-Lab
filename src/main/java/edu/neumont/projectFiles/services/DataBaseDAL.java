@@ -6,6 +6,8 @@ import edu.neumont.projectFiles.models.GameScoreModel;
 import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.interfaces.DAL;
 
+import java.util.List;
+
 /**
  * Created by bwaite on 5/19/2015.
  */
@@ -29,6 +31,11 @@ public class DataBaseDAL implements DAL {
     @Override
     public void deleteUser(long userModelId) {
 
+    }
+
+    @Override
+    public List<UserModel> GetAllUsers() {
+        return null;
     }
 
     @Override
@@ -57,6 +64,11 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
+    public List<AchievementModel> GetAllAchievements() {
+        return null;
+    }
+
+    @Override
     public GameModel createGameModel(GameModel gameModel) {
         return null;
     }
@@ -77,6 +89,11 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
+    public List<GameModel> GetAllGames() {
+        return null;
+    }
+
+    @Override
     public GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel) {
         return null;
     }
@@ -94,5 +111,10 @@ public class DataBaseDAL implements DAL {
     @Override
     public void deleteGameScore(long gameScoreModelId) {
 
+    }
+
+    @Override
+    public List<GameScoreModel> GetAllGamesScores() {
+        return null;
     }
 }

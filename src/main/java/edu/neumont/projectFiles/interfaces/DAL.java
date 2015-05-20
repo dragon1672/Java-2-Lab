@@ -5,6 +5,8 @@ import edu.neumont.projectFiles.models.GameModel;
 import edu.neumont.projectFiles.models.GameScoreModel;
 import edu.neumont.projectFiles.models.UserModel;
 
+import java.util.List;
+
 /**
  * Created by bwaite on 5/15/2015.
  */
@@ -92,6 +94,7 @@ public interface DAL {
     UserModel retrieveUser(long userModelId);
     UserModel updateUser(UserModel userModel);
     void deleteUser(long userModelId);
+    List<UserModel> GetAllUsers();
     //endregion
     //region Achievement DAL
     AchievementModel createAchievementModel(AchievementModel achievementModel);
@@ -99,17 +102,20 @@ public interface DAL {
     AchievementModel updateAchievementModel(AchievementModel achievementModel);
     void deleteAchievement(long achievementModelId);
     void unlockAchievement(long userID, long achievementModelId);
+    List<AchievementModel> GetAllAchievements();
     //endregion
     //region Game DAL
     GameModel createGameModel(GameModel gameModel);
     GameModel retrieveGameModel(long gameModelId);
     GameModel updateGameModel(GameModel gameModel);
     void deleteGameModel(long gameModelId);
+    List<GameModel> GetAllGames();
     //endregion
     //region GameScore DAL
     GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel);
     GameScoreModel retrieveGameScoreModel(long gameScoreModelId);
     GameScoreModel updateGameScoreModel(GameScoreModel gameScoreModel);
     void deleteGameScore(long gameScoreModelId);
+    List<GameScoreModel> GetAllGamesScores();
     //endregion
 }
