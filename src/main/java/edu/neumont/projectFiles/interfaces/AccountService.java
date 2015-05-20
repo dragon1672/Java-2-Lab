@@ -15,7 +15,7 @@ public interface AccountService {
         if(input == null || input.isEmpty()) {
             throw new AccountService.UserExceptions(name + " cannot be null or empty",new IllegalArgumentException(name));
         }
-        input = HtmlStringHelper.Sanatize(input);
+        input = HtmlStringHelper.Sanitize(input);
         return input;
     }
     default void validateInput(Object input, String name) {
