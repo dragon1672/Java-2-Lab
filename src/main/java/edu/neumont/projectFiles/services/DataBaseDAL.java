@@ -14,22 +14,22 @@ import java.util.List;
 public class DataBaseDAL implements DAL {
 
     @Override
-    public UserModel createUser(UserModel userModel) {
+    public UserModel createUserModel(UserModel userModel) {
         return null;
     }
 
     @Override
-    public UserModel retrieveUser(long userModelId) {
+    public UserModel retrieveUserModel(long userModelId) {
         return null;
     }
 
     @Override
-    public UserModel updateUser(UserModel userModel) {
+    public UserModel updateUserModel(UserModel userModel) {
         return null;
     }
 
     @Override
-    public void deleteUser(long userModelId) {
+    public void deleteUserModel(long userModelId) {
 
     }
 
