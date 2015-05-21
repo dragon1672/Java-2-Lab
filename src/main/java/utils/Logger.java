@@ -10,7 +10,25 @@ import java.util.Map;
  */
 public class Logger {
 
-    enum PrintLevel {
+    public static class LoggerBuilder {
+        final Logger logger = new Logger();
+
+        public LoggerBuilder add(OutputStream stream) {
+            logger.addOutput(stream);
+            return this;
+        }
+
+        public LoggerBuilder setLevel(PrintLevel level) {
+            logger.setCurrentLevel(level.Level);
+            return this;
+        }
+
+        public Logger build() {
+            return logger;
+        }
+    }
+
+    public enum PrintLevel {
         ERROR,
         WARNING(ERROR),
         DEBUG(WARNING),
@@ -19,17 +37,17 @@ public class Logger {
 
         public final int Level;
 
-        private PrintLevel() {
+        PrintLevel() {
             this.Level = 0;
         }
 
-        private PrintLevel(PrintLevel previous) {
+        PrintLevel(PrintLevel previous) {
             this.Level = previous.Level + 100;
         }
 
     }
 
-    Map<OutputStream, PrintWriter> pws = new HashMap<>();
+    private final Map<OutputStream, PrintWriter> pws = new HashMap<>();
     private int currentLevel = PrintLevel.TRACE.Level;
 
 
