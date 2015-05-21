@@ -1,0 +1,53 @@
+CREATE TABLE IF NOT EXISTS users (
+	id bigserial PRIMARY KEY,
+	first_name varchar(40) NOT NULL,
+	last_name varchar(40) NOT NULL,
+	display_name varchar(40) NOT NULL,
+	email varchar(40) NOT NULL,
+	avatar_url varchar(1024),
+	password varchar(256) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS gameScores (
+	id bigserial PRIMARY KEY,
+	user_id bigserial REFERENCES users (id),
+	score real,
+	timestamp timestamptz NOT NULL
+);
+CREATE TABLE IF NOT EXISTS games (
+	id bigserial PRIMARY KEY,
+	name varchar(40) NOT NULL,
+	description varchar(1024) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS rooms (
+	id bigserial PRIMARY KEY,
+	game_id bigserial REFERENCES games (id),
+	post_date timestamptz NOT NULL,
+	started bool NOT NULL
+);
+CREATE TABLE IF NOT EXISTS connectedPlayers (
+	room_id bigserial REFERENCES rooms (id),
+	player_id bigserial REFERENCES users (id),
+	join_time timestamptz NOT NULL,
+	update_time timestamptz NOT NULL
+);
+CREATE TABLE IF NOT EXISTS achievements (
+	id bigserial PRIMARY KEY,
+	game_id bigserial REFERENCES games (id),
+	name varchar(40) NOT NULL,
+	description varchar(40) NOT NULL,
+	points int NOT NULL
+);
+CREATE TABLE IF NOT EXISTS userAchievements (
+	achievement_id bigserial REFERENCES achievements (id),
+	user_id bigserial REFERENCES users (id)
+);
+CREATE TABLE IF NOT EXISTS elos (
+	user_id bigserial REFERENCES users (id),
+	game_id bigserial REFERENCES games (id),
+	rating int NOT NULL
+);
+CREATE TABLE IF NOT EXISTS pendingPlayers (
+	player_id bigserial REFERENCES users (id),
+	game_id bigserial REFERENCES games (id)
+);
+
