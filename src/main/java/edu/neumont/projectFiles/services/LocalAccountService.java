@@ -20,13 +20,19 @@ public class LocalAccountService implements AccountService {
         avatarURL = validateInput(avatarURL,"avatarURL");
         //use -1 for id, Database will assign ID later.
         UserModel userM = new UserModel(-1,firstName,lastName,displayName,email,avatarURL);
-        Singletons.theDAL.createUserModel(userM);
-        return userM;
+        userM = Singletons.theDAL.createUserModel(userM);
+        return  userM;
     }
 
     @Override
     public UserModel retrieveUser(long id) {
         return Singletons.theDAL.retrieveUserModel(id);
+    }
+
+    //TODO:password not used yet
+    @Override
+    public UserModel retrieveUserModel(String username, String password) {
+        return Singletons.theDAL.retrieveUserModel(username,password);
     }
 
     @Override
@@ -41,7 +47,7 @@ public class LocalAccountService implements AccountService {
                     validateInput(user.getDisplayName(),"displayName"),
                     validateInput(user.getEmail(),"email"),
                     validateInput(user.getAvatarURL(),"avatarURL"));
-            Singletons.theDAL.updateUserModel(uNew);
+            uNew = Singletons.theDAL.updateUserModel(uNew);
         }
         return uNew;
     }

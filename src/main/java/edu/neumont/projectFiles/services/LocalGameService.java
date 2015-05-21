@@ -15,7 +15,7 @@ public class LocalGameService  implements GameService{
         description = validateInput(description, "description");
         //use -1 for id, Database will assign ID later.
         GameModel gameM = new GameModel(-1,name,description);
-        Singletons.theDAL.createGameModel(gameM);
+        gameM = Singletons.theDAL.createGameModel(gameM);
         return gameM;
     }
 
@@ -33,7 +33,7 @@ public class LocalGameService  implements GameService{
             gameNew = new GameModel(game.getID(),
                     validateInput(game.getName(),"name"),
                     validateInput(game.getDescription(), "description"));
-            Singletons.theDAL.updateGameModel(gameNew);
+            gameNew = Singletons.theDAL.updateGameModel(gameNew);
         }
         return gameNew;
     }

@@ -103,6 +103,8 @@ public interface AccountService {
 
     UserModel createUser(String firstName,String lastName,String displayName,String email,String avatarURL);
     UserModel retrieveUser(long id);
+    //TODO:password not used yet
+    UserModel retrieveUserModel(String username, String password);
     UserModel updateUser(UserModel user);
     void deleteUser(long id);
     public List<UserModel> getAllUsers();
