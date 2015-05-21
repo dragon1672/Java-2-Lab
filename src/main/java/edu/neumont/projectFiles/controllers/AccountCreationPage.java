@@ -32,9 +32,10 @@ public class AccountCreationPage {
 
         //Create an account here
         LocalAccountService las = new LocalAccountService();
-        las.createUser(firstName,lastName,accountName,email,avatar);
+        //TODO:password not used yet
+         UserModel userM = las.createUser(firstName, lastName, accountName, email, avatar);
 
         //Forward page
-        return Route.RedirectToUrl("");
+        return Route.RedirectToUrl(request.getContextPath()+"/accountInformation/" + userM.getID());
     }
 }

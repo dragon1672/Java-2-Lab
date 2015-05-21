@@ -1,6 +1,8 @@
 package edu.neumont.projectFiles.controllers;
 
 import edu.neumont.projectFiles.controllers.routing.Route;
+import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.services.Singletons;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.regex.Pattern;
@@ -16,6 +18,7 @@ public class LoginPage {
         //login the user here
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        //currently redirect to home page
-        return Route.RedirectToUrl("");}
+        UserModel userM = Singletons.theDAL.retrieveUserModel(username,password);
+        return Route.RedirectToUrl("/accountInformation/" + userM.getID());
+    }
 }

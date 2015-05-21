@@ -1,9 +1,6 @@
 package edu.neumont.projectFiles.controllers.routing;
 
-import edu.neumont.projectFiles.controllers.AccountCreationPage;
-import edu.neumont.projectFiles.controllers.GamesDisplayPage;
-import edu.neumont.projectFiles.controllers.LandingPage;
-import edu.neumont.projectFiles.controllers.LoginPage;
+import edu.neumont.projectFiles.controllers.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +22,7 @@ public class GodServlet extends HttpServlet {
             .addURIRegex(LoginPage.Regex, LoginPage::getLoginPage)
             .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::getPage)
             .addURIRegex(GamesDisplayPage.Regex, GamesDisplayPage::getPage)
+            .addURIRegex(AccountInformationPage.Regex, AccountInformationPage::getPage)
             ;
 
     private static Router PostRoutes = new Router()
