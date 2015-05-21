@@ -5,6 +5,7 @@ import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.services.LocalAccountService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.regex.Pattern;
 
 /**
@@ -29,13 +30,29 @@ public class AccountCreationPage {
         if(avatar.isEmpty()){
             avatar = "http://i.imgur.com/PtGnyUo.jpg";
         }
-
         //Create an account here
         LocalAccountService las = new LocalAccountService();
         //TODO:password not used yet
-         UserModel userM = las.createUser(firstName, lastName, accountName, email, avatar);
+         UserModel userM = null;
+        if(isValid(accountName) && isValid(firstName) && isValid(lastName)&& isValid(email) && isValid(avatar) && isValid(avatar))
+        {
+            userM = las.createUser(firstName, lastName, accountName, email, avatar);
+            if(userM != null)
+            {
+                HttpSession session = request.getSession();
+                if(session != null) {
+                    session.setAttribute("username", userM.getDisplayName());
+                    session.setAttribute("userID", userM.getID());
+                }
+            }
+        }
 
         //Forward page
-        return Route.RedirectToUrl(request.getContextPath()+"/accountInformation/" + userM.getID());
+        return Route.RedirectToUrl(request.getContextPath() +"/accountInformation/" + userM.getID());
+    }
+
+    private static boolean isValid(String value)
+    {
+        return !(value == null || value.isEmpty());
     }
 }

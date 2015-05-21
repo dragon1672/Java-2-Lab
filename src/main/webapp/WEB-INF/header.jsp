@@ -7,3 +7,6 @@
 <span class="header"><a href="${pageContext.request.contextPath}/accountCreation">Create Account</a></span>
 <span class="header"> --- </span>
 <span class="header"><a href="${pageContext.request.contextPath}/games">Games</a></span>
+<span class="header"> --- </span>
+<span class="header"><a href="${pageContext.request.contextPath}/accountInformation/<%= session.getAttribute("userID") %>">Welcome <%= session.getAttribute("username") %></a></span>
+

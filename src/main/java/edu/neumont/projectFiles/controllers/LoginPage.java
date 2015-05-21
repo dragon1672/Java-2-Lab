@@ -5,6 +5,7 @@ import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.services.Singletons;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.regex.Pattern;
 
 /**
@@ -18,7 +19,19 @@ public class LoginPage {
         //login the user here
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        UserModel userM = Singletons.theDAL.retrieveUserModel(username,password);
-        return Route.RedirectToUrl("/accountInformation/" + userM.getID());
+        UserModel userM = null;
+        if(username != null && password != null && !username.isEmpty() && !password.isEmpty())
+        {
+            userM = Singletons.theDAL.retrieveUserModel(username,password);
+            if(userM != null)
+            {
+                HttpSession session = request.getSession();
+                   if(session != null) {
+                       session.setAttribute("username", userM.getDisplayName());
+                       session.setAttribute("userID", userM.getID());
+                   }
+            }
+        }
+        return Route.RedirectToUrl(request.getContextPath()+ "/accountInformation/" + userM.getID());
     }
 }
