@@ -17,7 +17,7 @@ public class DateParser {
 
     public static final String datePatternRegex = "(\\w+|\\d{2}|\\d)[\\-\\.\\s/]+(?:(\\d{2}|\\d)?[\\-\\.\\s/,]+)?(\\d{2,4})";
     private static final Pattern datePattern = Pattern.compile(datePatternRegex);
-    private static SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy");
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd, yyyy");
     private static final HashMap<String, Integer> strToMonth;
 
     static {
@@ -166,7 +166,7 @@ public class DateParser {
         return ret;
     }
 
-    private static Tuple<String, Long>[] timeDiffs = new Tuple[]{
+    private static final Tuple<String, Long>[] timeDiffs = new Tuple[]{
             new Tuple<>("Millisecond", 1L),
             new Tuple<>("Second", 1000L),
             new Tuple<>("Min", 60L),

@@ -1,12 +1,13 @@
 package utils;
 
-import utils.Predicates.Predicate;
-
 import java.util.*;
+
+import utils.Predicates.Predicate;
 
 /**
  * Created by Anthony on 5/18/2015.
  */
+@SuppressWarnings("unused")
 public class CollectionUtils {
     //region Helper Classes =====================================================================================================
 
@@ -24,7 +25,7 @@ public class CollectionUtils {
 
     public static <T, SelectType> Iterable<T> filter(Iterable<T> elements, Predicate<SelectType> theTest, Selector<T, SelectType> selector) {
         return () -> new Iterator<T>() {
-            Iterator<T> back = elements.iterator();
+            final Iterator<T> back = elements.iterator();
             Object next = null;
 
             @Override
@@ -89,7 +90,7 @@ public class CollectionUtils {
      */
     public static <T> Iterable<T> reverse(List<T> collection) {
         return () -> new Iterator<T>() {
-            List<T> back = collection;
+            final List<T> back = collection;
             int index = collection.size()-1;
             @Override
             public boolean hasNext() {
@@ -112,7 +113,7 @@ public class CollectionUtils {
     @SafeVarargs
     public static <T> Iterable<T> reverse(T ... collection) {
         return () -> new Iterator<T>() {
-            T[] back = collection;
+            final T[] back = collection;
             int index = collection.length-1;
             @Override
             public boolean hasNext() {
@@ -157,6 +158,9 @@ public class CollectionUtils {
         return toList(toIterable(collection));
     }
     public static <T> List<T> toList(Iterable<T> collection) {
+        if(collection instanceof List) {
+            return (List<T>)collection;
+        }
         List<T> ret = new ArrayList<>();
         for (T t : collection) ret.add(t);
         return ret;
@@ -168,6 +172,9 @@ public class CollectionUtils {
     }
     public static <T> Set<T> toSet(Iterable<T> collection) {
         Set<T> ret = new HashSet<>();
+        if(collection instanceof Set) {
+            return (Set<T>)collection;
+        }
         for (T elem : collection) {
             if (!ret.contains(elem)) {
                 ret.add(elem);
@@ -180,7 +187,7 @@ public class CollectionUtils {
     @SafeVarargs
     public static <T> Iterable<T> toIterable(T... prams) {
         return () -> new Iterator<T>() {
-            T[] backingData = prams;
+            final T[] backingData = prams;
             int index = 0;
 
             @Override
@@ -209,7 +216,7 @@ public class CollectionUtils {
 
     public static <T> Iterable<T> selectMany(Iterable<Iterable<T>> collection) {
         return () -> new Iterator<T>() {
-            Iterator<Iterator<T>> backingData = select(collection, Iterable::iterator).iterator();
+            final Iterator<Iterator<T>> backingData = select(collection, Iterable::iterator).iterator();
             Iterator<T> current = null;
 
             @Override
@@ -237,7 +244,7 @@ public class CollectionUtils {
 
     public static <T, OUT> Iterable<OUT> select(Iterable<T> collection, Selector<T, OUT> selector) {
         return () -> new Iterator<OUT>() {
-            Iterator<T> backing = collection.iterator();
+            final Iterator<T> backing = collection.iterator();
 
             @Override
             public boolean hasNext() {
@@ -250,4 +257,80 @@ public class CollectionUtils {
             }
         };
     }
+
+    //region SubIndexing ========================================================================================================
+
+    public static <T> Iterable<T> subCollection(Iterable<T> collection, int startingIndex) {
+        return subCollection(collection, startingIndex,Integer.MAX_VALUE);
+    }
+
+    public static <T> Iterable<T> subCollection(Iterable<T> collection, int startingIndex, int length) {
+        return () -> new Iterator<T>() {
+            final Iterator<T> backbone = collection.iterator();
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                while(backbone.hasNext() // still stuff left
+                        && index < startingIndex // before start
+                        && index > startingIndex + length) { // haven't gone over the end
+                    backbone.next(); // trash
+                    index++;
+                }
+                return backbone.hasNext();
+            }
+
+            @Override
+            public T next() {
+                return backbone.next();
+            }
+        };
+    }
+
+    public static <T> Iterable<T> subCollection(List<T> collection, int startingIndex) {
+        if(startingIndex == 0) return collection;
+        return subCollection(collection, startingIndex, Integer.MAX_VALUE);
+    }
+
+    public static <T> Iterable<T> subCollection(List<T> collection, int startingIndex, int length) {
+        if (startingIndex == 0 && collection.size() <= length) return collection;
+        return () -> new Iterator<T>() {
+            final List<T> backbone = collection;
+            int index = startingIndex;
+
+            @Override
+            public boolean hasNext() {
+                return index < backbone.size() && index < startingIndex + length;
+            }
+
+            @Override
+            public T next() {
+                return backbone.get(index++);
+            }
+        };
+    }
+
+    public static <T> Iterable<T> subCollection(T[] collection, int startingIndex) {
+        if(startingIndex == 0) return toIterable(collection);
+        return subCollection(collection, startingIndex, Integer.MAX_VALUE);
+    }
+
+    public static <T> Iterable<T> subCollection(T[] collection, int startingIndex, int length) {
+        if(startingIndex == 0 && collection.length <= length) return toIterable(collection);
+        return () -> new Iterator<T>() {
+            final T[] backbone = collection;
+            int index = startingIndex;
+            @Override
+            public boolean hasNext() {
+                return index < backbone.length && index < startingIndex + length;
+            }
+
+            @Override
+            public T next() {
+                return backbone[index++];
+            }
+        };
+    }
+
+    //endregion //*/
+
 }
