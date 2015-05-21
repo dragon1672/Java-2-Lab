@@ -22,6 +22,12 @@ public class DataBaseDAL implements DAL {
         return null;
     }
 
+    //TODO:password not used yet
+    @Override
+    public UserModel retrieveUserModel(String username, String password) {
+        return null;
+    }
+
     @Override
     public UserModel updateUserModel(UserModel userModel) {
         return null;

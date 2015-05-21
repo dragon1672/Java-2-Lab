@@ -92,6 +92,8 @@ public interface DAL {
     //region User DAL
     UserModel createUserModel(UserModel userModel);
     UserModel retrieveUserModel(long userModelId);
+    //TODO:password not used yet
+    UserModel retrieveUserModel(String username, String password);
     UserModel updateUserModel(UserModel userModel);
     void deleteUserModel(long userModelId);
     List<UserModel> GetAllUsers();
