@@ -21,10 +21,12 @@ public class GodServlet extends HttpServlet {
 
     private static Router GetRoutes = new Router()
             .addURIRegex(LandingPage.Regex, LandingPage::DoIt)
-            .addURIRegex(LoginPage.Regex, LoginPage::getLoginPage)
+            .addURIRegex(LoginPage.Regex, LoginPage::getPage)
             .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::getPage)
             .addURIRegex(GamesDisplayPage.Regex, GamesDisplayPage::getPage)
-            .addURIRegex(AccountInformationPage.Regex, AccountInformationPage::getPage);
+            .addURIRegex(AccountInformationPage.Regex, AccountInformationPage::getPage)
+            .addURIRegex(RockPaperScissorsPage.Regex, RockPaperScissorsPage::getPage)
+            ;
 
     private static Router PostRoutes = new Router()
             .addURIRegex(LoginPage.Regex, LoginPage::LoginUserRedirect)
