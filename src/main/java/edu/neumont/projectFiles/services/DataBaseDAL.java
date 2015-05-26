@@ -1,9 +1,6 @@
 package edu.neumont.projectFiles.services;
 
-import edu.neumont.projectFiles.models.AchievementModel;
-import edu.neumont.projectFiles.models.GameModel;
-import edu.neumont.projectFiles.models.GameScoreModel;
-import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.models.*;
 import edu.neumont.projectFiles.interfaces.DAL;
 
 import java.util.List;
@@ -120,6 +117,31 @@ public class DataBaseDAL implements DAL {
 
     @Override
     public List<GameScoreModel> GetAllGamesScores() {
+        return null;
+    }
+
+    @Override
+    public RoomModel createRoomModel(RoomModel roomModel) {
+        return null;
+    }
+
+    @Override
+    public RoomModel retrieveRoomModel(long roomModelId) {
+        return null;
+    }
+
+    @Override
+    public RoomModel updateRoomModel(RoomModel roomModel) {
+        return null;
+    }
+
+    @Override
+    public void deleteRoomModel(long roomModelId) {
+
+    }
+
+    @Override
+    public List<RoomModel> GetAllRoomModels() {
         return null;
     }
 }

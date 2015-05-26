@@ -1,10 +1,7 @@
 package edu.neumont.projectFiles.services;
 
 import edu.neumont.projectFiles.interfaces.DAL;
-import edu.neumont.projectFiles.models.AchievementModel;
-import edu.neumont.projectFiles.models.GameModel;
-import edu.neumont.projectFiles.models.GameScoreModel;
-import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.models.*;
 import utils.Tuple;
 
 import java.util.*;
@@ -18,10 +15,12 @@ public class LocalInMemoryDal implements DAL{
     Map<Tuple<Long,Long>, AchievementModel> achievements = new HashMap<>();
     Map<UserModel, AchievementModel> unlockedAchievements = new HashMap<>();
     Map<Tuple<Long,Long>, GameScoreModel> gameScores = new HashMap<>();
+    Map<Long, RoomModel> rooms = new HashMap<>();
     private static long gameIDCounter = 0;
     private static long userIDCounter = 0;
     private static long achievementIDCounter = 0;
     private static long gameScoreIDCounter = 0;
+    private static long gameRoomIDCounter = 0;
 
 
     @Override
@@ -183,5 +182,38 @@ public class LocalInMemoryDal implements DAL{
             allGameScores.add(gameEntry.getValue());
         }
         return allGameScores;
+    }
+
+    @Override
+    public RoomModel createRoomModel(RoomModel roomModel) {
+        RoomModel newRoom = new RoomModel(gameRoomIDCounter++,roomModel.getGameID(),roomModel.getTimePosted(), roomModel.getNumberOfPlayers(), roomModel.getPassword());
+        rooms.put(newRoom.getID(), newRoom);
+        return rooms.get(newRoom.getID());
+    }
+
+    @Override
+    public RoomModel retrieveRoomModel(long roomModelId) {
+        return rooms.get(roomModelId);
+    }
+
+    @Override
+    public RoomModel updateRoomModel(RoomModel roomModel) {
+        rooms.remove(roomModel.getID());
+        rooms.put(roomModel.getID(), roomModel);
+        return rooms.get(roomModel.getID());
+    }
+
+    @Override
+    public void deleteRoomModel(long roomModelId) {
+        rooms.remove(roomModelId);
+    }
+
+    @Override
+    public List<RoomModel> GetAllRoomModels() {
+        List<RoomModel> allRoomModels = new ArrayList<>();
+        for(Map.Entry<Long, RoomModel> roomModelEntry: rooms.entrySet()){
+            allRoomModels.add(roomModelEntry.getValue());
+        }
+        return  allRoomModels;
     }
 }

@@ -1,9 +1,6 @@
 package edu.neumont.projectFiles.interfaces;
 
-import edu.neumont.projectFiles.models.AchievementModel;
-import edu.neumont.projectFiles.models.GameModel;
-import edu.neumont.projectFiles.models.GameScoreModel;
-import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.models.*;
 
 import java.util.List;
 
@@ -119,5 +116,12 @@ public interface DAL {
     GameScoreModel updateGameScoreModel(GameScoreModel gameScoreModel);
     void deleteGameScore(long gameModelId,long gameScoreModelId);
     List<GameScoreModel> GetAllGamesScores();
+    //endregion
+    //region GameRoom DAL
+    RoomModel createRoomModel(RoomModel roomModel);
+    RoomModel retrieveRoomModel(long roomModelId);
+    RoomModel updateRoomModel(RoomModel roomModel);
+    void deleteRoomModel(long roomModelId);
+    List<RoomModel> GetAllRoomModels();
     //endregion
 }
