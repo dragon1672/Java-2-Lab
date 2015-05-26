@@ -1,8 +1,10 @@
 package edu.neumont.projectFiles.controllers;
 
 import edu.neumont.projectFiles.controllers.routing.Route;
+import edu.neumont.projectFiles.interfaces.AccountService;
 import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.services.LocalAccountService;
+import edu.neumont.projectFiles.services.Singletons;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,7 +33,7 @@ public class AccountCreationPage {
             avatar = "http://i.imgur.com/PtGnyUo.jpg";
         }
         //Create an account here
-        LocalAccountService las = new LocalAccountService();
+        AccountService las = Singletons.accountService;
         //TODO:password not used yet
          UserModel userM = null;
         if(isValid(accountName) && isValid(firstName) && isValid(lastName)&& isValid(email) && isValid(avatar) && isValid(avatar))
