@@ -21,7 +21,7 @@
     Game password: <input class="gameInputField" type="text" name="gamePassword" maxlength="40">
   </div>
   <div>
-    Max number of players:   <input type="number" name="numberOfPlayers" min="1" max="5">
+    Max number of players:   <input type="number" name="numPlayers" min="1" max="5">
   </div>
   <input type="submit" value="Create Game Room">
 </form>

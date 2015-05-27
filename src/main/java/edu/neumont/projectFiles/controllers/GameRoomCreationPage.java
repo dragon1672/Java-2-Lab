@@ -16,7 +16,7 @@ public class GameRoomCreationPage {
     public static Pattern CreateGameRegex = Pattern.compile("/makeGame/[0-9]{1,40}/Create");
 
     public static Route getPage(HttpServletRequest request) {
-        long gameTypeID = Integer.parseInt(request.getRequestURI().split("/")[2]);
+        long gameTypeID = Integer.parseInt(request.getRequestURI().split("/")[3]);
         GameModel gameInformation = Singletons.theDAL.retrieveGameModel(gameTypeID);
         request.setAttribute("GameInfo", gameInformation);
         return Route.ForwardToUrl("/WEB-INF/MakeGame.jsp");
@@ -26,7 +26,8 @@ public class GameRoomCreationPage {
         LocalRoomService rs = new LocalRoomService();
         String roomName = request.getParameter("roomName");
         String password = request.getParameter("gamePassword");
-        Long gameId = ((GameModel)request.getAttribute("GameInfo")).getID();
+        String[] utiTemp = request.getRequestURI().split("/");
+        long gameId = Integer.parseInt(request.getRequestURI().split("/")[3]);
         String numPlayers = request.getParameter("numPlayers");
         rs.createRoom(roomName, gameId, Integer.parseInt(numPlayers), password);
         return Route.ForwardToUrl("/WEB-INF/WaitingForPlayers.jsp");
