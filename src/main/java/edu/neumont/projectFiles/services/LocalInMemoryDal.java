@@ -187,7 +187,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public RoomModel createRoomModel(RoomModel roomModel)
     {
-        RoomModel newRoom = new RoomModel(gameRoomIDCounter++,roomModel.getGameID(),roomModel.getTimePosted(), roomModel.getMaxPlayers(), roomModel.getPassword());
+        RoomModel newRoom = new RoomModel(gameRoomIDCounter++,roomModel.getGameID(),roomModel.getRoomName(),roomModel.getTimePosted(), roomModel.getMaxPlayers(), roomModel.getPassword());
         rooms.put(newRoom.getID(), newRoom);
         return rooms.get(newRoom.getID());
     }

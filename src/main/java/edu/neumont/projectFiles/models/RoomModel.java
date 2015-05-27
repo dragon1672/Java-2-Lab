@@ -8,18 +8,20 @@ import java.util.Date;
 public class RoomModel {
     private long ID;
     private long gameID;
+    private String roomName;
     private Date timePosted;
     private int maxPlayers;
     private int currentNumberOfPlayers;
 
     private String password;
 
-    public RoomModel(long ID, long gameID, Date timePosted, int maxPlayers, String password) {
+    public RoomModel(long ID, long gameID, String roomName, Date timePosted, int maxPlayers, String password) {
         this.ID = ID;
         this.gameID = gameID;
         this.timePosted = timePosted;
         this.maxPlayers = maxPlayers;
         this.password = password;
+        this.roomName = roomName;
         currentNumberOfPlayers = 1;
     }
 
@@ -50,5 +52,9 @@ public class RoomModel {
     }
     public String getPassword() {
         return password;
+    }
+
+    public String getRoomName() {
+        return roomName;
     }
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: awayman
@@ -23,5 +24,13 @@
       </div>
       <input type="submit" value="Enter Room"/>
     </form>
+    <div>Rooms:</div>
+    <c:forEach items="${rooms}" var="room">
+        <div class="roomDisplay">
+            <div class="roomDisplayFeild">Room name: ${room.getRoomName()}</div>
+            <div class="roomDisplayFeild">ID: ${room.getID()}</div>
+            <div class="roomDisplayFeild">Number of players: ${room.getCurrentNumberOfPlayers()} / ${room.getMaxPlayers()}</div>
+        </div>
+    </c:forEach>
   </body>
 </html>

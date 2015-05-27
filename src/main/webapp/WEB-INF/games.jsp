@@ -26,6 +26,9 @@
   <form method="GET" action="${pageContext.request.contextPath}/makeGame/${game.getID()}">
     <input type="submit" value="Create Room">
   </form>
+  <form method="GET" action="${pageContext.request.contextPath}/findGame/${game.getID()}">
+    <input type="submit" value="Find Room">
+  </form>
   <br>
 </c:forEach>
 </body>
