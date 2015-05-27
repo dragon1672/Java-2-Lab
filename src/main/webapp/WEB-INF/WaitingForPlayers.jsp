@@ -11,6 +11,9 @@
     <title>Waiting For Players</title>
 </head>
 <body>
-  <h1>Heard you liked playing games, but we need other people so hold your horses</h1>
+  <h1>Waiting For Players</h1>
+  Heard you liked playing games, but we need other people so hold your horses.
+  This page will autorefresh in a few seconds... Sorry Anthony :P
+  <% response.setIntHeader("Refresh", 8);%>
 </body>
 </html>
