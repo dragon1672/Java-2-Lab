@@ -9,15 +9,18 @@ public class RoomModel {
     private long ID;
     private long gameID;
     private Date timePosted;
-    private int numberOfPlayers;
+    private int maxPlayers;
+    private int currentNumberOfPlayers;
+
     private String password;
 
-    public RoomModel(long ID, long gameID, Date timePosted, int numberOfPlayers, String password) {
+    public RoomModel(long ID, long gameID, Date timePosted, int maxPlayers, String password) {
         this.ID = ID;
         this.gameID = gameID;
         this.timePosted = timePosted;
-        this.numberOfPlayers = numberOfPlayers;
+        this.maxPlayers = maxPlayers;
         this.password = password;
+        currentNumberOfPlayers = 1;
     }
 
     public long getID() {
@@ -32,10 +35,19 @@ public class RoomModel {
         return timePosted;
     }
 
-    public int getNumberOfPlayers() {
-        return numberOfPlayers;
+    public int getMaxPlayers() {
+        return maxPlayers;
     }
 
+    public int getCurrentNumberOfPlayers()
+    {
+        return currentNumberOfPlayers;
+    }
+
+    public void setCurrentNumberOfPlayers(int currentNumberOfPlayers)
+    {
+        this.currentNumberOfPlayers = currentNumberOfPlayers;
+    }
     public String getPassword() {
         return password;
     }

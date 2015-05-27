@@ -11,18 +11,22 @@ import java.util.regex.Pattern;
 /**
  * Created by tlousignont on 5/21/2015.
  */
-public class GameRoomCreationPage {
+public class GameRoomCreationPage
+{
     public static Pattern Regex = Pattern.compile("/makeGame/[0-9]{1,40}");
     public static Pattern CreateGameRegex = Pattern.compile("/makeGame/[0-9]{1,40}/Create");
+    public static Pattern WaitingGameRegex = Pattern.compile("makeGame/[0-9]{1,40}/Wait");
 
-    public static Route getPage(HttpServletRequest request) {
+    public static Route getPage(HttpServletRequest request)
+    {
         long gameTypeID = Integer.parseInt(request.getRequestURI().split("/")[3]);
         GameModel gameInformation = Singletons.theDAL.retrieveGameModel(gameTypeID);
         request.setAttribute("GameInfo", gameInformation);
         return Route.ForwardToUrl("/WEB-INF/MakeGame.jsp");
     }
 
-    public static Route createGame(HttpServletRequest request) {
+    public static Route createGame(HttpServletRequest request)
+    {
         LocalRoomService rs = new LocalRoomService();
         String roomName = request.getParameter("roomName");
         String password = request.getParameter("gamePassword");
@@ -30,6 +34,8 @@ public class GameRoomCreationPage {
         long gameId = Integer.parseInt(request.getRequestURI().split("/")[3]);
         String numPlayers = request.getParameter("numPlayers");
         rs.createRoom(roomName, gameId, Integer.parseInt(numPlayers), password);
+
+
         return Route.ForwardToUrl("/WEB-INF/WaitingForPlayers.jsp");
     }
 }
