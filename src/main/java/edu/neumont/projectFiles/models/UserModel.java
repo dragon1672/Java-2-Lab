@@ -1,5 +1,10 @@
 package edu.neumont.projectFiles.models;
 
+import edu.neumont.projectFiles.interfaces.DBSerializable;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Created by tlousignont on 5/15/2015.
  * @ID user id. Primary key in the database.
@@ -9,7 +14,7 @@ package edu.neumont.projectFiles.models;
  * @email the users email.
  * @avatarURL The URl for the users avatar to display.
  */
-public class UserModel {
+public class UserModel implements DBSerializable {
     private long ID;
     private String firstName;
     private String lastName;
@@ -17,12 +22,19 @@ public class UserModel {
     private String email;
     private String avatarURL;
 
-    public UserModel(long ID){
-        this.ID = ID;
+    public UserModel(){
     }
 
-    public UserModel(long ID, String firstName, String lastName, String displayName, String email, String avatarURL) {
-        this.ID = ID;
+    public UserModel(String firstName, String lastName, String displayName, String email, String avatarURL) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.displayName = displayName;
+        this.email = email;
+        this.avatarURL = avatarURL;
+    }
+
+    private UserModel(long id, String firstName, String lastName, String displayName, String email, String avatarURL){
+        this.ID = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.displayName = displayName;
@@ -72,5 +84,33 @@ public class UserModel {
 
     public String getAvatarURL(){
         return avatarURL;
+    }
+
+    @Override
+    public DBSerializable deserialize(ResultSet set) throws SQLException {
+        long id = set.getLong("id");
+        String first_Name = set.getString("first_name");
+        String last_Name = set.getString("last_name");
+        String display_Name = set.getString("display_name");
+        String email = set.getString("email");
+        String avatarURL = set.getString("avatar_url");
+        return new UserModel(id, first_Name, last_Name, display_Name, email, avatarURL);
+    }
+
+    @Override
+    public String serialize() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("default, '").append(firstName).append("', '").append(lastName).
+                append("', '").append(displayName).append("', '").append(email).
+                append("', ").append(avatarURL).append("', 'password'");
+        return sb.toString();
+    }
+
+    @Override
+    public String getUpdateSet(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("(first_name, last_name, display_name, email, avatar_url) = (").append("'").append(firstName).append("', '").append(lastName)
+                .append("', '").append(displayName).append("', '").append(email).append("', '").append(avatarURL).append("')");
+        return sb.toString();
     }
 }
