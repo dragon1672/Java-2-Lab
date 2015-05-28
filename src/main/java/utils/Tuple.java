@@ -12,6 +12,8 @@ public class Tuple<T1,T2> {
         Second = second;
     }
 
+    public Tuple() {}
+
     public T1 getFirst() {
         return First;
     }
