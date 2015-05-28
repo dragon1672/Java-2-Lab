@@ -36,7 +36,7 @@ public class GameRoomCreationPage
         String numPlayers = request.getParameter("numPlayers");
         rs.createRoom(roomName, gameId, Integer.parseInt(numPlayers), password);
 
-        String URLtoRedirect = request.getContextPath()+"/makeGame/"+gameId+"/Wait";
+        String URLtoRedirect = "/makeGame/"+gameId+"/Wait";
         return Route.RedirectToUrl(URLtoRedirect);
     }
 
@@ -61,7 +61,7 @@ public class GameRoomCreationPage
         }
         else
         {
-            return Route.RedirectToUrl("makeGame/"+gameId+"/Wait");
+            return Route.ForwardToUrl("/WEB-INF/WaitingForPlayers.jsp");
         }
     }
 }
