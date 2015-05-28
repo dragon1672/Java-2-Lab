@@ -48,7 +48,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<UserModel> GetAllUsers() {
+    public List<UserModel> getAllUsers() {
         List<UserModel> allUsers = new ArrayList<>();
         for(Map.Entry<Long,UserModel> userEntry : users.entrySet())
         {
@@ -81,7 +81,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<GameModel> GetAllGames() {
+    public List<GameModel> getAllGames() {
         List<GameModel> allGames = new ArrayList<>();
         for(Map.Entry<Long,GameModel> gameEntry : games.entrySet())
         {
@@ -119,7 +119,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<AchievementModel> GetAllAchievements() {
+    public List<AchievementModel> getAllAchievements() {
         List<AchievementModel> allAchievements = new ArrayList<>();
         for(Map.Entry<Tuple<Long,Long>,AchievementModel> achievementEntry : achievements.entrySet())
         {
@@ -154,7 +154,7 @@ public class LocalInMemoryDal implements DAL{
 
 
     @Override
-    public List<GameScoreModel> GetAllGamesScores() {
+    public List<GameScoreModel> getAllGamesScores() {
         List<GameScoreModel> allGameScores = new ArrayList<>();
         for(Map.Entry<Tuple<Long,Long>,GameScoreModel> gameEntry : gameScores.entrySet())
         {

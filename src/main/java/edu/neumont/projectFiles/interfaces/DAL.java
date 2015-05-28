@@ -94,14 +94,14 @@ public interface DAL {
     UserModel retrieveUserModel(long userModelId);
     UserModel updateUserModel(UserModel userModel);
     void deleteUserModel(long userModelId);
-    List<UserModel> GetAllUsers();
+    List<UserModel> getAllUsers();
     //endregion
     //region Game DAL
     GameModel createGameModel(GameModel gameModel);
     GameModel retrieveGameModel(long gameModelId);
     GameModel updateGameModel(GameModel gameModel);
     void deleteGameModel(long gameModelId);
-    List<GameModel> GetAllGames();
+    List<GameModel> getAllGames();
     //endregion
     //region Achievement DAL
     AchievementModel createAchievementModel(AchievementModel achievementModel);
@@ -109,13 +109,13 @@ public interface DAL {
     AchievementModel updateAchievementModel(AchievementModel achievementModel);
     void deleteAchievement(long gameModelId,long achievementModelId);
     void unlockAchievement(long userModelID, long achievementModelId);
-    List<AchievementModel> GetAllAchievements();
+    List<AchievementModel> getAllAchievements();
     //endregion
     //region GameScore DAL
     GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel);
     GameScoreModel retrieveGameScoreModel(long gameModelId, long gameScoreModelId);
     GameScoreModel updateGameScoreModel(GameScoreModel gameScoreModel);
     void deleteGameScore(long gameModelId,long gameScoreModelId);
-    List<GameScoreModel> GetAllGamesScores();
+    List<GameScoreModel> getAllGamesScores();
     //endregion
 }

@@ -102,7 +102,7 @@ public class UserModel implements DBSerializable {
         StringBuilder sb = new StringBuilder();
         sb.append("default, '").append(firstName).append("', '").append(lastName).
                 append("', '").append(displayName).append("', '").append(email).
-                append("', ").append(avatarURL).append("', 'password'");
+                append("', '").append(avatarURL).append("', 'password'");
         return sb.toString();
     }
 

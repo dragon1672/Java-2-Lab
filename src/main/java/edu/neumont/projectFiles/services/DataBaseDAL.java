@@ -21,10 +21,14 @@ public class DataBaseDAL implements DAL {
 
     @Override
     public UserModel createUserModel(UserModel userModel) {
-        String query = SqlCommandsManager.insertInto("users", userModel);
-        DBConnectionManager.runQuery(query);
-        DBConnectionManager.runQuery(SqlCommandsManager.getLast("users") );
-        return (UserModel)DBConnectionManager.deserialize(UserModel.class);
+        UserModel model = null;
+        if(userModel != null) {
+            String query = SqlCommandsManager.insertInto("users", userModel);
+            DBConnectionManager.runQuery(query);
+            DBConnectionManager.runQuery(SqlCommandsManager.getLast("users"));
+            model = (UserModel) DBConnectionManager.deserialize(UserModel.class);
+        }
+        return model;
     }
 
     @Override
@@ -37,32 +41,39 @@ public class DataBaseDAL implements DAL {
 
     @Override
     public UserModel updateUserModel(UserModel userModel) {
-        String query = SqlCommandsManager.updateWhere("users", userModel.getUpdateSet(), userModel.getID());
-        DBConnectionManager.runQuery(query );
-        UserModel model = new UserModel();
-        return (UserModel) DBConnectionManager.deserialize(UserModel.class);
+        UserModel model = null;
+        if(userModel != null) {
+            String query = SqlCommandsManager.updateWhere("users", userModel.getUpdateSet(), userModel.getID());
+            DBConnectionManager.runQuery(query);
+            model =  (UserModel) DBConnectionManager.deserialize(UserModel.class);
+        }
+        return model;
     }
 
     @Override
     public void deleteUserModel(long userModelId) {
         String query = SqlCommandsManager.deleteWhereId("users", userModelId);
-        DBConnectionManager.runQuery(query );
+        DBConnectionManager.runQuery(query, false);
     }
 
     @Override
-    public List<UserModel> GetAllUsers() {
+    public List<UserModel> getAllUsers() {
         String query = SqlCommandsManager.selectAll("users");
         DBConnectionManager.runQuery(query);
-        List<UserModel> users = (List<UserModel>) DBConnectionManager.deserializeList(new UserModel());
+        List<UserModel> users = (List<UserModel>) DBConnectionManager.deserializeList(UserModel.class);
         return users;
     }
 
     @Override
     public GameModel createGameModel(GameModel gameModel) {
-        String query = SqlCommandsManager.insertInto("games", gameModel);
-        DBConnectionManager.runQuery(query );
-        DBConnectionManager.runQuery(SqlCommandsManager.getLast("games") );
-        return (GameModel)DBConnectionManager.deserialize(GameModel.class);
+        GameModel model = null;
+        if(gameModel != null) {
+            String query = SqlCommandsManager.insertInto("games", gameModel);
+            DBConnectionManager.runQuery(query);
+            DBConnectionManager.runQuery(SqlCommandsManager.getLast("games"));
+            model =  (GameModel) DBConnectionManager.deserialize(GameModel.class);
+        }
+        return model;
     }
 
     @Override
@@ -74,27 +85,35 @@ public class DataBaseDAL implements DAL {
 
     @Override
     public GameModel updateGameModel(GameModel gameModel) {
-        String query = SqlCommandsManager.updateWhere("games", gameModel.getUpdateSet(), gameModel.getID());
-        DBConnectionManager.runQuery(query );
-        return (GameModel) DBConnectionManager.deserialize(GameModel.class);
+        GameModel model = null ;
+        if(gameModel != null) {
+            String query = SqlCommandsManager.updateWhere("games", gameModel.getUpdateSet(), gameModel.getID());
+            DBConnectionManager.runQuery(query);
+            model = (GameModel) DBConnectionManager.deserialize(GameModel.class);
+        }
+        return model;
     }
 
     @Override
     public void deleteGameModel(long gameModelId) {
-        DBConnectionManager.runQuery(SqlCommandsManager.deleteWhereId("games", gameModelId) );
+        DBConnectionManager.runQuery(SqlCommandsManager.deleteWhereId("games", gameModelId), false );
     }
 
     @Override
-    public List<GameModel> GetAllGames() {
+    public List<GameModel> getAllGames() {
         DBConnectionManager.runQuery(SqlCommandsManager.selectAll("games") );
-        return (List<GameModel>) DBConnectionManager.deserializeList(new GameModel());
+        return (List<GameModel>) DBConnectionManager.deserializeList(GameModel.class);
     }
 
     @Override
     public AchievementModel createAchievementModel(AchievementModel achievementModel) {
-        DBConnectionManager.runQuery(SqlCommandsManager.insertInto("achievements", achievementModel));
-        DBConnectionManager.runQuery(SqlCommandsManager.getLast("achievements"));
-        return (AchievementModel) DBConnectionManager.deserialize(achievementModel.getClass());
+        AchievementModel model = null;
+        if(achievementModel != null) {
+            DBConnectionManager.runQuery(SqlCommandsManager.insertInto("achievements", achievementModel));
+            DBConnectionManager.runQuery(SqlCommandsManager.getLast("achievements"));
+            model = (AchievementModel) DBConnectionManager.deserialize(achievementModel.getClass());
+        }
+        return model;
     }
 
     @Override
@@ -106,47 +125,62 @@ public class DataBaseDAL implements DAL {
 
     @Override
     public AchievementModel updateAchievementModel(AchievementModel achievementModel) {
-        DBConnectionManager.runQuery(SqlCommandsManager.updateWhere("achievements", achievementModel.getUpdateSet(), achievementModel.getID()));
-        return (AchievementModel) DBConnectionManager.deserialize(AchievementModel.class);
+        AchievementModel model = null;
+        if(achievementModel != null) {
+            DBConnectionManager.runQuery(SqlCommandsManager.updateWhere("achievements", achievementModel.getUpdateSet(), achievementModel.getID()));
+            model = (AchievementModel) DBConnectionManager.deserialize(AchievementModel.class);
+        }
+        return model;
     }
 
     @Override
     public void deleteAchievement(long gameModelId, long achievementModelId) {
-        DBConnectionManager.runQuery(SqlCommandsManager.deleteWhereId("achievements", achievementModelId));
+        DBConnectionManager.runQuery(SqlCommandsManager.deleteWhereId("achievements", achievementModelId), false);
     }
 
     @Override
     public void unlockAchievement(long userModelID, long achievementModelId) {
-
+        StringBuilder sb = SqlCommandsManager.insert("userAchievements");
+        sb.append(userModelID).append(", ").append(achievementModelId).append(") returning *;");
+        DBConnectionManager.runQuery(sb.toString());
     }
 
     @Override
-    public List<AchievementModel> GetAllAchievements() {
-        return null;
+    public List<AchievementModel> getAllAchievements() {
+        DBConnectionManager.runQuery(SqlCommandsManager.selectAll("achievements"));
+        return (List<AchievementModel>) DBConnectionManager.deserializeList(AchievementModel.class);
     }
 
     @Override
     public GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel) {
-        return null;
+        DBConnectionManager.runQuery(SqlCommandsManager.insertInto("gameScores", gameScoreModel));
+        return (GameScoreModel) DBConnectionManager.deserialize(GameScoreModel.class);
     }
 
     @Override
     public GameScoreModel retrieveGameScoreModel(long gameModelId, long gameScoreModelId) {
-        return null;
+        DBConnectionManager.runQuery(SqlCommandsManager.selectWhereId("gameScores", gameScoreModelId));
+        return (GameScoreModel) DBConnectionManager.deserialize(GameScoreModel.class);
     }
 
     @Override
     public GameScoreModel updateGameScoreModel(GameScoreModel gameScoreModel) {
-        return null;
+        GameScoreModel model = null;
+        if(gameScoreModel != null) {
+            DBConnectionManager.runQuery(SqlCommandsManager.updateWhere("gameScores", gameScoreModel.getUpdateSet(), gameScoreModel.getID()));
+            model = (GameScoreModel) DBConnectionManager.deserialize(GameScoreModel.class);
+        }
+        return model;
     }
 
     @Override
     public void deleteGameScore(long gameModelId, long gameScoreModelId) {
-
+        DBConnectionManager.runQuery(SqlCommandsManager.deleteWhereId("gameScores", gameScoreModelId), false);
     }
 
     @Override
-    public List<GameScoreModel> GetAllGamesScores() {
-        return null;
+    public List<GameScoreModel> getAllGamesScores() {
+        DBConnectionManager.runQuery(SqlCommandsManager.selectAll("gameScores"));
+        return (List<GameScoreModel>) DBConnectionManager.deserializeList(GameScoreModel.class);
     }
 }

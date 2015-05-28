@@ -4,6 +4,7 @@ import edu.neumont.projectFiles.interfaces.DBSerializable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  * Created by awayman on 5/15/2015.

@@ -46,30 +46,42 @@ public class DBConnectionManager {
         return connection;
     }
 
-    public static ResultSet runQuery(String query){
-        ResultSet set = null;
+    private static void finalizeQuery(String query, boolean hasResult){
         Statement stm = null;
         try {
             if(connection == null || connection.isClosed()){
                 getCurrConnection();
             }
             stm = connection.createStatement();
-            currSet = set = stm.executeQuery(query);
+            if(hasResult) {
+                currSet = stm.executeQuery(query);
+            }else{
+                stm.executeUpdate(query);
+            }
             useCount--;
             if(useCount == 0){
                 connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            return set;
         }
     }
 
+    public static void runQuery(String query){
+        finalizeQuery(query, true);
+    }
+
+    public static void runQuery(String query, boolean hasResult){
+        finalizeQuery(query, hasResult);
+    }
+
     public static DBSerializable deserialize(Class<? extends DBSerializable> instance){
+        DBSerializable result = null;
         try {
             DBSerializable obj = instance.newInstance();
-            return obj.deserialize(currSet);
+            if(currSet.next()) {
+                result = obj.deserialize(currSet);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -80,15 +92,23 @@ public class DBConnectionManager {
             e.printStackTrace();
             return null;
         }
+        return result;
     }
 
-    public static List<? extends DBSerializable> deserializeList(DBSerializable obj){
+    public static List<? extends DBSerializable> deserializeList(Class<? extends DBSerializable> instance){
         List<DBSerializable> items = new ArrayList<>();
         try {
+            DBSerializable obj = instance.newInstance();
             while(currSet.next()){
                 items.add(obj.deserialize(currSet));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
             return null;
         }

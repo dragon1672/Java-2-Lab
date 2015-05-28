@@ -27,14 +27,14 @@ public class SqlCommandsManager {
 
     public static String insertInto(String table, DBSerializable obj) {
         StringBuilder sb = insert(table);
-        sb.append(obj.serialize()).append(");");
+        sb.append(obj.serialize()).append(") Returning *;");
         return sb.toString();
     }
 
     public static String updateWhere(String table, String setInfo, long id){
         StringBuilder sb = new StringBuilder();
         sb.append("update ").append(table).append(" set ").append(setInfo).append(" where id=").
-                append(id).append(" returning ").append(table).append(";");
+                append(id).append(" returning *;");
         return sb.toString();
     }
 
@@ -57,6 +57,12 @@ public class SqlCommandsManager {
     }
 
     public static String selectAll(String table){
-        return "select * from " + table + ";";
+        return selectAll(table, "id");
+    }
+
+    public static String selectAll(String table, String orderedBy){
+        StringBuilder sb = new StringBuilder();
+        sb.append("select * from ").append(table).append(" order by ").append(orderedBy).append(";");
+        return sb.toString();
     }
 }

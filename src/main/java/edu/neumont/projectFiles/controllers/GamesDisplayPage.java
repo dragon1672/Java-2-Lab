@@ -20,7 +20,7 @@ public class GamesDisplayPage {
 
     public static Route getPage(HttpServletRequest request) {
         //Get List of Games
-        List<GameModel> games = Singletons.theDAL.GetAllGames();
+        List<GameModel> games = Singletons.theDAL.getAllGames();
         request.setAttribute("games", games);
         return Route.ForwardToUrl("/WEB-INF/games.jsp");
     }
