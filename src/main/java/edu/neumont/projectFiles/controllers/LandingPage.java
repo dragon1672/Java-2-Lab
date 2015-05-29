@@ -14,7 +14,6 @@ public class LandingPage {
     public static Pattern Regex = Pattern.compile("/");
 
     public static Route DoIt(HttpServletRequest request) {
-        DavidTests.testDB();
         return Route.ForwardToUrl("/WEB-INF/index.jsp");
     }
 }
