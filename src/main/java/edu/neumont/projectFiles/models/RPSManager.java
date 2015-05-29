@@ -15,12 +15,15 @@ public class RPSManager{
     public class RPSUser {
         private UserModel user;
         private int index;
+        private boolean readyToStartNewGame;
+        private RPSMove lastSavedMove;
         private boolean doneWithGame;
 
         public RPSUser(UserModel user) {
             this.user = user;
             this.index = 0;
             this.doneWithGame = false;
+            this.readyToStartNewGame = true;
         }
 
         public UserModel getUser() {
@@ -41,6 +44,22 @@ public class RPSManager{
 
         public void setDoneWithGame(boolean doneWithGame) {
             this.doneWithGame = doneWithGame;
+        }
+
+        public RPSMove getLastSavedMove() {
+            return lastSavedMove;
+        }
+
+        public void setLastSavedMove(RPSMove lastSavedMove) {
+            this.lastSavedMove = lastSavedMove;
+        }
+
+        public boolean isReadyToStartNewGame() {
+            return readyToStartNewGame;
+        }
+
+        public void setReadyToStartNewGame(boolean readyToStartNewGame) {
+            this.readyToStartNewGame = readyToStartNewGame;
         }
     }
 
@@ -69,6 +88,8 @@ public class RPSManager{
     }
 
     public void addMove(Tuple<RPSMove, RPSMove> move) {
+        p1.setLastSavedMove(move.getFirst());
+        p2.setLastSavedMove(move.getSecond());
         this.Moves.add(move);
     }
 }
