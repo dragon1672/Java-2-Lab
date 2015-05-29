@@ -205,7 +205,7 @@ public class CollectionUtils {
     /**
      * Joins collections together
      * Will iterate in the same order they are passed in
-     * @param collections
+     * @param collections data
      * @param <T> type of collection
      * @return hook to iterate over all the collections
      */
