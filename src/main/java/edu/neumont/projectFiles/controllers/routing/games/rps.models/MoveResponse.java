@@ -11,13 +11,13 @@ public class MoveResponse {
      */
     public final int compare;
     public final RPSMoveSet.MoveBeatsMove moveData;
-    public final RPSMove MyMove,TheirMove;
+    public final RPSMove P1Move, P2Move;
 
     public MoveResponse(int compare, RPSMoveSet.MoveBeatsMove moveData, RPSMove P1, RPSMove P2) {
         this.compare = compare;
         this.moveData = moveData;
-        MyMove = P1;
-        TheirMove = P2;
+        P1Move = P1;
+        P2Move = P2;
     }
     public boolean P1Won()  { return compare  > 0; }
     public boolean P2Won() { return compare  < 0; }
