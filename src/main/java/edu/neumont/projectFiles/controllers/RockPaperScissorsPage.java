@@ -89,9 +89,9 @@ public class RockPaperScissorsPage {
                                 MoveResponse moveResponse = RPSRules.getResponse(RPSSet.getFirst(), RPSSet.getSecond());
                                 String GameMessage = "It's a tie!";
                                 if(moveResponse.P1Won()) {
-                                    GameMessage = rpsGame.getP1().getUser().getDisplayName() + " has beat" +rpsGame.getP2().getUser().getDisplayName() + ", " +RPSSet.getFirst().getText() + " " + moveResponse.moveData.beatMsg+ " " +RPSSet.getSecond().getText();
+                                    GameMessage = "user: " + rpsGame.getP1().getUser().getDisplayName() + " has beat user: " +rpsGame.getP2().getUser().getDisplayName() + ", " +RPSSet.getFirst().getText() + " " + moveResponse.moveData.beatMsg+ " " +RPSSet.getSecond().getText();
                                 } else if(moveResponse.P2Won()){
-                                    GameMessage = rpsGame.getP2().getUser().getDisplayName() + " has beat" +rpsGame.getP1().getUser().getDisplayName() + ", " +RPSSet.getSecond().getText() + " " + moveResponse.moveData.beatMsg+ " " +RPSSet.getFirst().getText();
+                                    GameMessage = "user:" + rpsGame.getP2().getUser().getDisplayName() + " has beat user: " +rpsGame.getP1().getUser().getDisplayName() + ", " +RPSSet.getSecond().getText() + " " + moveResponse.moveData.beatMsg+ " " +RPSSet.getFirst().getText();
                                 }
                                 //display result page
 
