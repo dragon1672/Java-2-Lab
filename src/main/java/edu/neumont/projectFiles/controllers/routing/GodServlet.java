@@ -25,7 +25,7 @@ public class GodServlet extends HttpServlet {
             .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::getPage)
             .addURIRegex(GamesDisplayPage.Regex, GamesDisplayPage::getPage)
             .addURIRegex(AccountInformationPage.Regex, AccountInformationPage::getPage)
-            .addURIRegex(RockPaperScissorsPage.Regex, RockPaperScissorsPage::getPage)
+            .addURIRegex(RockPaperScissorsPage.Regex, RockPaperScissorsPage::DummyGetPage)
             .addURIRegex(GameRoomCreationPage.Regex, GameRoomCreationPage::getPage)
             .addURIRegex(GameRoomCreationPage.WaitingGameRegex, GameRoomCreationPage::isGameReady)
             ;
