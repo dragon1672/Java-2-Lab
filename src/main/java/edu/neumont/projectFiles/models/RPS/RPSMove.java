@@ -1,5 +1,4 @@
-package edu.neumont.projectFiles.controllers.routing.games.rps.models;
-
+package edu.neumont.projectFiles.models.RPS;
 /**
  * Created by Anthony on 3/24/2015.
  */

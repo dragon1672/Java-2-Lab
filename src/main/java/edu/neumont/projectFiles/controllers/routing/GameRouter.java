@@ -1,4 +1,4 @@
-package edu.neumont.projectFiles.controllers.routing.games;
+package edu.neumont.projectFiles.controllers.routing;
 
 import edu.neumont.projectFiles.controllers.routing.Router;
 

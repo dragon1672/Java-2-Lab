@@ -1,15 +1,11 @@
-package edu.neumont.projectFiles.models;
-
-import edu.neumont.projectFiles.controllers.routing.games.rps.models.RPSMove;
+package edu.neumont.projectFiles.models.RPS;
+import edu.neumont.projectFiles.models.UserModel;
 import utils.Tuple;
-
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by bwaite on 5/27/2015.
  */
-
 public class RPSManager{
 
     public class RPSUser {

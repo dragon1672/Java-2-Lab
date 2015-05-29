@@ -1,10 +1,10 @@
 package edu.neumont.projectFiles.controllers;
 
 import edu.neumont.projectFiles.controllers.routing.Route;
-import edu.neumont.projectFiles.controllers.routing.games.rps.models.MoveResponse;
-import edu.neumont.projectFiles.controllers.routing.games.rps.models.RPSMove;
-import edu.neumont.projectFiles.controllers.routing.games.rps.models.RPSMoveSet;
-import edu.neumont.projectFiles.models.RPSManager;
+import edu.neumont.projectFiles.models.RPS.MoveResponse;
+import edu.neumont.projectFiles.models.RPS.RPSMove;
+import edu.neumont.projectFiles.models.RPS.RPSMoveSet;
+import edu.neumont.projectFiles.models.RPS.RPSManager;
 import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.services.Singletons;
 import utils.Tuple;
