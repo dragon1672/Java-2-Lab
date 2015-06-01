@@ -77,7 +77,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public GameModel createGameModel(GameModel gameModel) {
         long gameID = gameIDCounter++;
-        gameModel = new GameModel(gameID,gameModel.getName(),gameModel.getDescription());
+        gameModel = new GameModel(gameID,gameModel.getName(),gameModel.getDescription(), gameModel.getAbbreviation());
         games.put(gameID,gameModel);
         return games.get(gameID);
     }

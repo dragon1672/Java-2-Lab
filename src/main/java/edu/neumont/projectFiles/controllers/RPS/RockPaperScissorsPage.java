@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
  * Created by bwaite on 5/22/2015.
  */
 public class RockPaperScissorsPage {
+    public static final String MyID = "RPS";
     public static Pattern Regex = Pattern.compile("/RPS");
     private static Map<Long, RPSManager> RPSGames = new HashMap<>();
     //TODO: figure out where I get the RPS game type

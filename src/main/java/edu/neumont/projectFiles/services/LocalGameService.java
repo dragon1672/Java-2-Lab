@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class LocalGameService  implements GameService{
     @Override
-    public GameModel createGame(String name, String description) {
+    public GameModel createGame(String name, String description, String abbreviation) {
        name = validateInput(name,"name");
         description = validateInput(description, "description");
         //use -1 for id, Database will assign ID later.
-        GameModel gameM = new GameModel(-1,name,description);
+        GameModel gameM = new GameModel(-1,name,description, abbreviation);
         gameM = Singletons.theDAL.createGameModel(gameM);
         return gameM;
     }
@@ -32,7 +32,8 @@ public class LocalGameService  implements GameService{
         {
             gameNew = new GameModel(game.getID(),
                     validateInput(game.getName(),"name"),
-                    validateInput(game.getDescription(), "description"));
+                    validateInput(game.getDescription(), "description"),
+                    validateInput(game.getAbbreviation(),"abbreviation"));
             gameNew = Singletons.theDAL.updateGameModel(gameNew);
         }
         return gameNew;
