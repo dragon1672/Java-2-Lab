@@ -1,10 +1,12 @@
 package edu.neumont.projectFiles.services;
 
+import edu.neumont.projectFiles.RandomSwfURL;
 import edu.neumont.projectFiles.interfaces.DAL;
 import edu.neumont.projectFiles.models.*;
 import utils.Tuple;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by bwaite on 5/20/2015.
@@ -176,11 +178,7 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public List<GameScoreModel> GetAllGamesScores() {
-        List<GameScoreModel> allGameScores = new ArrayList<>();
-        for(Map.Entry<Tuple<Long,Long>,GameScoreModel> gameEntry : gameScores.entrySet())
-        {
-            allGameScores.add(gameEntry.getValue());
-        }
+        List<GameScoreModel> allGameScores = gameScores.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         return allGameScores;
     }
 
@@ -218,5 +216,15 @@ public class LocalInMemoryDal implements DAL{
             allRoomModels.add(roomModelEntry.getValue());
         }
         return  allRoomModels;
+    }
+
+    @Override
+    public String getRandomSWFURL() {
+        return RandomSwfURL.getRandomSwlUrl();
+    }
+
+    @Override
+    public void removeSWFURL(String toRemove) {
+        RandomSwfURL.removeURL(toRemove);
     }
 }

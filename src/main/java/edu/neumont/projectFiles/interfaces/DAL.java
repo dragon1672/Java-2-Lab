@@ -86,7 +86,7 @@ public interface DAL {
 
     //endregion
 
-    //region User DAL
+    //region User DAL ===========================================================================================================
     UserModel createUserModel(UserModel userModel);
     UserModel retrieveUserModel(long userModelId);
     //TODO:password not used yet
@@ -95,14 +95,16 @@ public interface DAL {
     void deleteUserModel(long userModelId);
     List<UserModel> GetAllUsers();
     //endregion
-    //region Game DAL
+
+    //region Game DAL ===========================================================================================================
     GameModel createGameModel(GameModel gameModel);
     GameModel retrieveGameModel(long gameModelId);
     GameModel updateGameModel(GameModel gameModel);
     void deleteGameModel(long gameModelId);
     List<GameModel> GetAllGames();
     //endregion
-    //region Achievement DAL
+
+    //region Achievement DAL ====================================================================================================
     AchievementModel createAchievementModel(AchievementModel achievementModel);
     AchievementModel retrieveAchievementModel(long gameModelId, long achievementModelId);
     AchievementModel updateAchievementModel(AchievementModel achievementModel);
@@ -110,18 +112,32 @@ public interface DAL {
     void unlockAchievement(long userModelID, long achievementModelId);
     List<AchievementModel> GetAllAchievements();
     //endregion
-    //region GameScore DAL
+
+    //region GameScore DAL ======================================================================================================
     GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel);
     GameScoreModel retrieveGameScoreModel(long gameModelId, long gameScoreModelId);
     GameScoreModel updateGameScoreModel(GameScoreModel gameScoreModel);
     void deleteGameScore(long gameModelId,long gameScoreModelId);
     List<GameScoreModel> GetAllGamesScores();
     //endregion
-    //region GameRoom DAL
+
+    //region GameRoom DAL =======================================================================================================
     RoomModel createRoomModel(RoomModel roomModel);
     RoomModel retrieveRoomModel(long roomModelId);
     RoomModel updateRoomModel(RoomModel roomModel);
     void deleteRoomModel(long roomModelId);
     List<RoomModel> GetAllRoomModels();
     //endregion
+
+    /**
+     * returns a random valid SWF url
+     * @return a random valid SWF url
+     */
+    String getRandomSWFURL();
+
+    /**
+     * Shouldn't throw any exceptions
+     * @param toRemove URL to remove
+     */
+    void removeSWFURL(String toRemove);
 }

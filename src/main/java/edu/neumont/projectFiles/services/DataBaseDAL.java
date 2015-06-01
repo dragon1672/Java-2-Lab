@@ -144,4 +144,14 @@ public class DataBaseDAL implements DAL {
     public List<RoomModel> GetAllRoomModels() {
         return null;
     }
+
+    @Override
+    public String getRandomSWFURL() {
+        return null;
+    }
+
+    @Override
+    public void removeSWFURL(String toRemove) {
+
+    }
 }
