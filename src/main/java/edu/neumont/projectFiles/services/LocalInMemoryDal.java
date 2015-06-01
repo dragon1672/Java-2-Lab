@@ -1,10 +1,7 @@
 package edu.neumont.projectFiles.services;
 
 import edu.neumont.projectFiles.interfaces.DAL;
-import edu.neumont.projectFiles.models.AchievementModel;
-import edu.neumont.projectFiles.models.GameModel;
-import edu.neumont.projectFiles.models.GameScoreModel;
-import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.models.*;
 import utils.Tuple;
 
 import java.util.*;
@@ -18,21 +15,39 @@ public class LocalInMemoryDal implements DAL{
     Map<Tuple<Long,Long>, AchievementModel> achievements = new HashMap<>();
     Map<UserModel, AchievementModel> unlockedAchievements = new HashMap<>();
     Map<Tuple<Long,Long>, GameScoreModel> gameScores = new HashMap<>();
+    Map<Long, RoomModel> rooms = new HashMap<>();
     private static long gameIDCounter = 0;
     private static long userIDCounter = 0;
     private static long achievementIDCounter = 0;
     private static long gameScoreIDCounter = 0;
+    private static long gameRoomIDCounter = 0;
 
 
     @Override
     public UserModel createUserModel(UserModel userModel) {
-        users.put(userIDCounter++,userModel);
-        return users.get(userModel.getID());
+        long userID = userIDCounter++;
+        userModel = new UserModel(userID,userModel.getFirstName(), userModel.getLastName(), userModel.getDisplayName(),userModel.getEmail(), userModel.getAvatarURL());
+        users.put(userID,userModel);
+        return users.get(userID);
     }
 
     @Override
     public UserModel retrieveUserModel(long userModelId) {
         return users.get(userModelId);
+    }
+
+    //TODO:password not used yet
+    @Override
+    public UserModel retrieveUserModel(String username, String password) {
+        UserModel userModel = null;
+        for(Map.Entry<Long, UserModel> u : users.entrySet()) {
+            if(u.getValue().getDisplayName().equals(username))
+            {
+                userModel = u.getValue();
+                break;
+            }
+        }
+        return userModel;
     }
 
     @Override
@@ -59,8 +74,10 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public GameModel createGameModel(GameModel gameModel) {
-        games.put(gameIDCounter++,gameModel);
-        return games.get(gameModel.getID());
+        long gameID = gameIDCounter++;
+        gameModel = new GameModel(gameID,gameModel.getName(),gameModel.getDescription());
+        games.put(gameID,gameModel);
+        return games.get(gameID);
     }
 
     @Override
@@ -92,8 +109,10 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public AchievementModel createAchievementModel(AchievementModel achievementModel) {
-        achievements.put(new Tuple<>(achievementModel.getGameID(), achievementIDCounter++),achievementModel);
-        return achievements.get(new Tuple<>(achievementModel.getGameID(),achievementModel.getID()));
+        Long achievementID = achievementIDCounter++;
+        achievementModel = new AchievementModel(achievementID,achievementModel.getGameID());
+        achievements.put(new Tuple<>(achievementModel.getGameID(), achievementID),achievementModel);
+        return achievements.get(new Tuple<>(achievementModel.getGameID(),achievementID));
     }
 
     @Override
@@ -130,8 +149,10 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel) {
-        gameScores.put(new Tuple<>(gameScoreModel.getGameID(),gameScoreIDCounter++),gameScoreModel);
-        return gameScores.get(new Tuple<>(gameScoreModel.getGameID(),gameScoreModel.getID()));
+        long gameScoreID = gameScoreIDCounter++;
+        gameScoreModel = new GameScoreModel(gameScoreID,gameScoreModel.getUserID(),gameScoreModel.getGameID(),gameScoreModel.getScore(),gameScoreModel.getDate());
+        gameScores.put(new Tuple<>(gameScoreModel.getGameID(),gameScoreID),gameScoreModel);
+        return gameScores.get(new Tuple<>(gameScoreModel.getGameID(),gameScoreID));
     }
 
     @Override
@@ -161,5 +182,41 @@ public class LocalInMemoryDal implements DAL{
             allGameScores.add(gameEntry.getValue());
         }
         return allGameScores;
+    }
+
+    @Override
+    public RoomModel createRoomModel(RoomModel roomModel)
+    {
+        RoomModel newRoom = new RoomModel(gameRoomIDCounter++,roomModel.getGameID(),roomModel.getRoomName(),roomModel.getTimePosted(), roomModel.getMaxPlayers(), roomModel.getPassword());
+        rooms.put(newRoom.getID(), newRoom);
+        return rooms.get(newRoom.getID());
+    }
+
+    @Override
+    public RoomModel retrieveRoomModel(long roomModelId)
+    {
+        return rooms.get(roomModelId);
+    }
+
+    @Override
+    public RoomModel updateRoomModel(RoomModel roomModel)
+    {
+        rooms.remove(roomModel.getID());
+        rooms.put(roomModel.getID(), roomModel);
+        return rooms.get(roomModel.getID());
+    }
+
+    @Override
+    public void deleteRoomModel(long roomModelId) {
+        rooms.remove(roomModelId);
+    }
+
+    @Override
+    public List<RoomModel> GetAllRoomModels() {
+        List<RoomModel> allRoomModels = new ArrayList<>();
+        for(Map.Entry<Long, RoomModel> roomModelEntry: rooms.entrySet()){
+            allRoomModels.add(roomModelEntry.getValue());
+        }
+        return  allRoomModels;
     }
 }

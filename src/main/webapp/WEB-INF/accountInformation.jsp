@@ -1,14 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: awayman
-  Date: 5/20/2015
-  Time: 10:44 AM
-  To change this template use File | Settings | File Templates.
-  This page just takes a UserModel, nothing else
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+  <style>
+    .userAvatar {
+      max-width: 500px;
+      max-height: 500px;
+      width: auto;
+    }
+  </style>
     <title>User Account Information</title>
 </head>
 <body>
@@ -32,7 +31,7 @@
     User Avatar URL: ${model.avatarURL}
   </div>
   <div>
-    <img src="${model.avatarURL}"/>
+    <img class="userAvatar" src="${model.avatarURL}"/>
   </div>
 </body>
 </html>

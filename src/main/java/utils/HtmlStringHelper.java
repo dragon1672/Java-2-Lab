@@ -29,7 +29,7 @@ public class HtmlStringHelper {
      * @return HTML formatted string where no code will run
      */
     public static String RemoveScripts(String HTML) {
-        /*
+        //*
         return ALL_SCRIPTS.matcher(HTML).replaceAll(""); // no tags for u
         /*/
         return HTML;

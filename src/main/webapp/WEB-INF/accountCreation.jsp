@@ -14,22 +14,22 @@
 <jsp:include page="header.jsp" />
 <form class="accountCreationForm" action="${pageContext.request.contextPath}/accountCreation" method="POST">
   <div class="textInputField">
-    Account name: <input class="accountInputField" type="text" name="accountName">
+    Account name: <input class="accountInputField" type="text" name="accountName" maxlength="40">
   </div>
   <div class="textInputField">
-    First name: <input class="accountInputField" type="text" name="firstName">
+    First name: <input class="accountInputField" type="text" name="firstName" maxlength="40">
   </div>
   <div class="textInputField">
-    Last name: <input class="accountInputField" type="text" name="lastName">
+    Last name: <input class="accountInputField" type="text" name="lastName" maxlength="40">
   </div>
   <div class="textInputField">
-    Email: <input class="accountInputField" type="text" name="email">
+    Email: <input class="accountInputField" type="text" name="email" maxlength="100">
   </div>
   <div class="textInputField">
-    Password: <input class="accountInputField" type="text" name="password">
+    Password: <input class="accountInputField" type="text" name="password" maxlength="100">
   </div>
   <div class="textInputField">
-    Avatar URL: <input class="accountInputField" type="text" name="avatar">
+    Avatar URL: <input class="accountInputField" type="text" name="avatar" maxlength="100">
   </div>
   <input type="submit" value="Create Account">
 </form>

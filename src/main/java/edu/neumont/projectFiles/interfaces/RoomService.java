@@ -1,26 +1,26 @@
 package edu.neumont.projectFiles.interfaces;
 
-import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.models.GameModel;
+import edu.neumont.projectFiles.models.RoomModel;
 import utils.HtmlStringHelper;
 
 import java.util.List;
 
 /**
- * Created by bwaite on 5/19/2015.
+ * Created by tlousignont on 5/22/2015.
  */
-public interface AccountService {
-
+public interface RoomService {
     //region Validation Helpers =================================================================================================
     default String validateInput(String input, String name) {
         if(input == null || input.isEmpty()) {
-            throw new AccountService.UserExceptions(name + " cannot be null or empty",new IllegalArgumentException(name));
+            throw new RoomService.UserExceptions(name + " cannot be null or empty",new IllegalArgumentException(name));
         }
         input = HtmlStringHelper.Sanitize(input);
         return input;
     }
     default void validateInput(Object input, String name) {
         if(input == null) {
-            throw new AccountService.UserExceptions(name + " cannot be null",new IllegalArgumentException(name));
+            throw new GameService.UserExceptions(name + " cannot be null",new IllegalArgumentException(name));
         }
     }
     //endregion
@@ -30,7 +30,7 @@ public interface AccountService {
      * The user passed invalid data
      * RECOMMENDED: use throwable cause to have a more detailed exception
      */
-    class UserExceptions extends AccountServiceExceptions {
+    class UserExceptions extends RoomServiceServiceExceptions {
         public UserExceptions() {
             super();
         }
@@ -48,7 +48,7 @@ public interface AccountService {
     /**
      * Something went wrong with the server
      */
-    class ServiceExceptions extends AccountServiceExceptions {
+    class ServiceExceptions extends RoomServiceServiceExceptions {
         public ServiceExceptions() {
             super();
         }
@@ -66,7 +66,7 @@ public interface AccountService {
     /**
      * The identifier the user passed in was not contained in this service
      */
-    class NotFoundExceptions extends AccountServiceExceptions {
+    class NotFoundExceptions extends RoomServiceServiceExceptions {
         public NotFoundExceptions() {
             super();
         }
@@ -84,28 +84,26 @@ public interface AccountService {
     /**
      * All Exceptions throw by this class should somehow be from this type
      */
-    class AccountServiceExceptions extends RuntimeException {
-        public AccountServiceExceptions() {
+    class RoomServiceServiceExceptions extends RuntimeException {
+        public RoomServiceServiceExceptions() {
             super();
         }
-        public AccountServiceExceptions(String message) {
+        public RoomServiceServiceExceptions(String message) {
             super(message);
         }
-        public AccountServiceExceptions(String message, Throwable cause) {
+        public RoomServiceServiceExceptions(String message, Throwable cause) {
             super(message, cause);
         }
-        public AccountServiceExceptions(Throwable cause) {
+        public RoomServiceServiceExceptions(Throwable cause) {
             super(cause);
         }
     }
 
     //endregion
 
-    UserModel createUser(String firstName,String lastName,String displayName,String email,String avatarURL);
-    UserModel retrieveUser(long id);
-    //TODO:password not used yet
-    UserModel retrieveUserModel(String username, String password);
-    UserModel updateUser(UserModel user);
-    void deleteUser(long id);
-    public List<UserModel> getAllUsers();
+    RoomModel createRoom(String name, long gameID, int numPlayers, String Password);
+    RoomModel retrieveRoom(long roomId);
+    RoomModel updateRoom(RoomModel room);
+    void deleteRoom(long id);
+    public List<RoomModel> getAllRooms();
 }
