@@ -81,8 +81,9 @@ public class GameScoreModel implements DBSerializable {
     @Override
     public String getUpdateSet() {
         StringBuilder sb = new StringBuilder();
+        java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
         sb.append("(user_id, game_id, score, timestamp)=(").append(userID).append(", ")
-                .append(gameID).append(", ").append(score).append(", ").append(date).append(")");
+                .append(gameID).append(", ").append(score).append(", ").append(timestamp).append(")");
         return sb.toString();
     }
 }

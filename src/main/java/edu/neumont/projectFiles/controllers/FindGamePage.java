@@ -19,7 +19,7 @@ public class FindGamePage {
     public static Route getPage(HttpServletRequest request) {
         long gameTypeID = Integer.parseInt(request.getRequestURI().split("/")[3]);
         List<RoomModel> rooms = new ArrayList<>();
-        List<RoomModel> allRooms = Singletons.theDAL.GetAllRoomModels();
+        List<RoomModel> allRooms = Singletons.theDAL.getAllRoomModels();
         for (RoomModel room : allRooms){
             if(room.getGameID() == gameTypeID){
                 rooms.add(room);

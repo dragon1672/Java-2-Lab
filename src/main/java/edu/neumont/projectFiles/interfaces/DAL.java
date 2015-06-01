@@ -122,6 +122,6 @@ public interface DAL {
     RoomModel retrieveRoomModel(long roomModelId);
     RoomModel updateRoomModel(RoomModel roomModel);
     void deleteRoomModel(long roomModelId);
-    List<RoomModel> GetAllRoomModels();
+    List<RoomModel> getAllRoomModels();
     //endregion
 }

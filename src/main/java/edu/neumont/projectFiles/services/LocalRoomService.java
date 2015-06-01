@@ -13,7 +13,7 @@ public class LocalRoomService implements edu.neumont.projectFiles.interfaces.Roo
 
     @Override
     public RoomModel createRoom(String name, long gameID, int numPlayers, String password) {
-        RoomModel rm = new RoomModel(-1,gameID,name, new Date(), numPlayers, password);
+        RoomModel rm = new RoomModel(gameID,name, new Date(), numPlayers, password);
         RoomModel newRoom = Singletons.theDAL.createRoomModel(rm);
         return  newRoom;
     }
@@ -35,6 +35,6 @@ public class LocalRoomService implements edu.neumont.projectFiles.interfaces.Roo
 
     @Override
     public List<RoomModel> getAllRooms() {
-        return Singletons.theDAL.GetAllRoomModels();
+        return Singletons.theDAL.getAllRoomModels();
     }
 }

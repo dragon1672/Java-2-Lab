@@ -30,6 +30,11 @@ public class LocalAccountService implements AccountService {
     }
 
     @Override
+    public UserModel retrieveUserModel(String username, String password) {
+        return null;
+    }
+
+    @Override
     public UserModel updateUser(UserModel user) {
         UserModel uInDB = Singletons.theDAL.retrieveUserModel(user.getID());
         UserModel uNew = null;

@@ -10,7 +10,7 @@ import utils.Logger;
 public class Singletons {
     public static DAL theDAL = new LocalInMemoryDal();//new DataBaseDAL();
     public static final Logger logger = new Logger.LoggerBuilder().add(System.out).setLevel(Logger.PrintLevel.TRACE).build();
-    public static AccountService accountService = new LocalAccountService(theDAL);
+    public static AccountService accountService = new LocalAccountService();
 
     static {
         accountService.createUser("Brittany", "Waite", "bnwbnw3", "NO@yourbusiness.goAway", "http://i.imgur.com/WS8ae2M.jpg?1");

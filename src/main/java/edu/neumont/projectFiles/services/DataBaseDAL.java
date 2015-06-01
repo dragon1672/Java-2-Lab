@@ -1,10 +1,7 @@
 package edu.neumont.projectFiles.services;
 
 import edu.neumont.projectFiles.interfaces.DBSerializable;
-import edu.neumont.projectFiles.models.AchievementModel;
-import edu.neumont.projectFiles.models.GameModel;
-import edu.neumont.projectFiles.models.GameScoreModel;
-import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.models.*;
 import edu.neumont.projectFiles.interfaces.DAL;
 
 import java.sql.ResultSet;
@@ -16,8 +13,6 @@ import java.util.List;
  * Created by bwaite on 5/19/2015.
  */
 public class DataBaseDAL implements DAL {
-
-
 
     @Override
     public UserModel createUserModel(UserModel userModel) {
@@ -37,6 +32,14 @@ public class DataBaseDAL implements DAL {
         DBConnectionManager.runQuery(query );
         UserModel model = new UserModel();
         return (UserModel)DBConnectionManager.deserialize(UserModel.class);
+    }
+
+    @Override
+    public UserModel retrieveUserModel(String username, String password) {
+        StringBuilder query = SqlCommandsManager.selectWhere("users");
+        query.append(" display_name = ").append(username).append(";");
+        DBConnectionManager.runQuery(query.toString());
+        return (UserModel) DBConnectionManager.deserialize(UserModel.class);
     }
 
     @Override
@@ -182,5 +185,34 @@ public class DataBaseDAL implements DAL {
     public List<GameScoreModel> getAllGamesScores() {
         DBConnectionManager.runQuery(SqlCommandsManager.selectAll("gameScores"));
         return (List<GameScoreModel>) DBConnectionManager.deserializeList(GameScoreModel.class);
+    }
+
+    @Override
+    public RoomModel createRoomModel(RoomModel roomModel) {
+        DBConnectionManager.runQuery(SqlCommandsManager.insertInto("rooms", roomModel));
+        return (RoomModel) DBConnectionManager.deserialize(RoomModel.class);
+    }
+
+    @Override
+    public RoomModel retrieveRoomModel(long roomModelId) {
+        DBConnectionManager.runQuery(SqlCommandsManager.selectWhereId("rooms", roomModelId));
+        return (RoomModel) DBConnectionManager.deserialize(RoomModel.class);
+    }
+
+    @Override
+    public RoomModel updateRoomModel(RoomModel roomModel) {
+        DBConnectionManager.runQuery(SqlCommandsManager.updateWhere("rooms", roomModel.getUpdateSet(), roomModel.getID()));
+        return (RoomModel) DBConnectionManager.deserialize(RoomModel.class);
+    }
+
+    @Override
+    public void deleteRoomModel(long roomModelId) {
+        DBConnectionManager.runQuery(SqlCommandsManager.deleteWhereId("rooms", roomModelId), false);
+    }
+
+    @Override
+    public List<RoomModel> getAllRoomModels() {
+        DBConnectionManager.runQuery(SqlCommandsManager.selectAll("rooms"));
+        return (List<RoomModel>) DBConnectionManager.deserializeList(RoomModel.class);
     }
 }
