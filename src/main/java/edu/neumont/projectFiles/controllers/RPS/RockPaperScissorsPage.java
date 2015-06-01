@@ -1,4 +1,4 @@
-package edu.neumont.projectFiles.controllers;
+package edu.neumont.projectFiles.controllers.RPS;
 
 import edu.neumont.projectFiles.controllers.routing.Route;
 import edu.neumont.projectFiles.models.RPS.MoveResponse;
