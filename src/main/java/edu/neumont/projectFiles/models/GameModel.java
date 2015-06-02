@@ -14,19 +14,22 @@ public class GameModel implements DBSerializable
     private String name;
     private String description;
     private long ID;
+    private String abbreviation;
     //Some kind of routing information to game files / logic will go here in these properties.  I'm not going to assume anything but I'll leave this comment as a reminder.
 
     public GameModel(){}
-
-    public GameModel(String name, String description){
-        this.name = name;
-        this.description = description;
-    }
-
+    
     private GameModel(long ID, String name, String description) {
         this.ID = ID;
         this.name = name;
         this.description = description;
+    }
+    
+    public GameModel(long ID, String name, String description, String abbreviation) {
+        this.ID = ID;
+        this.name = name;
+        this.description = description;
+        this.abbreviation = abbreviation;
     }
 
     public String getName() {
@@ -52,6 +55,10 @@ public class GameModel implements DBSerializable
     public GameModel(long ID)
     {
         this.ID = ID;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
     }
 
     @Override

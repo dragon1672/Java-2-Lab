@@ -12,10 +12,10 @@ public class GamesDisplayTestService {
     private List<GameModel> dummyGames = new ArrayList<GameModel>();
     public GamesDisplayTestService(){
         LocalGameService LGS = new LocalGameService();
-        LGS.createGame("Da Bomb", "This is da bomb. Do not click");
-        LGS.createGame("test game Please ignore", "This is a test game please ignore");
-        LGS.createGame("The best game", "out of order");
-        LGS.createGame("Shhhh", "What Game?");
+        LGS.createGame("Da Bomb", "This is da bomb. Do not click","D_SPCAL_TEST");
+        LGS.createGame("test game Please ignore", "This is a test game please ignore","t_SPCAL_TEST");
+        LGS.createGame("The best game", "out of order","T_SPCAL_TEST");
+        LGS.createGame("Shhhh", "What Game?","S_SPCAL_TEST");
     }
 
 }

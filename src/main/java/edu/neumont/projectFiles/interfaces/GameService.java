@@ -101,7 +101,7 @@ public interface GameService {
 
     //endregion
 
-    GameModel createGame(String name, String description);
+    GameModel createGame(String name, String description, String abbreviation);
     GameModel retrieveGame(long id);
     GameModel updateGame(GameModel game);
     void deleteGame(long id);

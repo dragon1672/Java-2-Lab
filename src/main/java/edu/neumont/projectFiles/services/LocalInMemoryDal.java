@@ -1,10 +1,12 @@
 package edu.neumont.projectFiles.services;
 
+import edu.neumont.projectFiles.RandomSwfURL;
 import edu.neumont.projectFiles.interfaces.DAL;
 import edu.neumont.projectFiles.models.*;
 import utils.Tuple;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by bwaite on 5/20/2015.
@@ -26,7 +28,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public UserModel createUserModel(UserModel userModel) {
         long userID = userIDCounter++;
-        userModel = new UserModel(userModel.getFirstName(), userModel.getLastName(), userModel.getDisplayName(),userModel.getEmail(), userModel.getAvatarURL());
+        userModel = new UserModel(userID,userModel.getFirstName(), userModel.getLastName(), userModel.getDisplayName(),userModel.getEmail(), userModel.getAvatarURL());
         users.put(userID,userModel);
         return users.get(userID);
     }
@@ -63,7 +65,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<UserModel> getAllUsers() {
+    public List<UserModel> GetAllUsers() {
         List<UserModel> allUsers = new ArrayList<>();
         for(Map.Entry<Long,UserModel> userEntry : users.entrySet())
         {
@@ -75,7 +77,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public GameModel createGameModel(GameModel gameModel) {
         long gameID = gameIDCounter++;
-        gameModel = new GameModel(gameModel.getName(),gameModel.getDescription());
+        gameModel = new GameModel(gameID,gameModel.getName(),gameModel.getDescription(), gameModel.getAbbreviation());
         games.put(gameID,gameModel);
         return games.get(gameID);
     }
@@ -98,7 +100,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<GameModel> getAllGames() {
+    public List<GameModel> GetAllGames() {
         List<GameModel> allGames = new ArrayList<>();
         for(Map.Entry<Long,GameModel> gameEntry : games.entrySet())
         {
@@ -110,7 +112,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public AchievementModel createAchievementModel(AchievementModel achievementModel) {
         Long achievementID = achievementIDCounter++;
-        achievementModel = new AchievementModel(achievementModel.getGameID(), "achievement", "achievement description", 10);
+        achievementModel = new AchievementModel(achievementID,achievementModel.getGameID());
         achievements.put(new Tuple<>(achievementModel.getGameID(), achievementID),achievementModel);
         return achievements.get(new Tuple<>(achievementModel.getGameID(),achievementID));
     }
@@ -138,7 +140,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<AchievementModel> getAllAchievements() {
+    public List<AchievementModel> GetAllAchievements() {
         List<AchievementModel> allAchievements = new ArrayList<>();
         for(Map.Entry<Tuple<Long,Long>,AchievementModel> achievementEntry : achievements.entrySet())
         {
@@ -150,7 +152,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel) {
         long gameScoreID = gameScoreIDCounter++;
-        gameScoreModel = new GameScoreModel(gameScoreModel.getUserID(),gameScoreModel.getGameID(),gameScoreModel.getScore(),gameScoreModel.getDate());
+        gameScoreModel = new GameScoreModel(gameScoreID,gameScoreModel.getUserID(),gameScoreModel.getGameID(),gameScoreModel.getScore(),gameScoreModel.getDate());
         gameScores.put(new Tuple<>(gameScoreModel.getGameID(),gameScoreID),gameScoreModel);
         return gameScores.get(new Tuple<>(gameScoreModel.getGameID(),gameScoreID));
     }
@@ -175,19 +177,15 @@ public class LocalInMemoryDal implements DAL{
 
 
     @Override
-    public List<GameScoreModel> getAllGamesScores() {
-        List<GameScoreModel> allGameScores = new ArrayList<>();
-        for(Map.Entry<Tuple<Long,Long>,GameScoreModel> gameEntry : gameScores.entrySet())
-        {
-            allGameScores.add(gameEntry.getValue());
-        }
+    public List<GameScoreModel> GetAllGamesScores() {
+        List<GameScoreModel> allGameScores = gameScores.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         return allGameScores;
     }
 
     @Override
     public RoomModel createRoomModel(RoomModel roomModel)
     {
-        RoomModel newRoom = new RoomModel(roomModel.getGameID(),roomModel.getRoomName(),roomModel.getTimePosted(), roomModel.getMaxPlayers(), roomModel.getPassword());
+        RoomModel newRoom = new RoomModel(gameRoomIDCounter++,roomModel.getGameID(),roomModel.getRoomName(),roomModel.getTimePosted(), roomModel.getMaxPlayers(), roomModel.getPassword());
         rooms.put(newRoom.getID(), newRoom);
         return rooms.get(newRoom.getID());
     }
@@ -212,11 +210,21 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<RoomModel> getAllRoomModels() {
+    public List<RoomModel> GetAllRoomModels() {
         List<RoomModel> allRoomModels = new ArrayList<>();
         for(Map.Entry<Long, RoomModel> roomModelEntry: rooms.entrySet()){
             allRoomModels.add(roomModelEntry.getValue());
         }
         return  allRoomModels;
+    }
+
+    @Override
+    public String getRandomSWFURL() {
+        return RandomSwfURL.getRandomSwlUrl();
+    }
+
+    @Override
+    public void removeSWFURL(String toRemove) {
+        RandomSwfURL.removeURL(toRemove);
     }
 }

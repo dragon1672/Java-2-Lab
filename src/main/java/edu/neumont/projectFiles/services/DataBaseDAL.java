@@ -215,4 +215,14 @@ public class DataBaseDAL implements DAL {
         DBConnectionManager.runQuery(SqlCommandsManager.selectAll("rooms"));
         return (List<RoomModel>) DBConnectionManager.deserializeList(RoomModel.class);
     }
+
+    @Override
+    public String getRandomSWFURL() {
+        return null;
+    }
+
+    @Override
+    public void removeSWFURL(String toRemove) {
+
+    }
 }

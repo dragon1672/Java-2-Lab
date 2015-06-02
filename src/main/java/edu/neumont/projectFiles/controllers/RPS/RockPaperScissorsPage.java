@@ -1,10 +1,10 @@
-package edu.neumont.projectFiles.controllers;
+package edu.neumont.projectFiles.controllers.RPS;
 
 import edu.neumont.projectFiles.controllers.routing.Route;
-import edu.neumont.projectFiles.controllers.routing.games.rps.models.MoveResponse;
-import edu.neumont.projectFiles.controllers.routing.games.rps.models.RPSMove;
-import edu.neumont.projectFiles.controllers.routing.games.rps.models.RPSMoveSet;
-import edu.neumont.projectFiles.models.RPSManager;
+import edu.neumont.projectFiles.models.RPS.MoveResponse;
+import edu.neumont.projectFiles.models.RPS.RPSMove;
+import edu.neumont.projectFiles.models.RPS.RPSMoveSet;
+import edu.neumont.projectFiles.models.RPS.RPSManager;
 import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.services.Singletons;
 import utils.Tuple;
@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
  * Created by bwaite on 5/22/2015.
  */
 public class RockPaperScissorsPage {
+    public static final String MyID = "RPS";
     public static Pattern Regex = Pattern.compile("/RPS");
     private static Map<Long, RPSManager> RPSGames = new HashMap<>();
     //TODO: figure out where I get the RPS game type

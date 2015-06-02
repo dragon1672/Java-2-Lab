@@ -1,11 +1,12 @@
 package utils;
 
-import java.util.*;
-
+import utils.FunctionInterfaces.Functions.Function2;
 import utils.Predicates.Predicate;
 
+import java.util.*;
+
 /**
- * Created by Anthony on 5/18/2015.
+ * Created by Anthony on 1/20/2015.
  */
 @SuppressWarnings("unused")
 public class CollectionUtils {
@@ -15,15 +16,21 @@ public class CollectionUtils {
         OUT Select(IN obj);
     }
 
+    public interface AggregateFunction<T> extends Function2<T,T,T> {
+        @Override
+        T Invoke(T toBuild, T current);
+    }
+
+
     //endregion
 
     //region Where calls ========================================================================================================
 
-    public static <T> Iterable<T> filter(Iterable<T> elements, Predicate<T> theTest) {
+    public static <T> Iterable<T> filter(Iterable<T> elements, Predicate<? super T> theTest) {
         return filter(elements, theTest, obj -> obj);
     }
 
-    public static <T, SelectType> Iterable<T> filter(Iterable<T> elements, Predicate<SelectType> theTest, Selector<T, SelectType> selector) {
+    public static <T, SelectType> Iterable<T> filter(Iterable<T> elements, Predicate<SelectType> theTest, Selector<? super T, SelectType> selector) {
         return () -> new Iterator<T>() {
             final Iterator<T> back = elements.iterator();
             Object next = null;
@@ -242,7 +249,7 @@ public class CollectionUtils {
 
     //endregion
 
-    public static <T, OUT> Iterable<OUT> select(Iterable<T> collection, Selector<T, OUT> selector) {
+    public static <T, OUT> Iterable<OUT> select(Iterable<T> collection, Selector<? super T, OUT> selector) {
         return () -> new Iterator<OUT>() {
             final Iterator<T> backing = collection.iterator();
 
@@ -256,6 +263,22 @@ public class CollectionUtils {
                 return selector.Select(backing.next());
             }
         };
+    }
+
+
+    /**
+     *
+     * @param collection
+     * @param aggregator
+     * @param <T>
+     * @return
+     */
+    public static <T> T aggregate(Iterable<T> collection, T seed, AggregateFunction<T> aggregator) {
+        T aggregated = seed;
+        for(T current : collection) {
+            aggregated = aggregator.Invoke(aggregated,current);
+        }
+        return aggregated;
     }
 
     //region SubIndexing ========================================================================================================
@@ -288,7 +311,7 @@ public class CollectionUtils {
 
     public static <T> Iterable<T> subCollection(List<T> collection, int startingIndex) {
         if(startingIndex == 0) return collection;
-        return subCollection(collection, startingIndex, Integer.MAX_VALUE);
+        return subCollection(collection, startingIndex,Integer.MAX_VALUE);
     }
 
     public static <T> Iterable<T> subCollection(List<T> collection, int startingIndex, int length) {
@@ -311,7 +334,7 @@ public class CollectionUtils {
 
     public static <T> Iterable<T> subCollection(T[] collection, int startingIndex) {
         if(startingIndex == 0) return toIterable(collection);
-        return subCollection(collection, startingIndex, Integer.MAX_VALUE);
+        return subCollection(collection, startingIndex,Integer.MAX_VALUE);
     }
 
     public static <T> Iterable<T> subCollection(T[] collection, int startingIndex, int length) {
@@ -331,6 +354,22 @@ public class CollectionUtils {
         };
     }
 
+
+
     //endregion //*/
+
+    public static <T> boolean anyMatch(Iterable<T> collection, Predicate<? super T> theTest) {
+        for(T t : collection) if(theTest.Invoke(t)) return true;
+        return false;
+    }
+    public static <T> boolean allMatch(Iterable<T> collection, Predicate<? super T> theTest) {
+        for(T t : collection) if(!theTest.Invoke(t)) return true;
+        return false;
+    }
+    public static <T> boolean noneMatch(Iterable<T> collection, Predicate<? super T> theTest) {
+        for(T t : collection) if(theTest.Invoke(t)) return false;
+        return true;
+    }
+
 
 }
