@@ -46,6 +46,6 @@ public class LocalGameService  implements GameService{
 
     @Override
     public List<GameModel> getAllGames() {
-        return Singletons.theDAL.GetAllGames();
+        return Singletons.theDAL.getAllGames();
     }
 }

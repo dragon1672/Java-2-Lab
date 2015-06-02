@@ -28,7 +28,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public UserModel createUserModel(UserModel userModel) {
         long userID = userIDCounter++;
-        userModel = new UserModel(userID,userModel.getFirstName(), userModel.getLastName(), userModel.getDisplayName(),userModel.getEmail(), userModel.getAvatarURL());
+        userModel = new UserModel(userModel.getFirstName(), userModel.getLastName(), userModel.getDisplayName(),userModel.getEmail(), userModel.getAvatarURL());
         users.put(userID,userModel);
         return users.get(userID);
     }
@@ -65,7 +65,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<UserModel> GetAllUsers() {
+    public List<UserModel> getAllUsers() {
         List<UserModel> allUsers = new ArrayList<>();
         for(Map.Entry<Long,UserModel> userEntry : users.entrySet())
         {
@@ -100,7 +100,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<GameModel> GetAllGames() {
+    public List<GameModel> getAllGames() {
         List<GameModel> allGames = new ArrayList<>();
         for(Map.Entry<Long,GameModel> gameEntry : games.entrySet())
         {
@@ -112,7 +112,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public AchievementModel createAchievementModel(AchievementModel achievementModel) {
         Long achievementID = achievementIDCounter++;
-        achievementModel = new AchievementModel(achievementID,achievementModel.getGameID());
+        achievementModel = new AchievementModel();
         achievements.put(new Tuple<>(achievementModel.getGameID(), achievementID),achievementModel);
         return achievements.get(new Tuple<>(achievementModel.getGameID(),achievementID));
     }
@@ -140,7 +140,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<AchievementModel> GetAllAchievements() {
+    public List<AchievementModel> getAllAchievements() {
         List<AchievementModel> allAchievements = new ArrayList<>();
         for(Map.Entry<Tuple<Long,Long>,AchievementModel> achievementEntry : achievements.entrySet())
         {
@@ -152,7 +152,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public GameScoreModel createGameScoreModel(GameScoreModel gameScoreModel) {
         long gameScoreID = gameScoreIDCounter++;
-        gameScoreModel = new GameScoreModel(gameScoreID,gameScoreModel.getUserID(),gameScoreModel.getGameID(),gameScoreModel.getScore(),gameScoreModel.getDate());
+        gameScoreModel = new GameScoreModel(gameScoreModel.getUserID(),gameScoreModel.getGameID(),gameScoreModel.getScore(),gameScoreModel.getDate());
         gameScores.put(new Tuple<>(gameScoreModel.getGameID(),gameScoreID),gameScoreModel);
         return gameScores.get(new Tuple<>(gameScoreModel.getGameID(),gameScoreID));
     }
@@ -177,7 +177,7 @@ public class LocalInMemoryDal implements DAL{
 
 
     @Override
-    public List<GameScoreModel> GetAllGamesScores() {
+    public List<GameScoreModel> getAllGamesScores() {
         List<GameScoreModel> allGameScores = gameScores.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         return allGameScores;
     }
@@ -185,7 +185,7 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public RoomModel createRoomModel(RoomModel roomModel)
     {
-        RoomModel newRoom = new RoomModel(gameRoomIDCounter++,roomModel.getGameID(),roomModel.getRoomName(),roomModel.getTimePosted(), roomModel.getMaxPlayers(), roomModel.getPassword());
+        RoomModel newRoom = new RoomModel(roomModel.getGameID(),roomModel.getRoomName(),roomModel.getTimePosted(), roomModel.getMaxPlayers(), roomModel.getPassword());
         rooms.put(newRoom.getID(), newRoom);
         return rooms.get(newRoom.getID());
     }
@@ -210,7 +210,7 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
-    public List<RoomModel> GetAllRoomModels() {
+    public List<RoomModel> getAllRoomModels() {
         List<RoomModel> allRoomModels = new ArrayList<>();
         for(Map.Entry<Long, RoomModel> roomModelEntry: rooms.entrySet()){
             allRoomModels.add(roomModelEntry.getValue());

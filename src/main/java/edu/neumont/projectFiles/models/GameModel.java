@@ -19,11 +19,12 @@ public class GameModel implements DBSerializable
 
     public GameModel(){}
     
-    private GameModel(long ID, String name, String description) {
+    /*private GameModel(long ID, String name, String description, String abbreviation) {
         this.ID = ID;
         this.name = name;
         this.description = description;
-    }
+        this.abbreviation = abbreviation;
+    }*/
     
     public GameModel(long ID, String name, String description, String abbreviation) {
         this.ID = ID;
@@ -66,20 +67,23 @@ public class GameModel implements DBSerializable
         long id = set.getLong("id");
         String name = set.getString("name");
         String description = set.getString("description");
-        return new GameModel(id, name, description);
+        String abbreviation = set.getString("abbrev");
+        return new GameModel(id, name, description, abbreviation);
     }
 
     @Override
     public String serialize() {
         StringBuilder sb = new StringBuilder();
-        sb.append("default, '").append(name).append("', '").append(description).append("'");
+        sb.append("default, '").append(name).append("', '").append(description).append("', '")
+            .append(abbreviation).append("'");
         return sb.toString();
     }
 
     @Override
     public String getUpdateSet() {
         StringBuilder sb = new StringBuilder();
-        sb.append("(name, description) = ( '").append(name).append("', '").append(description).append("')");
+        sb.append("(name, description, abbrev) = ( '").append(name).append("', '").append(description).append("', '")
+            .append(abbreviation).append("')");
         return sb.toString();
     }
 }
