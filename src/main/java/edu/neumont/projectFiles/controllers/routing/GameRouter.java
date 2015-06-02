@@ -27,7 +27,7 @@ public class GameRouter {
     private static final List<GamePath> gamesPages = new ArrayList<>();
 
     static { // register games here
-        AddGamePage("RPS",RockPaperScissorsPage.Regex,RockPaperScissorsPage::getPage);
+        //AddGamePage("RPS",RockPaperScissorsPage.Regex,RockPaperScissorsPage::getPage);
     }
 
     public static Pattern Path = Pattern.compile("/games/(\\d+)(/.*)");
