@@ -1,15 +1,19 @@
 package edu.neumont.projectFiles.controllers.routing;
 
 import edu.neumont.projectFiles.controllers.GamesDisplayPage;
+import edu.neumont.projectFiles.controllers.RPS.RockPaperScissorsPage;
 import edu.neumont.projectFiles.controllers.routing.Route;
 import edu.neumont.projectFiles.interfaces.DAL;
 import edu.neumont.projectFiles.models.GameModel;
 import edu.neumont.projectFiles.models.RoomModel;
+import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.services.Singletons;
+import utils.CollectionIterator;
 import utils.CollectionUtils;
 import utils.FunctionInterfaces.Functions;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,16 +24,22 @@ import java.util.regex.Pattern;
  * Created by Anthony on 5/26/2015.
  */
 public class GameRouter {
-    public static Pattern Path = Pattern.compile("/game/(\\d+)/(.*)");
+    private static final List<GamePath> gamesPages = new ArrayList<>();
+
+    static { // register games here
+        AddGamePage("RPS",RockPaperScissorsPage.Regex,RockPaperScissorsPage::getPage);
+    }
+
+    public static Pattern Path = Pattern.compile("/games/(\\d+)(/.*)");
 
     private static DAL myDal = Singletons.theDAL;
 
     private static class GamePath {
         private String gameID;
         private Pattern pattern;
-        private Functions.Function3<Route,Long,HttpServletRequest,String> function;
+        private Functions.Function4<Route, Long, HttpServletRequest, String, UserModel> function;
 
-        public GamePath(String gameID, Pattern pattern, Functions.Function3<Route, Long, HttpServletRequest, String> function) {
+        public GamePath(String gameID, Pattern pattern, Functions.Function4<Route, Long, HttpServletRequest, String, UserModel> function) {
             this.gameID = gameID;
             this.pattern = pattern;
             this.function = function;
@@ -43,35 +53,43 @@ public class GameRouter {
             return pattern;
         }
 
-        public Functions.Function3<Route, Long, HttpServletRequest, String> getFunction() {
+        public Functions.Function4<Route, Long, HttpServletRequest, String, UserModel> getFunction() {
             return function;
         }
     }
 
-    private static final List<GamePath> gamesPages = new ArrayList<>();
-
-    public static void AddGamePage(String gameTypeID,Pattern regex,Functions.Function3<Route,Long,HttpServletRequest,String> function) {
-        gamesPages.add(new GamePath(gameTypeID,regex,function));
-    }
-
-    private static String ExtractGameIDFromRoom(long roomID) {
-        RoomModel room = myDal.retrieveRoomModel(roomID);
-        GameModel game = myDal.retrieveGameModel(room.getGameID());
-        return game.getAbbreviation();
+    public static void AddGamePage(String gameTypeID, Pattern regex, Functions.Function4<Route, Long, HttpServletRequest, String, UserModel> function) {
+        gamesPages.add(new GamePath(gameTypeID, regex, function));
     }
 
     public static Route handleRequest(HttpServletRequest request) {
         Matcher m = Path.matcher(request.getPathInfo());
-        if(!m.matches()) throw new RuntimeException("Received improper route to GameRouter");
+        if (!m.matches()) throw new RuntimeException("Received improper route to GameRouter");
+
         long roomID = Long.parseLong(m.group(1));
-        String gameID = ExtractGameIDFromRoom(roomID);
+        RoomModel room = myDal.retrieveRoomModel(roomID);
+        GameModel game = myDal.retrieveGameModel(room.getGameID());
 
-        Iterable<GamePath> validGames = CollectionUtils.filter(gamesPages,n-> Objects.equals(n.gameID, gameID));
+        //region make sure user is legit
 
-        GamePath path = CollectionUtils.firstOrDefault(validGames,n->n.pattern.matcher(m.group(2)).matches());
+        HttpSession session = request.getSession();
+        if (session == null) return Route.ForwardToUrl("/login");
+        Long userID = (Long) session.getAttribute("userID");
+        if (userID == null) return Route.ForwardToUrl("/login");
+        UserModel userM = Singletons.theDAL.retrieveUserModel(userID);
+        if (userM == null) throw new RuntimeException("User not valid");
 
-        if(path != null) {
-            return path.getFunction().Invoke(roomID,request,m.group(2));
+        //TODO: make sure user is legit for game
+
+        //endregion
+
+        GamePath path = CollectionIterator.convert(gamesPages).filter(n -> Objects.equals(n.getGameID(), game.getAbbreviation())).firstOrDefault(n -> {
+            String toHit = m.group(2);
+            return n.pattern.matcher(m.group(2)).matches();
+        });
+
+        if (path != null) {
+            return path.getFunction().Invoke(roomID, request, m.group(2), userM);
         }
         return null;
     }
