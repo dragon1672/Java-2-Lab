@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>RPS</title>
+    <title>RPS Results</title>
   <style type="text/css">
     span { cursor: hand; }
     .button { cursor: hand; }
@@ -13,8 +13,14 @@
 
 <h2>Rock Paper Scissors</h2>
 <p>
-    Greetings your play session has finished.
-    <h5>${model}</h5>
+    ${model.P1} played ${model.P1Choice}
+    ${model.P2} played ${model.P2Choice}
+    ${model.WinChoice} ${model.BeatStatement} ${model.LoseChoice}
+        <img src="${model.WinChoicePicPath} ">
+    ${model.BeatStatement}
+        <img src="${model.LoseChoicePicPath} ">
+
+    <h3>You ${model.WonOrLost}</h3>
 </p>
 
 <form action="${pageContext.request.contextPath}/RPS" method="GET">
