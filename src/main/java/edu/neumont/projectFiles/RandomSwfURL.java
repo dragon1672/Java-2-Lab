@@ -1,8 +1,8 @@
 package edu.neumont.projectFiles;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import utils.RandomSet;
+
+import java.util.*;
 
 /**
  * Created by Anthony on 5/18/2015.
@@ -10,7 +10,7 @@ import java.util.Random;
 public class RandomSwfURL {
     private static Random rand = new Random();
     //region collection
-    private static List<String> collection = new ArrayList<>();
+    private static RandomSet<String> collection = new RandomSet<>();
 static {
     collection.add("www.thebest404pageever.com/swf/Delusion_AMV.swf");                   collection.add("www.thebest404pageever.com/swf/Destroyer_of_Worlds.swf");                collection.add("www.thebest404pageever.com/swf/Dey_Terk_Ur_Jerbs.swf");                    collection.add("www.thebest404pageever.com/swf/Dinkroll.swf");
     collection.add("www.thebest404pageever.com/swf/Disappoint.swf");                     collection.add("www.thebest404pageever.com/swf/Divinity.swf");                           collection.add("www.thebest404pageever.com/swf/DoILookInsane.swf");                        collection.add("www.thebest404pageever.com/swf/Doomsday.swf");
@@ -210,7 +210,7 @@ static {
     //endregion
 
     public static String getRandomSwlUrl() {
-    return "http://"+collection.get(rand.nextInt(collection.size()));
+    return "http://"+collection.getRandom(rand);
 }
 
     public static void removeURL(String toRemove) {
