@@ -62,6 +62,7 @@ public class RPSManager{
     private RPSUser p1,p2;
     //First = use p1 index, //Second = p2 index
     private List<Tuple<RPSMove,RPSMove>> Moves = new ArrayList<>();
+    private Tuple<RPSMove, RPSMove> CurrentMove = new Tuple<>();
 
     public RPSUser getP1() {
         return p1;
@@ -87,5 +88,13 @@ public class RPSManager{
         p1.setLastSavedMove(move.getFirst());
         p2.setLastSavedMove(move.getSecond());
         this.Moves.add(move);
+    }
+
+    public void setCurrentMove(Tuple<RPSMove, RPSMove> currentMove) {
+        CurrentMove = currentMove;
+    }
+
+    public Tuple<RPSMove, RPSMove> getCurrentMove() {
+        return CurrentMove;
     }
 }
