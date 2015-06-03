@@ -100,6 +100,11 @@ public class UserModel implements DBSerializable {
     @Override
     public String serialize() {
         StringBuilder sb = new StringBuilder();
+        firstName = firstName.replaceAll("'", "''");
+        lastName = lastName.replaceAll("'", "''");
+        displayName = displayName.replaceAll("'", "''");
+        email = email.replaceAll("'", "''");
+        avatarURL = avatarURL.replaceAll("'", "''");
         sb.append("default, '").append(firstName).append("', '").append(lastName).
                 append("', '").append(displayName).append("', '").append(email).
                 append("', '").append(avatarURL).append("', 'password'");
@@ -109,6 +114,11 @@ public class UserModel implements DBSerializable {
     @Override
     public String getUpdateSet(){
         StringBuilder sb = new StringBuilder();
+        firstName = firstName.replaceAll("'", "''");
+        lastName = lastName.replaceAll("'", "''");
+        displayName = displayName.replaceAll("'", "''");
+        email = email.replaceAll("'", "''");
+        avatarURL = avatarURL.replaceAll("'", "''");
         sb.append("(first_name, last_name, display_name, email, avatar_url) = (").append("'").append(firstName).append("', '").append(lastName)
                 .append("', '").append(displayName).append("', '").append(email).append("', '").append(avatarURL).append("')");
         return sb.toString();

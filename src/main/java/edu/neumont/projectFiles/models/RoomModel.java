@@ -19,6 +19,8 @@ public class RoomModel implements DBSerializable {
 
     private String password;
 
+    public RoomModel(){}
+
     private RoomModel(long ID, long gameID, String roomName, Date timePosted, int maxPlayers, int currentNumberOfPlayers) {
         this.ID = ID;
         this.gameID = gameID;
@@ -85,9 +87,10 @@ public class RoomModel implements DBSerializable {
     @Override
     public String serialize() {
         StringBuilder sb = new StringBuilder();
+        roomName = roomName.replaceAll("'", "''");
         java.sql.Timestamp timestamp = new java.sql.Timestamp(timePosted.getTime());
-        sb.append("default, ").append(gameID).append(", '").append(roomName).append(", ")
-                .append(timestamp).append(", ").append(maxPlayers).append(", ")
+        sb.append("default, ").append(gameID).append(", '").append(roomName).append("', '")
+                .append(timestamp).append("', ").append(maxPlayers).append(", ")
                 .append(currentNumberOfPlayers);
         return sb.toString();
     }
@@ -95,9 +98,10 @@ public class RoomModel implements DBSerializable {
     @Override
     public String getUpdateSet() {
         StringBuilder sb = new StringBuilder();
+        roomName = roomName.replaceAll("'", "''");
         java.sql.Timestamp timestamp = new java.sql.Timestamp(timePosted.getTime());
         sb.append("(id, game_id, name, time, max_players, curr_num_players) = (").append(ID).append(", ")
-            .append(gameID).append(", '").append(roomName).append("', ").append(timestamp).append(", ")
+            .append(gameID).append(", '").append(roomName).append("', '").append(timestamp).append("', ")
             .append(maxPlayers).append(", ").append(currentNumberOfPlayers).append(")");
         return sb.toString();
     }

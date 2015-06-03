@@ -1,6 +1,7 @@
 package edu.neumont.projectFiles.services;
 
 import edu.neumont.projectFiles.interfaces.DBSerializable;
+import org.postgresql.util.PSQLException;
 
 import javax.xml.transform.Result;
 import java.net.URI;
@@ -62,7 +63,16 @@ public class DBConnectionManager {
             if(useCount == 0){
                 connection.close();
             }
-        } catch (SQLException e) {
+        }catch (PSQLException e){
+            String error = e.getMessage();
+            //If a game has the same abbreviation then there's some issues
+            if(error.contains("duplicate key value")){
+                return;
+            }
+            e.printStackTrace();
+            System.out.println(query);
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }

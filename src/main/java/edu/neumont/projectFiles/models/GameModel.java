@@ -74,6 +74,8 @@ public class GameModel implements DBSerializable
     @Override
     public String serialize() {
         StringBuilder sb = new StringBuilder();
+        name = name.replaceAll("'", "''");
+        description = description.replaceAll("'", "''");
         sb.append("default, '").append(name).append("', '").append(description).append("', '")
             .append(abbreviation).append("'");
         return sb.toString();
@@ -82,6 +84,8 @@ public class GameModel implements DBSerializable
     @Override
     public String getUpdateSet() {
         StringBuilder sb = new StringBuilder();
+        name = name.replaceAll("'", "''");
+        description = description.replaceAll("'", "''");
         sb.append("(name, description, abbrev) = ( '").append(name).append("', '").append(description).append("', '")
             .append(abbreviation).append("')");
         return sb.toString();

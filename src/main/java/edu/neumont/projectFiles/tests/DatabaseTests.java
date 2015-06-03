@@ -1,10 +1,7 @@
 package edu.neumont.projectFiles.tests;
 
 import edu.neumont.projectFiles.interfaces.DAL;
-import edu.neumont.projectFiles.models.AchievementModel;
-import edu.neumont.projectFiles.models.GameModel;
-import edu.neumont.projectFiles.models.GameScoreModel;
-import edu.neumont.projectFiles.models.UserModel;
+import edu.neumont.projectFiles.models.*;
 import edu.neumont.projectFiles.services.DataBaseDAL;
 
 import java.util.Date;
@@ -43,5 +40,6 @@ public class DatabaseTests {
         GameScoreModel gameScoreModel2 = dal.createGameScoreModel(new GameScoreModel(1,1,75.0f,new Date()));
         List<GameScoreModel> gameScoreModels = dal.getAllGamesScores();
         dal.deleteGameScore(gameScoreModels.get(0).getGameID(), gameScoreModels.get(0).getID());
+        RoomModel roomModel1 = dal.createRoomModel(new RoomModel(1, "Johnny Room", new Date(), 5, "none"));
     }
 }
