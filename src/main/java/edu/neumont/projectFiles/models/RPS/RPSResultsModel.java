@@ -47,11 +47,11 @@ public class RPSResultsModel {
     private String getRPSPic(RPSMove move){
         String picturePath = "";
        if(move.equals(RPSMove.Rock)){
-        picturePath ="http://upload.wikimedia.org/wikipedia/commons/7/7e/Rock-paper-scissors_(rock).png";
+        picturePath ="http://i.imgur.com/NTCXdvh.png";
        } else if(move.equals(RPSMove.Scissors)){
-        picturePath = "http://upload.wikimedia.org/wikipedia/commons/5/5f/Rock-paper-scissors_(scissors).png";
+        picturePath = "http://i.imgur.com/DPVSCND.png";
        } else if (move.equals(RPSMove.Paper)){
-        picturePath= "http://upload.wikimedia.org/wikipedia/commons/a/af/Rock-paper-scissors_(paper).png";
+        picturePath= "http://i.imgur.com/PSkJUXd.png";
        }
         return picturePath;
     }
