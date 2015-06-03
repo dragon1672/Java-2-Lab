@@ -23,6 +23,7 @@ public class GodServlet extends HttpServlet {
     private static Router GetRoutes = new Router()
             .addURIRegex(LandingPage.Regex, LandingPage::DoIt)
             .addURIRegex(LoginPage.Regex, LoginPage::getPage)
+            .addURIRegex(LogoutPage.Regex, LogoutPage::getPage)
             .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::getPage)
             .addURIRegex(GamesDisplayPage.Regex, GamesDisplayPage::getPage)
             .addURIRegex(AccountInformationPage.Regex, AccountInformationPage::getPage)
@@ -35,6 +36,7 @@ public class GodServlet extends HttpServlet {
 
     private static Router PostRoutes = new Router()
             .addURIRegex(LoginPage.Regex, LoginPage::LoginUserRedirect)
+            .addURIRegex(LogoutPage.Regex, LogoutPage::LogoutUserRedirect)
             .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::createAccountRedirect)
             .addURIRegex(GameRoomCreationPage.CreateGameRegex, GameRoomCreationPage::createGame)
             .addURIRegex(RemoveSWF404Page.Regex, RemoveSWF404Page::getPage)
