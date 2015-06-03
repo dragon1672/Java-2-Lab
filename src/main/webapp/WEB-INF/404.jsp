@@ -1,4 +1,7 @@
 <%@ page import="edu.neumont.projectFiles.RandomSwfURL" %>
+<%@ page import="edu.neumont.projectFiles.services.LocalInMemoryDal" %>
+<%@ page import="edu.neumont.projectFiles.services.Singletons" %>
+<%@ page import="edu.neumont.projectFiles.controllers.routing.Route" %>
 <%--
   Created by IntelliJ IDEA.
   User: Anthony
@@ -6,6 +9,7 @@
   Time: 9:04 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -63,6 +67,12 @@
           <embed src="<%=url%>" menu="false" quality="high" width="640" height="480" id="embed_404" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" ></embed>
         </object>
         <br/>
+
+        <form action="${pageContext.request.contextPath}/removeSWF">
+          <input type="hidden" name="URLtoRemove" value="<%=url%>" />
+          <input type="submit" value="Remove SWF" />
+        </form>
+
         All audio and video content belongs to the original author(s) and/or copyright holders unless otherwise stated. I take no ownership of these videos.<br/>
         Viewing this website if you're photosensitive/epileptic probably isn't a good idea. You have been warned.
       </td>

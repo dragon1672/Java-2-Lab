@@ -22,10 +22,7 @@ public class RockPaperScissorsPage {
     public static final String MyID = "RPS";
     public static Pattern Regex = Pattern.compile("/RPS");
     private static Map<Long, RPSManager> RPSGames = new HashMap<>();
-    //TODO: figure out where I get the RPS game type
-    //sets what game rules are for this RPS
     private static RPSMoveSet RPSRules = RPSMoveSet.ClassicRockPaperScissors;
-    private static Tuple<RPSMove, RPSMove> RPSSet = new Tuple<>();
 
     public static Route DummyGetPage(HttpServletRequest request) {
         long fakeRoomID = 1l;
@@ -68,7 +65,7 @@ public class RockPaperScissorsPage {
                         rpsGame.getP2().setDoneWithGame(doneWithGame != null);
 
                         if(rpsGame.getP1().isReadyToStartNewGame() && rpsGame.getP2().isReadyToStartNewGame()) {
-                            RPSSet = new Tuple<>();
+                            rpsGame.setCurrentMove(new Tuple<>());
                         }
                     }
                     //For each user do this:
@@ -83,16 +80,16 @@ public class RockPaperScissorsPage {
                         String rpsMoveStr = request.getParameter("RPSMove");
                         //check if time to display results
                         if (rpsMoveStr == null || rpsMoveStr.isEmpty()) {
-                            if (RPSSet.getFirst() != null && RPSSet.getSecond() != null) {
-                                rpsGame.addMove(RPSSet);
+                            if (rpsGame.getCurrentMove().getFirst() != null && rpsGame.getCurrentMove().getSecond() != null) {
+                                rpsGame.addMove(rpsGame.getCurrentMove());
                                 updateGames(roomID, rpsGame);
                                 //check who won
-                                MoveResponse moveResponse = RPSRules.getResponse(RPSSet.getFirst(), RPSSet.getSecond());
+                                MoveResponse moveResponse = RPSRules.getResponse(rpsGame.getCurrentMove().getFirst(), rpsGame.getCurrentMove().getSecond());
                                 String GameMessage = "It's a tie!";
                                 if(moveResponse.P1Won()) {
-                                    GameMessage = "user: " + rpsGame.getP1().getUser().getDisplayName() + " has beat user: " +rpsGame.getP2().getUser().getDisplayName() + ", " +RPSSet.getFirst().getText() + " " + moveResponse.moveData.beatMsg+ " " +RPSSet.getSecond().getText();
+                                    GameMessage = "user: " + rpsGame.getP1().getUser().getDisplayName() + " has beat user: " +rpsGame.getP2().getUser().getDisplayName() + ", " +rpsGame.getCurrentMove().getFirst().getText() + " " + moveResponse.moveData.beatMsg+ " " +rpsGame.getCurrentMove().getSecond().getText();
                                 } else if(moveResponse.P2Won()){
-                                    GameMessage = "user:" + rpsGame.getP2().getUser().getDisplayName() + " has beat user: " +rpsGame.getP1().getUser().getDisplayName() + ", " +RPSSet.getSecond().getText() + " " + moveResponse.moveData.beatMsg+ " " +RPSSet.getFirst().getText();
+                                    GameMessage = "user:" + rpsGame.getP2().getUser().getDisplayName() + " has beat user: " +rpsGame.getP1().getUser().getDisplayName() + ", " +rpsGame.getCurrentMove().getSecond().getText() + " " + moveResponse.moveData.beatMsg+ " " +rpsGame.getCurrentMove().getFirst().getText();
                                 }
                                 //display result page
 
@@ -115,17 +112,17 @@ public class RockPaperScissorsPage {
                             RPSMove rpsMove = RPSMove.fromString(rpsMoveStr);
                             if (rpsGame.getP1() != null && rpsGame.getP2() != null) {
                                 //if moves are still needed
-                                if (RPSSet.getFirst() == null || RPSSet.getSecond() == null) {
+                                if (rpsGame.getCurrentMove().getFirst() == null || rpsGame.getCurrentMove().getSecond() == null) {
                                     if (userIsPlayer1) {
                                         if (rpsGame.getP1().getIndex() <= rpsGame.getP2().getIndex()) {
-                                            RPSSet.setFirst(rpsMove);
+                                            rpsGame.getCurrentMove().setFirst(rpsMove);
                                             rpsGame.getP1().setIndex(rpsGame.getP1().getIndex() + 1);
                                             rpsGame.getP1().setLastSavedMove(rpsMove);
                                             updateGames(roomID, rpsGame);
                                         }
                                     } else {
                                         if (rpsGame.getP2().getIndex() <= rpsGame.getP1().getIndex()) {
-                                            RPSSet.setSecond(rpsMove);
+                                            rpsGame.getCurrentMove().setSecond(rpsMove);
                                             rpsGame.getP2().setIndex(rpsGame.getP2().getIndex() + 1);
                                             rpsGame.getP2().setLastSavedMove(rpsMove);
                                             updateGames(roomID, rpsGame);
@@ -137,7 +134,7 @@ public class RockPaperScissorsPage {
                             //if at start of the game, and it is user1, user2 doesn't exist yet so allow user1 first move to work.
                             if(rpsGame.getP1() != null && userIsPlayer1 && rpsGame.getP1().getIndex() == 0)
                             {
-                                RPSSet.setFirst(rpsMove);
+                                rpsGame.getCurrentMove().setFirst(rpsMove);
                                 rpsGame.getP1().setIndex(rpsGame.getP1().getIndex() + 1);
                                 rpsGame.getP1().setLastSavedMove(rpsMove);
                                 updateGames(roomID, rpsGame);
@@ -148,11 +145,6 @@ public class RockPaperScissorsPage {
             }
         }
         return toReturn;
-    }
-
-    private static void getPageUsingPlayer(RPSManager.RPSUser user, boolean isPlayer1)
-    {
-
     }
 
     private static void updateGames(Long roomID, RPSManager rpsm) {

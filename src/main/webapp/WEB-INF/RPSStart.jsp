@@ -12,7 +12,7 @@
 <jsp:include page="header.jsp" />
 
 <h2>Rock Paper Scissors</h2>
-<p>Hello <%= session.getAttribute("username") %> please pick Rock, Paper, or Scissors</p>
+<p>Hello ${model.currentPlayer} please pick Rock, Paper, or Scissors. Your opponent is ${model.otherPlayer}</p>
 <form action="${pageContext.request.contextPath}/RPS" method="GET">
   <input type="text" name="RPSMove" style="display: none" value ="rock"/>
   <input class="button" type="submit" value="Rock"/>

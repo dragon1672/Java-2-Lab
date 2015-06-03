@@ -193,6 +193,12 @@ public class LocalInMemoryDal implements DAL{
     @Override
     public RoomModel retrieveRoomModel(long roomModelId)
     {
+        if(!rooms.containsKey(roomModelId)) {
+            rooms.put(roomModelId,new RoomModel(roomModelId,-1,"roomName",new Date(),2,"password"));
+            if(!games.containsKey(-1L)) {
+                games.put(-1L,new GameModel(-1,"RPS","DESC","RPS"));
+            }
+        }
         return rooms.get(roomModelId);
     }
 
