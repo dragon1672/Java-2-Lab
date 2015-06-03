@@ -178,8 +178,7 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public List<GameScoreModel> getAllGamesScores() {
-        List<GameScoreModel> allGameScores = gameScores.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
-        return allGameScores;
+        return gameScores.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
     }
 
     @Override
@@ -194,7 +193,7 @@ public class LocalInMemoryDal implements DAL{
     public RoomModel retrieveRoomModel(long roomModelId)
     {
         if(!rooms.containsKey(roomModelId)) {
-            rooms.put(roomModelId,new RoomModel(roomModelId,-1,"roomName",new Date(),2,"password"));
+            rooms.put(roomModelId,new RoomModel(-1,"roomName",new Date(),2,"password"));
             if(!games.containsKey(-1L)) {
                 games.put(-1L,new GameModel(-1,"RPS","DESC","RPS"));
             }

@@ -1,10 +1,8 @@
 package edu.neumont.projectFiles.controllers;
 
 import edu.neumont.projectFiles.controllers.routing.Route;
-import edu.neumont.projectFiles.models.DavidTests;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
