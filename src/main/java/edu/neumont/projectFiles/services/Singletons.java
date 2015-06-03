@@ -8,7 +8,8 @@ import utils.Logger;
  * Created by bwaite on 5/19/2015.
  */
 public class Singletons {
-    public static DAL theDAL = /*new LocalInMemoryDal();*/new DataBaseDAL();
+    public static DAL theDAL = /* add/remove a '/' to the beginning of this line to toggle between in mem and database dal
+                                new LocalInMemoryDal();/*/new DataBaseDAL();//*/
     public static final Logger logger = new Logger.LoggerBuilder().add(System.out).setLevel(Logger.PrintLevel.TRACE).build();
     public static AccountService accountService = new LocalAccountService();
 
