@@ -105,5 +105,5 @@ public interface GameService {
     GameModel retrieveGame(long id);
     GameModel updateGame(GameModel game);
     void deleteGame(long id);
-    public List<GameModel> getAllGames();
+    List<GameModel> getAllGames();
 }

@@ -11,7 +11,7 @@ import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = "edu.neumont.service")
+@ComponentScan(basePackages = "edu.neumont")
 @EnableTransactionManagement
 public class PersistenceConfig {
 

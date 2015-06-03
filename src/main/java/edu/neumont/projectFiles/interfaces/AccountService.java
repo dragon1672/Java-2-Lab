@@ -107,5 +107,5 @@ public interface AccountService {
     UserModel retrieveUserModel(String username, String password);
     UserModel updateUser(UserModel user);
     void deleteUser(long id);
-    public List<UserModel> getAllUsers();
+    List<UserModel> getAllUsers();
 }

@@ -10,7 +10,8 @@ public class PostPlayerModel
     private UserModel thisPlayer;
     private UserModel otherPlayer;
 
-    public enum ResultTypes {WIN, LOSS, DRAW};
+    public enum ResultTypes {WIN, LOSS, DRAW}
+
     private ResultTypes result;
 
     public PostPlayerModel(UserModel thisPlayer, UserModel otherPlayer, ResultTypes result)

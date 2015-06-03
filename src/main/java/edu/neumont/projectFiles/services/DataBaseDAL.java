@@ -1,12 +1,8 @@
 package edu.neumont.projectFiles.services;
 
-import edu.neumont.projectFiles.interfaces.DBSerializable;
 import edu.neumont.projectFiles.models.*;
 import edu.neumont.projectFiles.interfaces.DAL;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

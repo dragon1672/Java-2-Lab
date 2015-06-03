@@ -1,6 +1,5 @@
 package edu.neumont.projectFiles.services;
 
-import edu.neumont.projectFiles.models.GameModel;
 import edu.neumont.projectFiles.models.RoomModel;
 
 import java.util.Date;

@@ -81,17 +81,11 @@ public class AchievementModel implements DBSerializable{
 
     @Override
     public String serialize() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("default, ").append(gameID).append(", '").append(name).append("', '")
-                .append(description).append("', ").append(points);
-        return sb.toString();
+        return String.format("default, %s, '%s', '%s', %s",gameID,name,description,points);
     }
 
     @Override
     public String getUpdateSet() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("( game_id, name, description, points )=(").append(gameID).append(", '").append(name)
-                .append("', '").append(description).append("', ").append(points).append(")");
-        return sb.toString();
+        return String.format("( game_id, name, description, points )=(%s, '%s', '%s', %s)",gameID,name,description,points);
     }
 }

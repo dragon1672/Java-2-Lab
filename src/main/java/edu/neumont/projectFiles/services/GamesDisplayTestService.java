@@ -9,7 +9,7 @@ import java.util.List;
  * Created by tlousignont on 5/20/2015.
  */
 public class GamesDisplayTestService {
-    private List<GameModel> dummyGames = new ArrayList<GameModel>();
+    private List<GameModel> dummyGames = new ArrayList<>();
     public GamesDisplayTestService(){
         LocalGameService LGS = new LocalGameService();
         LGS.createGame("Da Bomb", "This is da bomb. Do not click","D_SPCAL_TEST");

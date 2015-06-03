@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 /**
  * Created by bwaite on 5/20/2015.
  */
+@SuppressWarnings("SuspiciousMethodCalls")
 public class LocalInMemoryDal implements DAL{
     Map<Long,UserModel> users = new HashMap<>();
     Map<Long,GameModel> games = new HashMap<>();
@@ -66,11 +67,7 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public List<UserModel> getAllUsers() {
-        List<UserModel> allUsers = new ArrayList<>();
-        for(Map.Entry<Long,UserModel> userEntry : users.entrySet())
-        {
-            allUsers.add(userEntry.getValue());
-        }
+        List<UserModel> allUsers = users.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         return allUsers;
     }
 
@@ -101,11 +98,7 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public List<GameModel> getAllGames() {
-        List<GameModel> allGames = new ArrayList<>();
-        for(Map.Entry<Long,GameModel> gameEntry : games.entrySet())
-        {
-            allGames.add(gameEntry.getValue());
-        }
+        List<GameModel> allGames = games.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         return allGames;
     }
 
@@ -141,12 +134,7 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public List<AchievementModel> getAllAchievements() {
-        List<AchievementModel> allAchievements = new ArrayList<>();
-        for(Map.Entry<Tuple<Long,Long>,AchievementModel> achievementEntry : achievements.entrySet())
-        {
-            allAchievements.add(achievementEntry.getValue());
-        }
-        return allAchievements;
+        return achievements.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
     }
 
     @Override
@@ -216,10 +204,7 @@ public class LocalInMemoryDal implements DAL{
 
     @Override
     public List<RoomModel> getAllRoomModels() {
-        List<RoomModel> allRoomModels = new ArrayList<>();
-        for(Map.Entry<Long, RoomModel> roomModelEntry: rooms.entrySet()){
-            allRoomModels.add(roomModelEntry.getValue());
-        }
+        List<RoomModel> allRoomModels = rooms.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         return  allRoomModels;
     }
 

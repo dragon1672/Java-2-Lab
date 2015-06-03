@@ -1,6 +1,5 @@
 package edu.neumont.projectFiles.interfaces;
 
-import edu.neumont.projectFiles.models.GameModel;
 import edu.neumont.projectFiles.models.RoomModel;
 import utils.HtmlStringHelper;
 
@@ -105,5 +104,5 @@ public interface RoomService {
     RoomModel retrieveRoom(long roomId);
     RoomModel updateRoom(RoomModel room);
     void deleteRoom(long id);
-    public List<RoomModel> getAllRooms();
+    List<RoomModel> getAllRooms();
 }

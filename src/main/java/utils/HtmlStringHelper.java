@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  */
 public class HtmlStringHelper {
     public static final Pattern HTML_TAG = Pattern.compile("<.*?(?:\\s*[a-zA-Z_:][-a-zA-Z0-9_:.]+=(?:'[^']*?')|(?:\"[^\"]*?\")|(?:[^\\s]*?))?>");
-    public static final Pattern ALL_SCRIPTS = Pattern.compile("<\\s*[sS][cC][rR][iI][pP][tT](?:\\s*[a-zA-Z_:][-a-zA-Z0-9_:.]+\\s*=\\s*(?:(?:'(?:[^']*)*?')|(?:\"(?:[^\"]*)*?\")))?>(.*?\\n*?)*?<\\s*\\/?\\s*[sS][cC][rR][iI][pP][tT](?:\\s*[a-zA-Z_:][-a-zA-Z0-9_:.]+\\s*=\\s*(?:(?:'(?:[^']*)*?')|(?:\"(?:[^\"]*)*?\")))?>");
+    public static final Pattern ALL_SCRIPTS = Pattern.compile("<\\s*[sS][cC][rR][iI][pP][tT](?:\\s*[a-zA-Z_:][-a-zA-Z0-9_:.]+\\s*=\\s*(?:(?:'(?:[^']*)*?')|(?:\"(?:[^\"]*)*?\")))?>(.*?\\n*?)*?<\\s*/?\\s*[sS][cC][rR][iI][pP][tT](?:\\s*[a-zA-Z_:][-a-zA-Z0-9_:.]+\\s*=\\s*(?:(?:'(?:[^']*)*?')|(?:\"(?:[^\"]*)*?\")))?>");
 
 
     /**

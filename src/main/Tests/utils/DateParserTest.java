@@ -13,6 +13,7 @@ import java.util.Map;
  * Created by Anthony on 5/20/2015.
  */
 public class DateParserTest {
+    @SuppressWarnings("MagicConstant")
     @Test
     public void testParse() throws Exception {
         Calendar c = Calendar.getInstance();

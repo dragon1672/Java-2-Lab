@@ -5,6 +5,7 @@ import java.util.*;
 /**
  * Created by Anthony on 6/2/2015.
  */
+@SuppressWarnings("ALL")
 public class RandomSet<T> extends AbstractSet<T> {
     Stack<T> list = new Stack<>();
     Set<T> set = new HashSet<>();

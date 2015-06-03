@@ -1,7 +1,5 @@
 package edu.neumont.projectFiles.controllers.routing;
 
-import edu.neumont.projectFiles.controllers.GamesDisplayPage;
-import edu.neumont.projectFiles.controllers.RPS.RockPaperScissorsPage;
 import edu.neumont.projectFiles.controllers.routing.Route;
 import edu.neumont.projectFiles.interfaces.DAL;
 import edu.neumont.projectFiles.models.GameModel;
@@ -9,7 +7,6 @@ import edu.neumont.projectFiles.models.RoomModel;
 import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.services.Singletons;
 import utils.CollectionIterator;
-import utils.CollectionUtils;
 import utils.FunctionInterfaces.Functions;
 
 import javax.servlet.http.HttpServletRequest;

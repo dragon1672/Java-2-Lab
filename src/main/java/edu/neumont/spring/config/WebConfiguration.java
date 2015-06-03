@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = { "edu.neumont.controller" })
+@ComponentScan(basePackages = { "edu.neumont" })
 public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {

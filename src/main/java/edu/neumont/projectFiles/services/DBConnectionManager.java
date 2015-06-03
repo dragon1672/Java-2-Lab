@@ -3,13 +3,11 @@ package edu.neumont.projectFiles.services;
 import edu.neumont.projectFiles.interfaces.DBSerializable;
 import org.postgresql.util.PSQLException;
 
-import javax.xml.transform.Result;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by dericson on 5/21/2015.

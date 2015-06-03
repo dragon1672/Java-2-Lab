@@ -3,7 +3,6 @@ package edu.neumont.projectFiles.controllers;
 import edu.neumont.projectFiles.controllers.routing.Route;
 import edu.neumont.projectFiles.interfaces.AccountService;
 import edu.neumont.projectFiles.models.UserModel;
-import edu.neumont.projectFiles.services.LocalAccountService;
 import edu.neumont.projectFiles.services.Singletons;
 
 import javax.servlet.http.HttpServletRequest;

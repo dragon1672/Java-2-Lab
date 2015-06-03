@@ -6,7 +6,6 @@ import edu.neumont.projectFiles.services.GamesDisplayTestService;
 import edu.neumont.projectFiles.services.Singletons;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
