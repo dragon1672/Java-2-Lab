@@ -37,7 +37,7 @@ public class DataBaseDAL implements DAL {
     @Override
     public UserModel retrieveUserModel(String username, String password) {
         StringBuilder query = SqlCommandsManager.selectWhere("users");
-        query.append(" display_name = ").append(username).append(";");
+        query.append(" display_name = '").append(username).append("' and password = '").append(password).append("';");
         DBConnectionManager.runQuery(query.toString());
         return (UserModel) DBConnectionManager.deserialize(UserModel.class);
     }
