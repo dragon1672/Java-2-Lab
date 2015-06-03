@@ -32,6 +32,10 @@ public class LoginPage {
                    }
             }
         }
-        return Route.RedirectToUrl(request.getContextPath()+ "/accountInformation/" + userM.getID());
+        Route toReturn = Route.RedirectToUrl(request.getContextPath()+ "/login");
+        if(userM != null) {
+            toReturn = Route.RedirectToUrl(request.getContextPath()+ "/accountInformation/" + userM.getID());
+        }
+        return toReturn;
     }
 }
