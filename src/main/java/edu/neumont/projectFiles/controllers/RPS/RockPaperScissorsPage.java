@@ -1,10 +1,7 @@
 package edu.neumont.projectFiles.controllers.RPS;
 
 import edu.neumont.projectFiles.controllers.routing.Route;
-import edu.neumont.projectFiles.models.RPS.MoveResponse;
-import edu.neumont.projectFiles.models.RPS.RPSMove;
-import edu.neumont.projectFiles.models.RPS.RPSMoveSet;
-import edu.neumont.projectFiles.models.RPS.RPSManager;
+import edu.neumont.projectFiles.models.RPS.*;
 import edu.neumont.projectFiles.models.UserModel;
 import edu.neumont.projectFiles.services.Singletons;
 import utils.Tuple;
@@ -75,7 +72,13 @@ public class RockPaperScissorsPage {
                         toReturn = Route.RedirectToUrl(request.getContextPath() + "/accountInformation/" + userID);
                     } else if(player.isReadyToStartNewGame()){
                             player.setReadyToStartNewGame(false);
-                        toReturn = Route.ForwardToUrl("/WEB-INF/RPSStart.jsp");
+                        RPSStartModel startModel;
+                        if(rpsGame.getP1() != null && rpsGame.getP2()!=null) {
+                            startModel = new RPSStartModel(player.getUser(),(userIsPlayer1? rpsGame.getP2():rpsGame.getP1()).getUser());
+                        } else{
+                            startModel = new RPSStartModel(player.getUser(), new UserModel(-1,"dummy","dummy","dummy","dummy","dummy"));
+                        }
+                        toReturn = Route.ForwardToUrl("/WEB-INF/RPSStart.jsp", startModel);
                     }else {
                         String rpsMoveStr = request.getParameter("RPSMove");
                         //check if time to display results
@@ -85,16 +88,17 @@ public class RockPaperScissorsPage {
                                 updateGames(roomID, rpsGame);
                                 //check who won
                                 MoveResponse moveResponse = RPSRules.getResponse(rpsGame.getCurrentMove().getFirst(), rpsGame.getCurrentMove().getSecond());
-                                String GameMessage = "It's a tie!";
-                                if(moveResponse.P1Won()) {
-                                    GameMessage = "user: " + rpsGame.getP1().getUser().getDisplayName() + " has beat user: " +rpsGame.getP2().getUser().getDisplayName() + ", " +rpsGame.getCurrentMove().getFirst().getText() + " " + moveResponse.moveData.beatMsg+ " " +rpsGame.getCurrentMove().getSecond().getText();
-                                } else if(moveResponse.P2Won()){
-                                    GameMessage = "user:" + rpsGame.getP2().getUser().getDisplayName() + " has beat user: " +rpsGame.getP1().getUser().getDisplayName() + ", " +rpsGame.getCurrentMove().getSecond().getText() + " " + moveResponse.moveData.beatMsg+ " " +rpsGame.getCurrentMove().getFirst().getText();
-                                }
+                               //String GameMessage = "It's a tie!";
+                               //if(moveResponse.P1Won()) {
+                               //    GameMessage = "user: " + rpsGame.getP1().getUser().getDisplayName() + " has beat user: " +rpsGame.getP2().getUser().getDisplayName() + ", " +rpsGame.getCurrentMove().getFirst().getText() + " " + moveResponse.moveData.beatMsg+ " " +rpsGame.getCurrentMove().getSecond().getText();
+                               //} else if(moveResponse.P2Won()){
+                               //    GameMessage = "user:" + rpsGame.getP2().getUser().getDisplayName() + " has beat user: " +rpsGame.getP1().getUser().getDisplayName() + ", " +rpsGame.getCurrentMove().getSecond().getText() + " " + moveResponse.moveData.beatMsg+ " " +rpsGame.getCurrentMove().getFirst().getText();
+                               //}
                                 //display result page
+                                RPSResultsModel resultsModel = new RPSResultsModel(rpsGame,moveResponse,userIsPlayer1);
 
                                 player.setReadyToStartNewGame(true);
-                                toReturn = Route.ForwardToUrl("/WEB-INF/RPSResults.jsp", GameMessage);
+                                toReturn = Route.ForwardToUrl("/WEB-INF/RPSResults.jsp", resultsModel);
                             }
                             // waiting for all players ready //refresh button clicked
                             else if((userIsPlayer1 && rpsGame.getP1().getLastSavedMove() != null) ||
