@@ -57,7 +57,7 @@
       <td>
           <%
             //Shhhhhhhhhhhhhh
-              String url = RandomSwfURL.getRandomSwlUrl();
+              String url = Singletons.theDAL.getRandomSWFURL();
           %>
         <object type="application/x-shockwave-flash" data="<%=url%>" width="640" height="480" class="centered" id="object_404">
           <param name="allowScriptAccess" value="sameDomain" />
