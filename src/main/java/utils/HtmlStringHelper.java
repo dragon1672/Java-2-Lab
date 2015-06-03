@@ -43,4 +43,18 @@ public class HtmlStringHelper {
         return HTML;
         //*/
     }
+
+    public static String PrettyUpUrlToFile(String url) {
+        String ret = url;
+        //get to just file name
+        int lastSlash = url.lastIndexOf('/');
+        if(lastSlash < 0) lastSlash = url.lastIndexOf('\\');
+        if(lastSlash >= 0) {
+            ret = url.substring(lastSlash + 1);
+        }
+        //remove extension
+        int lastPeriod = ret.lastIndexOf('.');
+        if(lastPeriod > 0) ret = ret.substring(0,lastPeriod);
+        return ret.replaceAll("[_.]]"," ");
+    }
 }

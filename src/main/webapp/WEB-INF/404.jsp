@@ -44,20 +44,22 @@
   </style>
 </head>
 <body>
+<%
+    //Shhhhhhhhhhhhhh
+    String url = Singletons.theDAL.getRandomSWFURL();
+    if(url == null) url = RandomSwfURL.getRandomSwlUrl();
+    String prettyName = HtmlStringHelper.PrettyUpUrlToFile(url);
+%>
 <div id="content">
   <div style="text-align: center;">
     <h1>404 Page Not Found</h1>
-    The page you requested was not found. So enjoy the randomness
+    The page you requested was not found. So enjoy the randomness of <a href="<%=url%>"><%=prettyName%></a>
     <br/>
   </div>
   <br/>
   <table id="table" align="center">
     <tr>
       <td>
-          <%
-            //Shhhhhhhhhhhhhh
-              String url = Singletons.theDAL.getRandomSWFURL();
-          %>
         <object type="application/x-shockwave-flash" data="<%=url%>" width="640" height="480" class="centered" id="object_404">
           <param name="allowScriptAccess" value="sameDomain" />
           <param name="movie" value="/swf/<?php echo $file; ?>" />
