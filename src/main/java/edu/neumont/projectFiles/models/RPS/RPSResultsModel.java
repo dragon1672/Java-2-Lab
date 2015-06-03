@@ -8,18 +8,20 @@ import edu.neumont.projectFiles.models.UserModel;
 public class RPSResultsModel {
     UserModel P1,P2;
             RPSMove P1Choice,P2Choice,WinChoice,LoseChoice;
-             String BeatStatement,WinChoicePicPath,LostChoicePicPath,WonOrLost;
+             String BeatStatement,WinChoicePicPath,LoseChoicePicPath,WonOrLost;
 
     public RPSResultsModel(RPSManager rpsGame, MoveResponse moveResponse, boolean userIsPlayer1) {
         P1 = rpsGame.getP1().getUser();
         P2 = rpsGame.getP2().getUser();
         P1Choice = rpsGame.getCurrentMove().getFirst();
         P2Choice = rpsGame.getCurrentMove().getSecond();
-        BeatStatement = moveResponse.moveData.beatMsg;
+        BeatStatement = "ties with";
+        if(moveResponse!= null && moveResponse.moveData!=null && moveResponse.moveData.beatMsg != null) {
+            BeatStatement = moveResponse.moveData.beatMsg;
+        }
 
         WonOrLost = "Won";
         if(moveResponse.Tie()){
-            BeatStatement = "ties with";
             WonOrLost = "Tied";
             WinChoice  = rpsGame.getCurrentMove().getFirst() ;
             LoseChoice = rpsGame.getCurrentMove().getSecond();
@@ -38,20 +40,19 @@ public class RPSResultsModel {
         }
 
         WinChoicePicPath = getRPSPic(WinChoice);
-        LostChoicePicPath = getRPSPic(LoseChoice);
+        LoseChoicePicPath = getRPSPic(LoseChoice);
 
     }
 
     private String getRPSPic(RPSMove move){
         String picturePath = "";
        if(move.equals(RPSMove.Rock)){
-
+        picturePath ="http://upload.wikimedia.org/wikipedia/commons/7/7e/Rock-paper-scissors_(rock).png";
        } else if(move.equals(RPSMove.Scissors)){
-
+        picturePath = "http://upload.wikimedia.org/wikipedia/commons/5/5f/Rock-paper-scissors_(scissors).png";
        } else if (move.equals(RPSMove.Paper)){
-
+        picturePath= "http://upload.wikimedia.org/wikipedia/commons/a/af/Rock-paper-scissors_(paper).png";
        }
-
         return picturePath;
     }
 
@@ -87,8 +88,8 @@ public class RPSResultsModel {
         return WinChoicePicPath;
     }
 
-    public String getLostChoicePicPath() {
-        return LostChoicePicPath;
+    public String getLoseChoicePicPath() {
+        return LoseChoicePicPath;
     }
 
     public String getWonOrLost() {

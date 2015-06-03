@@ -12,15 +12,17 @@
 <jsp:include page="header.jsp" />
 
 <h2>Rock Paper Scissors</h2>
-<p>
-    ${model.P1} played ${model.P1Choice}
-    ${model.P2} played ${model.P2Choice}
-    ${model.WinChoice} ${model.BeatStatement} ${model.LoseChoice}
-        <img src="${model.WinChoicePicPath} ">
-    ${model.BeatStatement}
-        <img src="${model.LoseChoicePicPath} ">
-
-    <h3>You ${model.WonOrLost}</h3>
+    ${model.p1} played ${model.p1Choice}
+<br/>
+    ${model.p2} played ${model.p2Choice}
+<br/>
+        <img width=100 height=100 src="${model.winChoicePicPath} ">
+      V.S.
+        <img width=100 height=100 src="${model.loseChoicePicPath} ">
+<br/>
+${model.winChoice} ${model.beatStatement} ${model.loseChoice}
+<br/>
+    <h3>You ${model.wonOrLost}</h3>
 </p>
 
 <form action="${pageContext.request.contextPath}/RPS" method="GET">
