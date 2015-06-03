@@ -48,10 +48,10 @@ public class RPSResultsModel {
         String picturePath = "";
        if(move.equals(RPSMove.Rock)){
         picturePath ="http://i.imgur.com/NTCXdvh.png";
-       } else if(move.equals(RPSMove.Scissors)){
-        picturePath = "http://i.imgur.com/DPVSCND.png";
        } else if (move.equals(RPSMove.Paper)){
-        picturePath= "http://i.imgur.com/PSkJUXd.png";
+           picturePath= "http://i.imgur.com/DPVSCND.png";
+       }else if(move.equals(RPSMove.Scissors)){
+        picturePath = "http://i.imgur.com/PSkJUXd.png";
        }
         return picturePath;
     }
