@@ -76,7 +76,7 @@ public class RockPaperScissorsPage {
                         if(rpsGame.getP1() != null && rpsGame.getP2()!=null) {
                             startModel = new RPSStartModel(player.getUser(),(userIsPlayer1? rpsGame.getP2():rpsGame.getP1()).getUser());
                         } else{
-                            startModel = new RPSStartModel(player.getUser(), new UserModel(-1,"dummy","dummy","dummy","dummy","dummy"));
+                            startModel = new RPSStartModel(player.getUser(), new UserModel("dummy","dummy","dummy","dummy","dummy"));
                         }
                         toReturn = Route.ForwardToUrl("/WEB-INF/RPSStart.jsp", startModel);
                     }else {
