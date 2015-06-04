@@ -214,11 +214,14 @@ public class DataBaseDAL implements DAL {
 
     @Override
     public String getRandomSWFURL() {
-        return null;
+        String query = "select * from swfs order by random() limit 1;";
+        DBConnectionManager.runQuery(query);
+        return (String) DBConnectionManager.deserializeColumn("url");
     }
 
     @Override
     public void removeSWFURL(String toRemove) {
-
+        String query = "delete from swfs where url = "+toRemove;
+        DBConnectionManager.runQuery(query, false);
     }
 }

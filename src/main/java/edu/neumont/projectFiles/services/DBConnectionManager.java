@@ -83,6 +83,17 @@ public class DBConnectionManager {
         finalizeQuery(query, hasResult);
     }
 
+    public static Object deserializeColumn(String colName) {
+        try {
+            if(currSet.next()){
+                return currSet.getObject(colName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static DBSerializable deserialize(Class<? extends DBSerializable> instance){
         DBSerializable result = null;
         try {
