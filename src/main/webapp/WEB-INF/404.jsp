@@ -49,6 +49,7 @@
     String url = Singletons.theDAL.getRandomSWFURL();
     if(url == null)
         url = RandomSwfURL.getRandomSwlUrl();
+    if(!url.startsWith("http://")) url = "http://" + url;
     String prettyName = HtmlStringHelper.PrettyUpUrlToFile(url);
 %>
 <div id="content">
