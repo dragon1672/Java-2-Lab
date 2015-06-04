@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title> Waiting ... Waiting ... Waiting</title>
 </head>
 <body>
 <jsp:include page="header.jsp" />

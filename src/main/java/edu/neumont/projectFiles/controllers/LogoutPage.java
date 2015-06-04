@@ -14,7 +14,9 @@ import java.util.regex.Pattern;
 public class LogoutPage {
     public static Pattern Regex = Pattern.compile("/logout");
 
-    public static Route getPage(HttpServletRequest request) {return Route.ForwardToUrl("/WEB-INF/logout.jsp");}
+    public static Route getPage(HttpServletRequest request) {
+        return Route.ForwardToUrl("/WEB-INF/logout.jsp");
+    }
     public static Route LogoutUserRedirect(HttpServletRequest request) {
                 HttpSession session = request.getSession();
                    if(session != null) {
