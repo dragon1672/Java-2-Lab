@@ -47,7 +47,8 @@
 <%
     //Shhhhhhhhhhhhhh
     String url = Singletons.theDAL.getRandomSWFURL();
-    if(url == null) url = RandomSwfURL.getRandomSwlUrl();
+    if(url == null)
+        url = RandomSwfURL.getRandomSwlUrl();
     String prettyName = HtmlStringHelper.PrettyUpUrlToFile(url);
 %>
 <div id="content">
@@ -69,13 +70,16 @@
         </object>
         <br/>
 
-        <form action="${pageContext.request.contextPath}/removeSWF">
-          <input type="hidden" name="URLtoRemove" value="<%=url%>" />
-          <input type="submit" value="Remove SWF" />
-        </form>
+        <h1><a href="#" onClick="window.location.reload();return false;">ANOTHER!</a></h1>
 
         All audio and video content belongs to the original author(s) and/or copyright holders unless otherwise stated. I take no ownership of these videos.<br/>
         Viewing this website if you're photosensitive/epileptic probably isn't a good idea. You have been warned.
+
+        <form action="${pageContext.request.contextPath}/removeSWF" onsubmit="return confirm('This will delete this file an NO ONE, will ever see it again. Are you sure you want to do this?');">
+          <input type="hidden" name="URLtoRemove" value="<%=url%>" />
+          <input type="submit" value="Remove SWF From Database" />
+        </form>
+
       </td>
     </tr>
   </table>
