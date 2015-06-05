@@ -3,12 +3,25 @@ package edu.neumont.projectFiles.services;
 import edu.neumont.projectFiles.models.*;
 import edu.neumont.projectFiles.interfaces.DAL;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Created by bwaite on 5/19/2015.
  */
-public class DataBaseDAL implements DAL {
+public class DataBaseDAL implements DAL{
+    private File f = new File("../../../../../../../DatabaseReset.txt");
+    private FileWriter writer;
+
+    public DataBaseDAL(){
+        try {
+            writer = new FileWriter(f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public UserModel createUserModel(UserModel userModel) {
@@ -259,7 +272,15 @@ public class DataBaseDAL implements DAL {
 
     @Override
     public void removeSWFURL(String toRemove) {
-        String query = "delete from swfs where url = "+toRemove;
-        DBConnectionManager.runQuery(query, false);
+        try {
+            String query = "delete from swfs where url = '+toRemove+';";
+            String otherQuery = "insert into deletedSwfs VALUES('+toRemove+');";
+            writer.write(query);
+            DBConnectionManager.runQuery(query, false);
+            DBConnectionManager.runQuery(otherQuery, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Couldn't write to the databasereset.txt");
+        }
     }
 }
