@@ -39,7 +39,7 @@ public class RockPaperScissorsPage {
     }
 
     public static Route getPage(long roomID, HttpServletRequest request, String URI, UserModel userM) {
-        Route toReturn = Route.ForwardToUrl("/WEB-INF/RPSStart.jsp", new UserModel("dummy", "dummy", "dummy", "dummy", "dummy"));
+        Route toReturn = Route.ForwardToUrl("/WEB-INF/RPSStart.jsp", new RPSStartModel(userM, new UserModel("dummy", "dummy", "dummy", "dummy", "dummy")));
         //Check if the current user is logged in, if not logged in redirect to login
         RPSManager rpsGame = new RPSManager();
         //grab a game if it exists
