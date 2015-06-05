@@ -28,7 +28,7 @@ public class GameRouter {
         AddGamePage("RPS", Pattern.compile("/"),RockPaperScissorsPage::getPage);
     }
 
-    public static Pattern Path = Pattern.compile("/games/(\\d+)(/.*)");
+    public static Pattern Path = Pattern.compile("/games/(\\d+)(/.*)?");
 
     private static DAL myDal = Singletons.theDAL;
 
@@ -87,10 +87,11 @@ public class GameRouter {
 
         //endregion
 
+        String gamePath = m.group(2) != null ? m.group(2) : "/";
+
         final String finalGameAbbreviation = gameAbbreviation;
         GamePath path = CollectionIterator.convert(gamesPages).filter(n -> Objects.equals(n.getGameID(), finalGameAbbreviation)).firstOrDefault(n -> {
-            String toHit = m.group(2);
-            return n.pattern.matcher(m.group(2)).matches();
+            return n.pattern.matcher(gamePath).matches();
         });
 
         if (path != null) {
