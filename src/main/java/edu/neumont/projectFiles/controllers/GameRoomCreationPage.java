@@ -67,7 +67,7 @@ public class GameRoomCreationPage
         if (lpirm.getAllPlayerInRoomModel(temp.getID()).size() == temp.getMaxPlayers())
         {
             //HEY, THIS NEEDS TO REDIRECT TO THE INDIVIDUAL GAME
-            return Route.ForwardToUrl("/WEB-INF/index.jsp");
+            return Route.RedirectToUrl("/games/" +temp.getID());
         }
         else
         {
