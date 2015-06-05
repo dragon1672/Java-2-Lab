@@ -25,10 +25,10 @@ ${model.winChoice} ${model.beatStatement} ${model.loseChoice}
     <h3>You ${model.wonOrLost}</h3>
 </p>
 
-<form action="${pageContext.request.contextPath}/RPS" method="GET">
+<form method="GET">
   <input class="button" type="submit" value="Click to Play Another Game"/>
 </form>
-<form action="${pageContext.request.contextPath}/RPS" method="GET">
+<form method="GET">
   <input type="text" name="DoneWithGame" style="display: none" value ="true"/>
   <input class="button" type="submit" value="Click to Finish This Game Session"/>
 </form>
