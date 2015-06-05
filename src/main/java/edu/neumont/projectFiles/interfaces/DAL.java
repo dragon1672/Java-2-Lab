@@ -129,6 +129,13 @@ public interface DAL {
     List<RoomModel> getAllRoomModels();
     //endregion
 
+    //region PlayerInRoom DAL =======================================================================================================
+    PlayerInRoomModel createPlayerInRoomModel(PlayerInRoomModel playerInRoomModel);
+    PlayerInRoomModel retrievePlayerInRoomModel(long roomID, long playerID);
+    PlayerInRoomModel updatePlayerInRoomModel(PlayerInRoomModel roomModel);
+    void deletePlayerInRoomModel(long roomId, long playerId);
+    List<PlayerInRoomModel> getAllPlayerInRoomModels(long roomId);
+    //endregion
     /**
      * returns a random valid SWF url
      * @return a random valid SWF url

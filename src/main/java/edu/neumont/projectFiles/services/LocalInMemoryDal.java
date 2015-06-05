@@ -209,6 +209,31 @@ public class LocalInMemoryDal implements DAL{
     }
 
     @Override
+    public PlayerInRoomModel createPlayerInRoomModel(PlayerInRoomModel playerInRoomModel) {
+        return null;
+    }
+
+    @Override
+    public PlayerInRoomModel retrievePlayerInRoomModel(long roomID, long playerID) {
+        return null;
+    }
+
+    @Override
+    public PlayerInRoomModel updatePlayerInRoomModel(PlayerInRoomModel roomModel) {
+        return null;
+    }
+
+    @Override
+    public void deletePlayerInRoomModel(long roomId, long playerId) {
+
+    }
+
+    @Override
+    public List<PlayerInRoomModel> getAllPlayerInRoomModels(long roomId) {
+        return null;
+    }
+
+    @Override
     public String getRandomSWFURL() {
         return RandomSwfURL.getRandomSwlUrl();
     }

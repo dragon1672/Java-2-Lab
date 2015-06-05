@@ -213,6 +213,44 @@ public class DataBaseDAL implements DAL {
     }
 
     @Override
+    public PlayerInRoomModel createPlayerInRoomModel(PlayerInRoomModel playerInRoomModel) {
+        DBConnectionManager.runQuery(SqlCommandsManager.insertInto("playersInRooms", playerInRoomModel));
+        return (PlayerInRoomModel) DBConnectionManager.deserialize(PlayerInRoomModel.class);
+    }
+
+    @Override
+    public PlayerInRoomModel retrievePlayerInRoomModel(long roomID, long playerID) {
+        StringBuilder sb = SqlCommandsManager.selectWhere("playersInRooms");
+        sb.append("player_id = ").append(playerID).append(" and room_id = ").append(roomID).append(";");
+        DBConnectionManager.runQuery(sb.toString());
+        return (PlayerInRoomModel) DBConnectionManager.deserialize(PlayerInRoomModel.class);
+    }
+
+    @Override
+    public PlayerInRoomModel updatePlayerInRoomModel(PlayerInRoomModel roomModel) {
+        StringBuilder sb = SqlCommandsManager.update("playersInRooms");
+        sb.append(" set ").append(roomModel.getUpdateSet()).append(" where player_id =")
+                .append(roomModel.getUserID()).append(" and room_id = ").append(roomModel.getRoomID())
+                .append(" returning *;");
+        DBConnectionManager.runQuery(sb.toString());
+        return (PlayerInRoomModel) DBConnectionManager.deserialize(PlayerInRoomModel.class);
+    }
+
+    @Override
+    public void deletePlayerInRoomModel(long roomId, long playerId) {
+        StringBuilder sb = SqlCommandsManager.deleteWhere("playersInRooms");
+        sb.append("player_id = ").append(playerId).append(" and ").append(roomId).append(";");
+        DBConnectionManager.runQuery(sb.toString());
+    }
+
+    @Override
+    public List<PlayerInRoomModel> getAllPlayerInRoomModels(long roomId) {
+        StringBuilder sb = SqlCommandsManager.selectWhere("playersInRooms").append(" room_id =").append(roomId).append(";");
+        DBConnectionManager.runQuery(sb.toString());
+        return (List<PlayerInRoomModel>) DBConnectionManager.deserializeList(PlayerInRoomModel.class);
+    }
+
+    @Override
     public String getRandomSWFURL() {
         String query = "select * from swfs order by random() limit 1;";
         DBConnectionManager.runQuery(query);

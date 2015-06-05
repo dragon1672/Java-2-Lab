@@ -35,11 +35,14 @@ public class DatabaseTests {
         List<AchievementModel> achievementModels = dal.getAllAchievements();
         achievementModels.get(0).setName("Basic Achievement");
         AchievementModel updatedAchModel = dal.updateAchievementModel(achievementModels.get(0));
-        dal.deleteAchievement(achievementModels.get(0).getGameID(), achievementModels.get(0).getID());*/
+        dal.deleteAchievement(achievementModels.get(0).getGameID(), achievementModels.get(0).getID());
         GameScoreModel gameScoreModel = dal.createGameScoreModel(new GameScoreModel(1,1,50.0f,new Date()));
         GameScoreModel gameScoreModel2 = dal.createGameScoreModel(new GameScoreModel(1,1,75.0f,new Date()));
         List<GameScoreModel> gameScoreModels = dal.getAllGamesScores();
         dal.deleteGameScore(gameScoreModels.get(0).getGameID(), gameScoreModels.get(0).getID());
-        RoomModel roomModel1 = dal.createRoomModel(new RoomModel(1, "Johnny Room", new Date(), 5, "none"));
+        RoomModel roomModel1 = dal.createRoomModel(new RoomModel(1, "Johnny Room", new Date(), 5, "none"));*/
+
+        List<PlayerInRoomModel> pirs = dal.getAllPlayerInRoomModels(2);
+
     }
 }

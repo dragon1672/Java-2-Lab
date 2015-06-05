@@ -18,9 +18,9 @@
       <input type="submit"  value="Search for Opponent">
     </form>
     <h1>Find a room</h1>
-    <form class="findGameSpecificRoomForm" action="" method="POST">
+    <form class="findGameSpecificRoomForm" action="/join" method="POST">
       <div class="textInputField">
-        Room ID: <input type="text" class="findGameField" value=""/>
+        Room ID: <input name="roomID" type="text" class="findGameField" value=""/>
       </div>
       <input type="submit" value="Enter Room"/>
     </form>

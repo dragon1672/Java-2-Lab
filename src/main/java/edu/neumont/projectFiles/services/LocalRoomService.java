@@ -36,4 +36,5 @@ public class LocalRoomService implements edu.neumont.projectFiles.interfaces.Roo
     public List<RoomModel> getAllRooms() {
         return Singletons.theDAL.getAllRoomModels();
     }
+
 }

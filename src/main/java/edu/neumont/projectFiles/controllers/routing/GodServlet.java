@@ -26,12 +26,13 @@ public class GodServlet extends HttpServlet {
             .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::getPage)
             .addURIRegex(GamesDisplayPage.Regex, GamesDisplayPage::getPage)
             .addURIRegex(AccountInformationPage.Regex, AccountInformationPage::getPage)
+            .addURIRegex(RockPaperScissorsPage.Regex, RockPaperScissorsPage::DummyGetPage)
             .addURIRegex(GameRoomCreationPage.Regex, GameRoomCreationPage::getPage)
             .addURIRegex(GameRoomCreationPage.WaitingGameRegex, GameRoomCreationPage::isGameReady)
             .addURIRegex(GameRouter.Path, GameRouter::handleRequest)
             .addURIRegex(ImageGetter.regex, ImageGetter::handleRequest)
-            //.addURIRegex(RockPaperScissorsPage.Regex, RockPaperScissorsPage::DummyGetPage)
-            ;
+            .addURIRegex(FindGamePage.Regex, FindGamePage::getPage)
+;
 
     private static Router PostRoutes = new Router()
             .addURIRegex(LoginPage.Regex, LoginPage::LoginUserRedirect)
@@ -39,8 +40,9 @@ public class GodServlet extends HttpServlet {
             .addURIRegex(AccountCreationPage.Regex, AccountCreationPage::createAccountRedirect)
             .addURIRegex(GameRoomCreationPage.CreateGameRegex, GameRoomCreationPage::createGame)
             .addURIRegex(RemoveSWF404Page.Regex, RemoveSWF404Page::getPage)
+            .addURIRegex(FindGamePage.regexToJoin, FindGamePage::joinGame);
             //.addURIRegex(QuestionActionRouter.questionVoteUpPattern, QuestionActionRouter.Instance::upVoteQuestion)
-            ;
+            
 
     private void handleRequest(Router router, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         mySession = request.getSession();

@@ -3,6 +3,7 @@ package edu.neumont.projectFiles.controllers;
 import edu.neumont.projectFiles.controllers.routing.Route;
 import edu.neumont.projectFiles.models.GameModel;
 import edu.neumont.projectFiles.services.GamesDisplayTestService;
+import edu.neumont.projectFiles.services.LocalRoomService;
 import edu.neumont.projectFiles.services.Singletons;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,4 +24,6 @@ public class GamesDisplayPage {
         request.setAttribute("games", games);
         return Route.ForwardToUrl("/WEB-INF/games.jsp");
     }
+
+
 }

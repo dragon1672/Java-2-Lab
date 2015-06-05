@@ -31,9 +31,15 @@ public class SqlCommandsManager {
         return sb.toString();
     }
 
-    public static String updateWhere(String table, String setInfo, long id){
+    public static StringBuilder update(String table){
         StringBuilder sb = new StringBuilder();
-        sb.append("update ").append(table).append(" set ").append(setInfo).append(" where id=").
+        sb.append("update ").append(table);
+        return sb;
+    }
+
+    public static String updateWhere(String table, String setInfo, long id){
+        StringBuilder sb =update(table);
+        sb.append(" set ").append(setInfo).append(" where id=").
                 append(id).append(" returning *;");
         return sb.toString();
     }
