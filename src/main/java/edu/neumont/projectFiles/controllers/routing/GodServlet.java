@@ -30,7 +30,7 @@ public class GodServlet extends HttpServlet {
             .addURIRegex(GameRoomCreationPage.WaitingGameRegex, GameRoomCreationPage::isGameReady)
             .addURIRegex(GameRouter.Path, GameRouter::handleRequest)
             .addURIRegex(ImageGetter.regex, ImageGetter::handleRequest)
-            .addURIRegex(RockPaperScissorsPage.Regex, RockPaperScissorsPage::DummyGetPage)
+            //.addURIRegex(RockPaperScissorsPage.Regex, RockPaperScissorsPage::DummyGetPage)
             ;
 
     private static Router PostRoutes = new Router()

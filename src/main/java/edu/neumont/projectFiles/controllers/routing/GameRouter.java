@@ -1,5 +1,6 @@
 package edu.neumont.projectFiles.controllers.routing;
 
+import edu.neumont.projectFiles.controllers.RPS.RockPaperScissorsPage;
 import edu.neumont.projectFiles.controllers.routing.Route;
 import edu.neumont.projectFiles.interfaces.DAL;
 import edu.neumont.projectFiles.models.GameModel;
@@ -24,7 +25,7 @@ public class GameRouter {
     private static final List<GamePath> gamesPages = new ArrayList<>();
 
     static { // register games here
-        //AddGamePage("RPS",RockPaperScissorsPage.Regex,RockPaperScissorsPage::getPage);
+        AddGamePage("RPS", Pattern.compile("/"),RockPaperScissorsPage::getPage);
     }
 
     public static Pattern Path = Pattern.compile("/games/(\\d+)(/.*)");
@@ -64,8 +65,14 @@ public class GameRouter {
         if (!m.matches()) throw new RuntimeException("Received improper route to GameRouter");
 
         long roomID = Long.parseLong(m.group(1));
-        RoomModel room = myDal.retrieveRoomModel(roomID);
-        GameModel game = myDal.retrieveGameModel(room.getGameID());
+        String gameAbbreviation = "RPS";
+        try {
+            RoomModel room = myDal.retrieveRoomModel(roomID);
+            GameModel game = myDal.retrieveGameModel(room.getGameID());
+            gameAbbreviation = game.getAbbreviation();
+        } catch (Exception e) {
+            //means that the room is invalid, fix when database is legit
+        }
 
         //region make sure user is legit
 
@@ -80,7 +87,8 @@ public class GameRouter {
 
         //endregion
 
-        GamePath path = CollectionIterator.convert(gamesPages).filter(n -> Objects.equals(n.getGameID(), game.getAbbreviation())).firstOrDefault(n -> {
+        final String finalGameAbbreviation = gameAbbreviation;
+        GamePath path = CollectionIterator.convert(gamesPages).filter(n -> Objects.equals(n.getGameID(), finalGameAbbreviation)).firstOrDefault(n -> {
             String toHit = m.group(2);
             return n.pattern.matcher(m.group(2)).matches();
         });
