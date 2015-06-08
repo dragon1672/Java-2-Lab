@@ -3,13 +3,30 @@
 <html>
 <head>
     <title> Waiting ... Waiting ... Waiting</title>
+    <script>
+        function refreshPage()
+        {
+            $this = $(this);
+            $.ajax({
+                url: 'RPS_ajaxReloader',
+                datatype: 'html',
+                async:true,
+                success: function(data){
+                    if(data=='true') {
+                        location.reload(true);
+                    }
+                    else {
+                        refreshPage();
+                    }
+                }
+            });
+        }
+        body.onload = refreshPage();
+    </script>
 </head>
 <body>
 <jsp:include page="header.jsp" />
 
-<p> Click the button below to check if the other player has made their choice</p>
-<form method="GET">
-  <input type="submit" value="Check For Other Player"/>
-</form>
+<p> Waiting for other player</p>
 </body>
 </html>
