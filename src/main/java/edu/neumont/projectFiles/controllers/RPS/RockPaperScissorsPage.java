@@ -157,16 +157,17 @@ public class RockPaperScissorsPage {
         RPSGames.put(roomID, rpsm);
     }
 
+    public static Pattern Regex2 = Pattern.compile("/RPS_ajaxReloader");
     public static Route queryBothPlayersHaveMoved(long roomID, HttpServletRequest request, String URI, UserModel userM){
-        Boolean bothPlayersHaveMoved = false;
+        String bothPlayersHaveMoved = "false";
         RPSManager rpsGame = new RPSManager();
         //grab a game if it exists
         if (RPSGames.containsKey(roomID)) {
             rpsGame = RPSGames.get(roomID);
         }
         if(rpsGame != null){
-            bothPlayersHaveMoved = rpsGame.getCurrentMove().getFirst() != null && rpsGame.getCurrentMove().getSecond() != null;
+            bothPlayersHaveMoved =  (rpsGame.getCurrentMove().getFirst() != null && rpsGame.getCurrentMove().getSecond() != null) ? "true":"false";
         }
-        return new Route.ForwardToUrl("/WEB-INF/RPSWaitForOtherPlayerDecision.jsp",bothPlayersHaveMoved);
+        return Route.ForwardToUrl("/WEB-INF/RPSWaitForOtherPlayerDecision.jsp",bothPlayersHaveMoved);
     }
 }

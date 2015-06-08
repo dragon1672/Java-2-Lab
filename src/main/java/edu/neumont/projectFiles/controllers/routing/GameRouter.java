@@ -1,7 +1,6 @@
 package edu.neumont.projectFiles.controllers.routing;
 
 import edu.neumont.projectFiles.controllers.RPS.RockPaperScissorsPage;
-import edu.neumont.projectFiles.controllers.routing.Route;
 import edu.neumont.projectFiles.interfaces.DAL;
 import edu.neumont.projectFiles.models.GameModel;
 import edu.neumont.projectFiles.models.RoomModel;
@@ -26,6 +25,7 @@ public class GameRouter {
 
     static { // register games here
         AddGamePage("RPS", RockPaperScissorsPage.Regex,RockPaperScissorsPage::getPage);
+        AddGamePage("RPS", RockPaperScissorsPage.Regex2,RockPaperScissorsPage::queryBothPlayersHaveMoved);
     }
 
     public static Pattern Path = Pattern.compile("/games/(\\d+)(/.*)?");
