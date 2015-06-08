@@ -7,9 +7,11 @@ import edu.neumont.projectFiles.services.LocalPlayersInRoomService;
 import edu.neumont.projectFiles.services.LocalRoomService;
 import edu.neumont.projectFiles.models.GameModel;
 import edu.neumont.projectFiles.services.Singletons;
+import jdk.nashorn.internal.ir.RuntimeNode;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -17,13 +19,17 @@ import java.util.regex.Pattern;
  */
 public class GameRoomCreationPage
 {
-    public static Pattern Regex = Pattern.compile("/makeGame/[0-9]{1,40}");
-    public static Pattern CreateGameRegex = Pattern.compile("/makeGame/[0-9]{1,40}/Create");
-    public static Pattern WaitingGameRegex = Pattern.compile("/makeGame/[0-9]{1,40}/Wait");
+    public static Pattern Regex = Pattern.compile("/makeGame/([0-9]{1,40})");
+    public static Pattern CreateGameRegex = Pattern.compile("/makeGame/([0-9]{1,40})/Create");
+    public static Pattern WaitingGameRegex = Pattern.compile("/makeGame/([0-9]{1,40})/Wait");
 
     public static Route getPage(HttpServletRequest request)
     {
-        long gameTypeID = Integer.parseInt(request.getRequestURI().split("/")[3]);
+        Matcher m = Regex.matcher(request.getPathInfo());
+        long gameTypeID = 2;
+        if(m.find()){
+            gameTypeID = Long.parseLong(m.group(1));
+        }
         GameModel gameInformation = Singletons.theDAL.retrieveGameModel(gameTypeID);
         request.setAttribute("GameInfo", gameInformation);
         return Route.ForwardToUrl("/WEB-INF/MakeGame.jsp");
@@ -35,8 +41,11 @@ public class GameRoomCreationPage
         LocalPlayersInRoomService lpirm = new LocalPlayersInRoomService();
         String roomName = request.getParameter("roomName");
         String password = request.getParameter("gamePassword");
-        String[] utiTemp = request.getRequestURI().split("/");
-        long gameId = Integer.parseInt(request.getRequestURI().split("/")[3]);
+        long gameId = 1;
+        Matcher m = CreateGameRegex.matcher(request.getPathInfo());
+        if(m.find()){
+            gameId = Long.parseLong(m.group(1));
+        }
         String numPlayers = request.getParameter("numPlayers");
         RoomModel rm = rs.createRoom(roomName, gameId, Integer.parseInt(numPlayers), password);
         PlayerInRoomModel pirm = lpirm.createPlayerInRoomModel(rm.getID(), (long)request.getSession().getAttribute("userID"));
@@ -51,8 +60,11 @@ public class GameRoomCreationPage
         LocalPlayersInRoomService lpirm = new LocalPlayersInRoomService();
         String roomName = request.getParameter("roomName");
         String password = request.getParameter("gamePassword");
-        String[] utiTemp = request.getRequestURI().split("/");
-        long roomId = Integer.parseInt(request.getRequestURI().split("/")[3]);
+        long roomId = 1;
+        Matcher m = WaitingGameRegex.matcher(request.getPathInfo());
+        if(m.find()){
+            roomId = Long.parseLong(m.group(1));
+        }
         String numPlayers = request.getParameter("numPlayers");
         RoomModel temp = rs.retrieveRoom(roomId);
         if(temp != null){
