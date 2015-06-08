@@ -45,6 +45,7 @@ public class RockPaperScissorsPage {
         //grab a game if it exists
         if (RPSGames.containsKey(roomID)) {
             rpsGame = RPSGames.get(roomID);
+
         }
         //set up the users if not set up
         if (rpsGame.getP1() == null) {
@@ -154,5 +155,18 @@ public class RockPaperScissorsPage {
     private static void updateGames(Long roomID, RPSManager rpsm) {
         RPSGames.remove(roomID);
         RPSGames.put(roomID, rpsm);
+    }
+
+    public static Route queryBothPlayersHaveMoved(long roomID, HttpServletRequest request, String URI, UserModel userM){
+        Boolean bothPlayersHaveMoved = false;
+        RPSManager rpsGame = new RPSManager();
+        //grab a game if it exists
+        if (RPSGames.containsKey(roomID)) {
+            rpsGame = RPSGames.get(roomID);
+        }
+        if(rpsGame != null){
+            bothPlayersHaveMoved = rpsGame.getCurrentMove().getFirst() != null && rpsGame.getCurrentMove().getSecond() != null;
+        }
+        return new Route.ForwardToUrl("/WEB-INF/RPSWaitForOtherPlayerDecision.jsp",bothPlayersHaveMoved);
     }
 }
