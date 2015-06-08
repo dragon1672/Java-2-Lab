@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class RockPaperScissorsPage {
     public static final String MyID = "RPS";
-    public static Pattern Regex = Pattern.compile("/RPS");
+    public static Pattern Regex = Pattern.compile("/");
     private static Map<Long, RPSManager> RPSGames = new HashMap<>();
     private static RPSMoveSet RPSRules = RPSMoveSet.ClassicRockPaperScissors;
 
