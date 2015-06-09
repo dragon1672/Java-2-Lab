@@ -273,7 +273,8 @@ public class DataBaseDAL implements DAL{
 
     private <T extends DBSerializable> T callDBSingle(String query, Class<T> item, boolean hasResult){
         List<T> items = callDBList(query, item, hasResult);
-        return items.get(0);
+        T result = (items.size()>0)?items.get(0):null;
+        return result;
     }
 
 }

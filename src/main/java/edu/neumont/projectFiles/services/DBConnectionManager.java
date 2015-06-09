@@ -116,20 +116,22 @@ public class DBConnectionManager {
 
     public static List<? extends DBSerializable> deserializeList(Class<? extends DBSerializable> instance){
         List<DBSerializable> items = new ArrayList<>();
-        try {
-            DBSerializable obj = instance.newInstance();
-            while(currSet.next()){
-                items.add(obj.deserialize(currSet));
+        if(currSet != null) {
+            try {
+                DBSerializable obj = instance.newInstance();
+                while (currSet.next()) {
+                    items.add(obj.deserialize(currSet));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                return null;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
         }
         return items;
     }
