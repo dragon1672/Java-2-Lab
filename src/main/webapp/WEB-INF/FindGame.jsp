@@ -14,22 +14,24 @@
   <body>
     <jsp:include page="header.jsp" />
     <h1>Matchmaking</h1>
-    <form class="findGameMatchmadeForm" action="" method="POST">
-      <input type="submit"  value="Search for Opponent">
-    </form>
+    <c:if test="${sessionScope.username != null}">
+        <form class="findGameMatchmadeForm" action="" method="POST">
+          <input type="submit"  value="Search for Opponent">
+        </form>
+    </c:if>
     <h1>Find a room</h1>
-    <form class="findGameSpecificRoomForm" action="/join" method="POST">
-      <div class="textInputField">
-        Room ID: <input name="roomID" type="text" class="findGameField" value=""/>
-      </div>
-      <input type="submit" value="Enter Room"/>
-    </form>
+
     <div>Rooms:</div>
     <c:forEach items="${rooms}" var="room">
         <div class="roomDisplay">
             <div class="roomDisplayFeild">Room name: ${room.getRoomName()}</div>
-            <div class="roomDisplayFeild">ID: ${room.getID()}</div>
             <div class="roomDisplayFeild">Number of players: ${room.getCurrentNumberOfPlayers()} / ${room.getMaxPlayers()}</div>
+            <c:if test="${sessionScope.username != null}">
+            <form class="findGameSpecificRoomForm" action="/join" method="POST">
+                <input name="roomID" type="hidden" class="findGameField" value="<c:out value="${room.getID()}"/>"/>
+                <input type="submit" value="Enter Room"/>
+            </form>
+            </c:if>
         </div>
     </c:forEach>
   </body>
