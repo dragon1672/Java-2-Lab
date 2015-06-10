@@ -48,8 +48,10 @@ public class GameRoomCreationPage
         }
         String numPlayers = request.getParameter("numPlayers");
         RoomModel rm = rs.createRoom(roomName, gameId, Integer.parseInt(numPlayers), password);
+        if(request.getSession().getAttribute("userID") == null){
+            return Route.ForwardToUrl("/WEB-INF/404.jsp");
+        }
         PlayerInRoomModel pirm = lpirm.createPlayerInRoomModel(rm.getID(), (long)request.getSession().getAttribute("userID"));
-
         String URLtoRedirect = "/makeGame/"+rm.getID()+"/Wait";
         return Route.RedirectToUrl(URLtoRedirect);
     }
