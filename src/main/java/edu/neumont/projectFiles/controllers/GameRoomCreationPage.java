@@ -20,11 +20,7 @@ import java.util.regex.Pattern;
 public class GameRoomCreationPage
 {
     public static Pattern Regex = Pattern.compile("/makeGame/([0-9]{1,40})");
-    public static Pattern CreateGameRegex = Pattern.compile("/makeGame/([0-9]{1,40})/Create");
-    public static Pattern WaitingGameRegex = Pattern.compile("/makeGame/([0-9]{1,40})/Wait");
-
-    public static Route getPage(HttpServletRequest request)
-    {
+    public static Route getPage(HttpServletRequest request) {
         Matcher m = Regex.matcher(request.getPathInfo());
         long gameTypeID = 2;
         if(m.find()){
@@ -35,8 +31,8 @@ public class GameRoomCreationPage
         return Route.ForwardToUrl("/WEB-INF/MakeGame.jsp");
     }
 
-    public static Route createGame(HttpServletRequest request)
-    {
+    public static Pattern CreateGameRegex = Pattern.compile("/makeGame/([0-9]{1,40})/Create");
+    public static Route createGame(HttpServletRequest request) {
         LocalRoomService rs = new LocalRoomService();
         LocalPlayersInRoomService lpirm = new LocalPlayersInRoomService();
         String roomName = request.getParameter("roomName");
@@ -56,8 +52,8 @@ public class GameRoomCreationPage
         return Route.RedirectToUrl(URLtoRedirect);
     }
 
-    public static Route isGameReady(HttpServletRequest request)
-    {
+    public static Pattern WaitingGameRegex = Pattern.compile("/makeGame/([0-9]{1,40})/Wait");
+    public static Route isGameReady(HttpServletRequest request) {
         LocalRoomService rs = new LocalRoomService();
         LocalPlayersInRoomService lpirm = new LocalPlayersInRoomService();
         String roomName = request.getParameter("roomName");
@@ -69,23 +65,33 @@ public class GameRoomCreationPage
         }
         String numPlayers = request.getParameter("numPlayers");
         RoomModel temp = rs.retrieveRoom(roomId);
-        if(temp != null){
+        if(temp != null) {
             List<PlayerInRoomModel> test = lpirm.getAllPlayerInRoomModel(temp.getID());
             test = null;
         }
-        if (temp == null)
-        {
+        if (temp == null) {
             return Route.ForwardToUrl("/WEB-INF/404.jsp");
-        }
-        else
-        if (lpirm.getAllPlayerInRoomModel(temp.getID()).size() == temp.getMaxPlayers())
-        {
-            //HEY, THIS NEEDS TO REDIRECT TO THE INDIVIDUAL GAME
+        } else if (lpirm.getAllPlayerInRoomModel(temp.getID()).size() == temp.getMaxPlayers()) {
             return Route.RedirectToUrl("/games/" +temp.getID());
+        } else {
+            return Route.ForwardToUrl("/WEB-INF/WaitingForPlayers.jsp",roomId);
         }
-        else
-        {
-            return Route.ForwardToUrl("/WEB-INF/WaitingForPlayers.jsp");
-        }
+    }
+
+    public static Pattern checkGameRegex = Pattern.compile("/checkGame/([0-9]{1,40})");
+    public static Route isGameReadyAJAX(HttpServletRequest request) {
+        Matcher m = checkGameRegex.matcher(request.getPathInfo());
+        if(!m.matches()) return null;
+        long roomID = Integer.parseInt(m.group(1));
+
+        LocalRoomService rs = new LocalRoomService();
+        LocalPlayersInRoomService lpirm = new LocalPlayersInRoomService();
+
+        RoomModel rModel = rs.retrieveRoom(roomID);
+        boolean ready = rModel != null && lpirm.getAllPlayerInRoomModel(rModel.getID()).size() == rModel.getMaxPlayers();
+
+        String message = ready ? "success" : "not ready";
+
+        return Route.ForwardToUrl("/WEB-INF/plaintext.jsp",message);
     }
 }
