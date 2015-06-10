@@ -8,7 +8,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <title>Waiting For Players</title>
+    <script>
+        function ajax() {
+            return $.ajax({
+                url: '/checkGame/${model}',
+                async: false,
+                type: 'GET',
+                contentType: "html",
+                success:function(data) {
+                    console.log("got response: "+data);
+                    if(data == 'success') {
+                        console.log("yay we are ready to go");
+                        location.reload(true);
+                    }
+                },
+                complete:function() {
+                    console.log("finished");
+                    ajax();
+                },
+            });
+        }
+    </script>
 </head>
 <body>
   <h1>Waiting For Players</h1>
