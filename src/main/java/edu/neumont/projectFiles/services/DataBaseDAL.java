@@ -228,7 +228,7 @@ public class DataBaseDAL implements DAL{
         return callDBList(sb.toString(), PlayerInRoomModel.class, true);
     }
 
-    private static class SwfSerializable implements DBSerializable{
+    public static class SwfSerializable implements DBSerializable{
         String url;
         @Override
         public DBSerializable deserialize(ResultSet set) throws SQLException {
