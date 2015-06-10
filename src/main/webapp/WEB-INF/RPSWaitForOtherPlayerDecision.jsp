@@ -1,19 +1,21 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title> Waiting ... Waiting ... Waiting</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
-        function refreshPage()
-        {
+        var savedData;
+        function refreshPage() {
+            var pathArray = window.location.pathname.split( '/' );
             $this = $(this);
             $.ajax({
-                url: 'RPS_ajaxReloader',
+                url: pathArray[2]+'/RPS_ajaxReloader',
                 datatype: 'html',
                 async:true,
                 success: function(data){
+                    savedData = data;
                     if(data=='true') {
-                        location.reload(true);
+                        window.location.href = window.location.pathname;
                     }
                     else {
                         refreshPage();
@@ -21,7 +23,7 @@
                 }
             });
         }
-        body.onload = refreshPage();
+        document.onload = refreshPage();
     </script>
 </head>
 <body>

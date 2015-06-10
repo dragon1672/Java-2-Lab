@@ -168,6 +168,6 @@ public class RockPaperScissorsPage {
         if(rpsGame != null){
             bothPlayersHaveMoved =  (rpsGame.getCurrentMove().getFirst() != null && rpsGame.getCurrentMove().getSecond() != null) ? "true":"false";
         }
-        return Route.ForwardToUrl("/WEB-INF/RPSWaitForOtherPlayerDecision.jsp",bothPlayersHaveMoved);
+        return Route.ForwardToUrl("/WEB-INF/plaintext.jsp",bothPlayersHaveMoved);
     }
 }
