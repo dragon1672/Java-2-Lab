@@ -9,7 +9,12 @@
   </style>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<c:if test="${empty sessionScope.username}">
+  <jsp:include page="HeaderNoUser.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.username}">
+  <jsp:include page="HeaderHasUser.jsp" />
+</c:if>
 
 <h2>Rock Paper Scissors</h2>
 <p>Hello ${model.currentPlayer} please pick Rock, Paper, or Scissors. Your opponent is ${model.otherPlayer}</p>

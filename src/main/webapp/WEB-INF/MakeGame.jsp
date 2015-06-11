@@ -11,7 +11,12 @@
     <title></title>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<c:if test="${empty sessionScope.username}">
+  <jsp:include page="HeaderNoUser.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.username}">
+  <jsp:include page="HeaderHasUser.jsp" />
+</c:if>
 <div> Create a game of ${GameInfo.getName()}</div>
 <form class="GameCreationForm" action="${pageContext.request.contextPath}/makeGame/${GameInfo.getID()}/Create" method="POST">
   <div class="textInputField">

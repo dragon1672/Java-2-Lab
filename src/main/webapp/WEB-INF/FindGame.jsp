@@ -12,7 +12,12 @@
       <title></title>
   </head>
   <body>
-    <jsp:include page="header.jsp" />
+  <c:if test="${empty sessionScope.username}">
+      <jsp:include page="HeaderNoUser.jsp" />
+  </c:if>
+  <c:if test="${not empty sessionScope.username}">
+      <jsp:include page="HeaderHasUser.jsp" />
+  </c:if>
     <h1>Matchmaking</h1>
     <c:if test="${sessionScope.username != null}">
         <form class="findGameMatchmadeForm" action="" method="POST">

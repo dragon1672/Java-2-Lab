@@ -11,7 +11,12 @@
     <title>Account Creation</title>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<c:if test="${empty sessionScope.username}">
+  <jsp:include page="HeaderNoUser.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.username}">
+  <jsp:include page="HeaderHasUser.jsp" />
+</c:if>
 <form class="accountCreationForm" action="${pageContext.request.contextPath}/accountCreation" method="POST">
   <div class="textInputField">
     Account name: <input class="accountInputField" type="text" name="accountName" maxlength="40">

@@ -11,7 +11,12 @@
     <title>User Account Information</title>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<c:if test="${empty sessionScope.username}">
+  <jsp:include page="HeaderNoUser.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.username}">
+  <jsp:include page="HeaderHasUser.jsp" />
+</c:if>
   <div>
     Account name: ${model.displayName}
   </div>
