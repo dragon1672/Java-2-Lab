@@ -8,8 +8,7 @@
         function ajax() {
             return $.ajax({
                 url: '/checkGame/${model}',
-                async: false,
-                type: 'GET',
+                async: true,
                 contentType: "html",
                 success:function(data) {
                     console.log("got response: "+data);
@@ -24,6 +23,7 @@
                 },
             });
         }
+        document.onload = ajax();
     </script>
 </head>
 <body>
@@ -36,6 +36,5 @@
   <h1>Waiting For Players</h1>
   Heard you liked playing games, but we need other people so hold your horses.
   This page will autorefresh in a few seconds... Sorry Anthony :P
-  <% response.setIntHeader("Refresh", 8);%>
 </body>
 </html>
