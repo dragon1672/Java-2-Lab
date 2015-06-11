@@ -6,10 +6,9 @@
     <script>
         var savedData;
         function refreshPage() {
-            var pathArray = window.location.pathname.split( '/' );
             $this = $(this);
             $.ajax({
-                url: pathArray[2]+'/RPS_ajaxReloader',
+                url: window.location.pathname+'/RPS_ajaxReloader',
                 datatype: 'html',
                 async:true,
                 success: function(data){
