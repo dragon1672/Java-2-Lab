@@ -67,6 +67,9 @@ public class DBConnectionManager {
             if(error.contains("duplicate key value")){
                 return;
             }
+            if(error.contains("Connection to") && error.contains("refused.")){
+                finalizeQuery(query, hasResult);
+            }
             e.printStackTrace();
             System.out.println(query);
         }

@@ -1,0 +1,162 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: url(Background.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    float: left;
+}
+#navbar {
+    width: 100%;
+    position: fixed;
+    float: left;
+    margin-top: -1px;
+    z-index: 10;
+    padding: 0;
+    list-style: none;
+    background-color: #232323;
+}
+#navbar li.header{
+    float: right;
+}
+#navbar li a {
+    display: block;
+    padding: 8px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 50px;
+    color: #ffffff;
+    text-align: center;
+}
+#navbar li a:hover {
+    color: #959595;
+}
+#navbar li.home-link {
+    float: left;
+    font-family: 'Arial Black';
+    font-size: 40px;
+ }
+.content {
+    padding-left: 20%;
+    height: inherit;
+    float: inherit;
+    width: 60%;
+}
+.innerImage {
+    background: url(Gray.png) no-repeat center center fixed;
+    background-size: cover;
+    float: inherit;
+    width: 60%;
+    height: inherit;
+    position: fixed;
+    z-index: -1;
+}
+.innerContent {
+    float: inherit;
+    width: 90%;
+    height: inherit;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.postHeader {
+    padding-top: 70px;
+}
+.info {
+    font-size: 25px;
+}
+.accountCreationForm {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    background-color: darkgray;
+    font-family: 'century gothic';
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 25px;
+    border: 2px solid black;
+}
+.textInputField {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-left: 10%;
+    padding-bottom: 17px;
+    border-bottom: 1px solid;
+}
+.userAvatar {
+     width: 250px;
+     height: 250px;
+     border-radius: 100%;
+     margin-left: 38%;
+     border: 2px solid black;
+}
+.accountInfo {
+    background-color: darkgray;
+    border-radius: 25px;
+    border: 2px solid;
+    padding-bottom: 25px;
+    font-size: 20px;
+    font-family: 'century gothic';
+    font-weight: bold;
+}
+form.GameCreationForm {
+    background-color: darkgray;
+    border-radius: 25px;
+    border: 2px solid;
+    font-size: 20px;
+    font-family: 'century gothic';
+    font-weight: bold;
+}
+input.accountInputField {
+    float: right;
+    margin-right: 10%;
+    width: 40%;
+    font-size: 18px;
+    font-family: 'century gothic';
+    font-weight: bold;
+}
+input[type="submit"] {
+    width: initial;
+    margin-left: 10%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: 'century gothic';
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: 2px solid black;
+}
+.gamedisplay {
+    margin-left: 20%;
+    background-color: rgb(169, 169, 169);
+    margin-right: 20%;
+    padding-top: 10px;
+    padding-left: 30px;
+    border-radius: 20px;
+    border: 2px solid black;
+    font-family: 'century gothic';
+}
+.gamename {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10%;
+}
+.gamedescription {
+    margin-left: 10%;
+    font-size: 18px;
+}
+h1, h2, h3, h4, h5, p, span {
+    opacity: 1.0;
+}
+h1{
+    font-size: 40px;
+}
