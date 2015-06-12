@@ -20,8 +20,7 @@ public class LocalAccountService implements AccountService {
         avatarURL = validateInput(avatarURL,"avatarURL");
         //use -1 for id, Database will assign ID later.
         UserModel userM = new UserModel(firstName,lastName,displayName,email,avatarURL);
-        Singletons.theDAL.createUserModel(userM);
-        return userM;
+        return Singletons.theDAL.createUserModel(userM);
     }
 
     @Override

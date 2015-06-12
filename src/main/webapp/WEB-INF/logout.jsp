@@ -6,7 +6,6 @@
     <title>Logout</title>
 </head>
 <body>
-<<<<<<< HEAD
 <c:if test="${empty sessionScope.username}">
     <jsp:include page="HeaderNoUser.jsp" />
 </c:if>
