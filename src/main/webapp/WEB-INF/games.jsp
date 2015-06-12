@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+  <link href="${pageContext.request.contextPath}/resources/MainStyle.css" rel="stylesheet">
     <title></title>
 </head>
 <body>
@@ -11,7 +12,10 @@
 <c:if test="${not empty sessionScope.username}">
   <jsp:include page="HeaderHasUser.jsp" />
 </c:if>
-<div> Bellow is a list of all game types on the site:</div>
+<div class="content">
+  <div class="innerImage"></div>
+<div class="innerContent">
+<h1 class="postHeader">Bellow is a list of all game types on the site:</h1>
 <c:forEach items="${games}" var="game">
   <div class="gameDisplay">
     <div class="gameName">
@@ -20,14 +24,17 @@
     <div class="gameDescription">
       <p>${game.getDescription()}</p>
     </div>
+
+    <form method="GET" action="${pageContext.request.contextPath}/makeGame/${game.getID()}">
+      <input type="submit" value="Create Room">
+    </form>
+    <form method="GET" action="${pageContext.request.contextPath}/findGame/${game.getID()}">
+      <input type="submit" value="Find Room">
+    </form>
   </div>
-  <form method="GET" action="${pageContext.request.contextPath}/makeGame/${game.getID()}">
-    <input type="submit" value="Create Room">
-  </form>
-  <form method="GET" action="${pageContext.request.contextPath}/findGame/${game.getID()}">
-    <input type="submit" value="Find Room">
-  </form>
   <br>
 </c:forEach>
+</div>
+</div>
 </body>
 </html>

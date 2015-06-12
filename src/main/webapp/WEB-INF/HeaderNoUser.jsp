@@ -1,7 +1,6 @@
-<span class="header"><a href="${pageContext.request.contextPath}/">Home Page</a></span>
-<span class="header"> --- </span>
-<span class="header"><a href="${pageContext.request.contextPath}/games">Games</a></span>
-<span class="header"> --- </span>
-<span class="header"><a href="${pageContext.request.contextPath}/login">Log In</a></span>
-<span class="header"> --- </span>
-<span class="header"><a href="${pageContext.request.contextPath}/accountCreation/">Create Account</a></span>
+<ul id="navbar">
+    <li class="header, home-link"><a href="${pageContext.request.contextPath}/">DABAT</a></li>
+    <li class="header"><a href="${pageContext.request.contextPath}/login">Log In</a></li>
+    <li class="header"><a href="${pageContext.request.contextPath}/games">Games</a></li>
+    <li class="header"><a href="${pageContext.request.contextPath}/accountCreation/">Create Account</a></li>
+</ul>

@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>RPS Results</title>
+    <link href="${pageContext.request.contextPath}/resources/MainStyle.css" rel="stylesheet">
   <style type="text/css">
     span { cursor: hand; }
     .button { cursor: hand; }
@@ -17,7 +18,11 @@
     <jsp:include page="HeaderHasUser.jsp" />
 </c:if>
 
-<h2>Rock Paper Scissors</h2>
+<div class="content"/>
+<div class="innerImage"></div>
+<div class="innerContent"/>
+<h2 class="postHeader, rpsHeader">Rock Paper Scissors</h2>
+<div class="postContent">
     ${model.p1} played ${model.p1Choice}
 <br/>
     ${model.p2} played ${model.p2Choice}
@@ -28,15 +33,17 @@
 <br/>
 ${model.winChoice} ${model.beatStatement} ${model.loseChoice}
 <br/>
-    <h3>You ${model.wonOrLost}</h3>
+    <h3 class="rpsResult">You ${model.wonOrLost}</h3>
 </p>
 
 <form method="GET">
-  <input class="button" type="submit" value="Click to Play Another Game"/>
+  <input class="otherButton" type="submit" value="Click to Play Another Game"/>
 </form>
+<br>
 <form method="GET">
   <input type="text" name="DoneWithGame" style="display: none" value ="true"/>
-  <input class="button" type="submit" value="Click to Finish This Game Session"/>
+  <input class="otherButton" type="submit" value="Click to Finish This Game Session"/>
 </form>
+</div>
 </body>
 </html>

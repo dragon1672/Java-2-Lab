@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <link href="${pageContext.request.contextPath}/resources/MainStyle.css" rel="stylesheet">
     <title>Login</title>
 </head>
 <body>
@@ -11,14 +12,16 @@
 <c:if test="${not empty sessionScope.username}">
     <jsp:include page="HeaderHasUser.jsp" />
 </c:if>
-<h1>Log In </h1>
-<form action="${pageContext.request.contextPath}/login" method="POST">
-    <h5>Username:</h5>
-  <input type="text" name="username" placeholder="username"/>
-  <br/><br/>
-    <h5>Password:</h5>
-  <input type="password" name="password" placeholder="password"/>
-  <br/><br/>
+<div class="content"/>
+<div class="innerImage"></div>
+<div class="innerContent"/>
+<h1 class="postHeader">Log In </h1>
+<form class="accountCreationForm" action="${pageContext.request.contextPath}/login" method="POST">
+    <div class="textInputField">
+        Username: <input class="accountInputField" type="text" name="username" placeholder="username"/>
+    </div>
+    <div class="textInputField">
+        Password: <input class="accountInputField" type="password" name="password" placeholder="password"/></div>
   <input type="submit" value="Login"/>
 </form>
 </body>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <link href="${pageContext.request.contextPath}/resources/MainStyle.css" rel="stylesheet">
     <title> Waiting ... Waiting ... Waiting</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
@@ -31,7 +32,9 @@
 <c:if test="${not empty sessionScope.username}">
     <jsp:include page="HeaderHasUser.jsp" />
 </c:if>
-
-<p> Waiting for other player</p>
+<div class="content"/>
+<div class="innerImage"></div>
+<div class="innerContent"/>
+<p class="postHeader"> Waiting for other player</p>
 </body>
 </html>

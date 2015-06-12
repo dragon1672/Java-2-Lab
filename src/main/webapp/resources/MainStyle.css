@@ -66,6 +66,7 @@ body {
     height: inherit;
     padding-left: 5%;
     padding-right: 5%;
+    font-family: 'century gothic';
 }
 .postHeader {
     padding-top: 70px;
@@ -123,6 +124,25 @@ input.accountInputField {
     font-family: 'century gothic';
     font-weight: bold;
 }
+.allRooms {
+    background-color: darkgray;
+    border-radius: 25px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    font-size: 20px;
+    font-family: 'century gothic';
+    border: 2px solid;
+}
+.roomDisplay {
+    padding-left: 40%;
+    padding-top: 5px;
+    border-bottom: 2px solid;
+}
+.roomDisplayFeild {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 input[type="submit"] {
     width: initial;
     margin-left: 10%;
@@ -145,6 +165,18 @@ input[type="submit"] {
     border: 2px solid black;
     font-family: 'century gothic';
 }
+.postContent {
+    font-size: 20px;
+    font-weight: bold;
+}
+h3.rpsResult {
+    font-size: 45px;
+    padding-left: 10%;
+}
+h2.rpsHeader {
+    font-size: 30px;
+    padding-top: 70px;
+}
 .gamename {
     font-size: 20px;
     font-weight: bold;
@@ -153,6 +185,11 @@ input[type="submit"] {
 .gamedescription {
     margin-left: 10%;
     font-size: 18px;
+}
+input.button {
+    background-color: darkgray;
+    border-radius: 25px;
+    border: 2px solid;
 }
 h1, h2, h3, h4, h5, p, span {
     opacity: 1.0;
